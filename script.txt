@@ -1,0 +1,30 @@
+//actualizar el id de los registros
+update  cartera set id= [NRO DOCUMENTO]+[COMPARENDO]+[FECHA COMPARENDO]
+
+//obtener los registros repetidos e insertarlos en una tabla
+  insert into repetidos(registro,cantidad)
+   select  id, count(*) as cantidad
+   from cartera
+   group by id
+   HAVING count(*) >2 
+   order by cantidad
+
+//convertir la fecha mandamiento
+update cartera set [FECHA_MANDAMIENTO]=CONVERT(DATETIME,[FECHA MANDAMIENTO],103)
+WHERE [FECHA MANDAMIENTO] LIKE '%/%'
+
+//convertir la fecha notificacion
+update cartera set [FECHA_NOTIFICACION]=CONVERT(DATETIME,[FECHA NOTIFICACION],103)
+WHERE [FECHA NOTIFICACION] LIKE '%/%'
+  
+//agregar 3 anios
+SELECT  TOP (10000)  [FECHA MANDAMIENTO] ,[FECHA_MANDAMIENTO]
+,DATEADD(year, 3, [FECHA_MANDAMIENTO]) AS FechaMandamientoResultado
+FROM [DbTestImport].[dbo].[cartera]
+where [FECHA_MANDAMIENTO] is not null
+
+//agregar 3 anios
+SELECT  TOP (10000)  [FECHA NOTIFICACION] ,[FECHA_NOTIFICACION]
+,DATEADD(year, 3, [FECHA NOTIFICACION]) AS FechaMandamientoResultado
+FROM [DbTestImport].[dbo].[cartera]
+where [FECHA_MANDAMIENTO] is not null

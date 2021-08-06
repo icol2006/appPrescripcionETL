@@ -1,0 +1,2397 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/4/2021 2:28:42 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-5R1FD82"
+  DTS:CreatorName="DESKTOP-5R1FD82\icol2"
+  DTS:DTSID="{00B164A5-37A1-42A0-9926-600CCEC0BC5E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.167"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{5730F4C3-34AB-4892-8384-076108D59D73}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-5R1FD82\SQLEXPRESS.DbTestImport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{65BB54C4-F9C3-423C-B36D-116425D2F37E}"
+      DTS:ObjectName="DESKTOP-5R1FD82\SQLEXPRESS.DbTestImport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-5R1FD82\SQLEXPRESS;Initial Catalog=DbTestImport;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{8DB936D7-EC4A-40CB-8DE5-AC25798057B3}"
+      DTS:ObjectName="Flat File Connection Manager 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\icol2\Desktop\Cartera2.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TIPO DOCUMENTO"
+              DTS:DTSID="{1ACCC048-3109-4AD2-9C4C-1C570AEB545B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NRO DOCUMENTO"
+              DTS:DTSID="{08A820B7-880D-40D6-98F3-9E396BA9685C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COMPARENDO"
+              DTS:DTSID="{9F4FC054-514D-4CCB-B8FE-38DAD5A0FFC1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FECHA COMPARENDO"
+              DTS:DTSID="{BC58941C-226B-49FF-A1A6-8665033E8DCF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PLACA"
+              DTS:DTSID="{FA8670F6-4E41-4F51-8D3A-BA95CE769FB3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ESTADO"
+              DTS:DTSID="{519DB50B-CDBD-4D42-989A-74FAFF546E81}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="  SALDO  "
+              DTS:DTSID="{CE34F616-5E18-4BD6-82D4-FB082B6E2075}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName=" INTERESES  "
+              DTS:DTSID="{2382547D-C214-4CF7-887C-0ABC5EF38308}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TIPO COMPARENDO"
+              DTS:DTSID="{572A2993-59C4-450D-9576-A6E2F39A00BE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FECHA PROCESO"
+              DTS:DTSID="{FEAF394A-1E50-4132-B1B6-59758F61783D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="VALOR NOMINAL"
+              DTS:DTSID="{DABB9CBD-4D7E-42A2-979C-4961E8B7D06C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="INFRACCION"
+              DTS:DTSID="{436C5FDB-54B0-4B5B-B84C-61C6DF7807AA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1004"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DESCRIPCION INFRACCION"
+              DTS:DTSID="{FF5F8446-E001-40F9-AD5A-A38223619A94}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TIPO SERVICIO"
+              DTS:DTSID="{FB9F3109-1E07-4A3E-9F56-948788A34A3F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="VALOR TOTAL"
+              DTS:DTSID="{688798CA-A13A-48BA-8745-DD78B8CF5FB2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="UVT"
+              DTS:DTSID="{90C35663-CDCD-4F99-86C5-C41BF2177C86}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NRO RESOLUCION"
+              DTS:DTSID="{D4DD0209-582B-40A5-A2F8-7BC3166CDAEC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FECHA RESOLUCION"
+              DTS:DTSID="{B89BB75B-4171-422E-BAD7-F43A0D380C00}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FECHA FIRME"
+              DTS:DTSID="{184C636D-5AAC-4EF1-95F8-D98C1A415812}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TIPO RESOLUCION"
+              DTS:DTSID="{2461A282-F4F1-4069-AE26-65D3C998BD49}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PAGOS"
+              DTS:DTSID="{F486DA47-BFE0-48B9-85EE-5D66B374525D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CORREO"
+              DTS:DTSID="{389BBE5F-8DC5-4CD0-8FF8-E6B87B88447A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TELEFONO "
+              DTS:DTSID="{759FA250-44B0-4629-8EFB-DA821CBC28AD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DIRECCION"
+              DTS:DTSID="{4DCB1932-9070-4924-B9ED-7BC578C010C9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="150"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NOMBRE"
+              DTS:DTSID="{0CA32764-8270-4C55-B0C5-612F4D5F851C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NRO MANDAMIENTO"
+              DTS:DTSID="{ECB114CD-7401-41A6-813E-E88D1CFC0510}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FECHA MANDAMIENTO"
+              DTS:DTSID="{05EC52D1-C77D-4719-AA5D-5925980E0DDB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NOTIFICACION"
+              DTS:DTSID="{73E9F4DD-22EF-4864-847E-4105C2ED0CD4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FECHA NOTIFICACION"
+              DTS:DTSID="{19FFAFF7-2501-4047-87C7-42057136647D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ULTIMO PASO"
+              DTS:DTSID="{0A104E40-E2A6-42B3-AA28-8B3AF17D4588}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FECHA ULTIMO PASO"
+              DTS:DTSID="{5FB39157-C83F-4DE5-972B-60CA4EA848F7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FECHA CITACION"
+              DTS:DTSID="{B88917E0-B1D9-42B2-89EA-A77994C734E2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="250"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MEDIO IMPOSICION"
+              DTS:DTSID="{C945BE6E-5032-491C-9EE8-CA50C4D26832}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FECHA SEGUNDO FIRME"
+              DTS:DTSID="{CF2CB4AC-2644-41B7-9FAA-4497C0ED4947}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ENVIADO SEGUNDA INSTANCIA"
+              DTS:DTSID="{83577A32-250A-45F4-927B-BEAE8E39A735}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FECHA FALLO SEGUNDA INSTANCIA"
+              DTS:DTSID="{5A7E7AC8-9F55-46D3-A102-2F14A1F42CBB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ETAPA"
+              DTS:DTSID="{E69C8C2B-051A-4301-99A6-FC58345309D7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="llave color naranja"
+              DTS:DTSID="{B1EB5A57-0DD3-415B-BC57-08E6C161BD98}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{90F0FF3E-737F-4E22-9EB6-2449F3360E28}"
+      DTS:ObjectName="Parameter">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B2DA8920-7926-4290-9783-7D021C31BDF6}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[FECHA COMPARENDO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FECHA COMPARENDO"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA COMPARENDO]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]"
+                      name="Derived Column 1"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DATE)([SUBSTRING](#{Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA COMPARENDO]},5,2) + "/" + [SUBSTRING](#{Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA COMPARENDO]},7,2) + "/" + [SUBSTRING](#{Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA COMPARENDO]},1,4))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DATE)(SUBSTRING([FECHA COMPARENDO],5,2) + "/" + SUBSTRING([FECHA COMPARENDO],7,2) + "/" + SUBSTRING([FECHA COMPARENDO],1,4))</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Origen Archivo de texto"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Origen Archivo de texto"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Origen Archivo de texto.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO DOCUMENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[TIPO DOCUMENTO]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO DOCUMENTO]"
+                      name="TIPO DOCUMENTO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NRO DOCUMENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[NRO DOCUMENTO]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NRO DOCUMENTO]"
+                      name="NRO DOCUMENTO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[COMPARENDO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[COMPARENDO]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[COMPARENDO]"
+                      name="COMPARENDO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA COMPARENDO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA COMPARENDO]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA COMPARENDO]"
+                      name="FECHA COMPARENDO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[PLACA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[PLACA]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[PLACA]"
+                      name="PLACA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ESTADO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[ESTADO]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ESTADO]"
+                      name="ESTADO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[  SALDO  ]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[  SALDO  ]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[  SALDO  ]"
+                      name="  SALDO  "
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ INTERESES  ]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[ INTERESES  ]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ INTERESES  ]"
+                      name=" INTERESES  "
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO COMPARENDO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[TIPO COMPARENDO]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO COMPARENDO]"
+                      name="TIPO COMPARENDO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA PROCESO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA PROCESO]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA PROCESO]"
+                      name="FECHA PROCESO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[VALOR NOMINAL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[VALOR NOMINAL]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[VALOR NOMINAL]"
+                      name="VALOR NOMINAL"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[INFRACCION]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[INFRACCION]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[INFRACCION]"
+                      name="INFRACCION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[DESCRIPCION INFRACCION]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[DESCRIPCION INFRACCION]"
+                      length="1004"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[DESCRIPCION INFRACCION]"
+                      name="DESCRIPCION INFRACCION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO SERVICIO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[TIPO SERVICIO]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO SERVICIO]"
+                      name="TIPO SERVICIO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[VALOR TOTAL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[VALOR TOTAL]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[VALOR TOTAL]"
+                      name="VALOR TOTAL"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[UVT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[UVT]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[UVT]"
+                      name="UVT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NRO RESOLUCION]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[NRO RESOLUCION]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NRO RESOLUCION]"
+                      name="NRO RESOLUCION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA RESOLUCION]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA RESOLUCION]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA RESOLUCION]"
+                      name="FECHA RESOLUCION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA FIRME]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA FIRME]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA FIRME]"
+                      name="FECHA FIRME"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO RESOLUCION]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[TIPO RESOLUCION]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO RESOLUCION]"
+                      name="TIPO RESOLUCION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[PAGOS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[PAGOS]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[PAGOS]"
+                      name="PAGOS"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[CORREO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[CORREO]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[CORREO]"
+                      name="CORREO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TELEFONO ]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[TELEFONO ]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TELEFONO ]"
+                      name="TELEFONO "
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[DIRECCION]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[DIRECCION]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[DIRECCION]"
+                      name="DIRECCION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NOMBRE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[NOMBRE]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NOMBRE]"
+                      name="NOMBRE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NRO MANDAMIENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[NRO MANDAMIENTO]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NRO MANDAMIENTO]"
+                      name="NRO MANDAMIENTO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA MANDAMIENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA MANDAMIENTO]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA MANDAMIENTO]"
+                      name="FECHA MANDAMIENTO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NOTIFICACION]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[NOTIFICACION]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NOTIFICACION]"
+                      name="NOTIFICACION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA NOTIFICACION]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA NOTIFICACION]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA NOTIFICACION]"
+                      name="FECHA NOTIFICACION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ULTIMO PASO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[ULTIMO PASO]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ULTIMO PASO]"
+                      name="ULTIMO PASO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA ULTIMO PASO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA ULTIMO PASO]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA ULTIMO PASO]"
+                      name="FECHA ULTIMO PASO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA CITACION]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA CITACION]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA CITACION]"
+                      name="FECHA CITACION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[MEDIO IMPOSICION]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[MEDIO IMPOSICION]"
+                      length="250"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[MEDIO IMPOSICION]"
+                      name="MEDIO IMPOSICION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA SEGUNDO FIRME]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA SEGUNDO FIRME]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA SEGUNDO FIRME]"
+                      name="FECHA SEGUNDO FIRME"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ENVIADO SEGUNDA INSTANCIA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[ENVIADO SEGUNDA INSTANCIA]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ENVIADO SEGUNDA INSTANCIA]"
+                      name="ENVIADO SEGUNDA INSTANCIA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA FALLO SEGUNDA INSTANCIA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA FALLO SEGUNDA INSTANCIA]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA FALLO SEGUNDA INSTANCIA]"
+                      name="FECHA FALLO SEGUNDA INSTANCIA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ETAPA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[ETAPA]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ETAPA]"
+                      name="ETAPA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[llave color naranja]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[llave color naranja]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[llave color naranja]"
+                      name="llave color naranja"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[TIPO DOCUMENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="TIPO DOCUMENTO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[NRO DOCUMENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="NRO DOCUMENTO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[COMPARENDO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="COMPARENDO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA COMPARENDO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA COMPARENDO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[PLACA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PLACA" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[ESTADO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ESTADO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[  SALDO  ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="  SALDO  " />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[ INTERESES  ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name=" INTERESES  " />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[TIPO COMPARENDO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="TIPO COMPARENDO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA PROCESO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA PROCESO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[VALOR NOMINAL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="VALOR NOMINAL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[INFRACCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="INFRACCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[DESCRIPCION INFRACCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1004"
+                      name="DESCRIPCION INFRACCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[TIPO SERVICIO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="TIPO SERVICIO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[VALOR TOTAL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="VALOR TOTAL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[UVT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="UVT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[NRO RESOLUCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NRO RESOLUCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA RESOLUCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA RESOLUCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA FIRME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA FIRME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[TIPO RESOLUCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="TIPO RESOLUCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[PAGOS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PAGOS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[CORREO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="CORREO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[TELEFONO ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="TELEFONO " />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[DIRECCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="DIRECCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[NOMBRE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NOMBRE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[NRO MANDAMIENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="NRO MANDAMIENTO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA MANDAMIENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA MANDAMIENTO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[NOTIFICACION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="NOTIFICACION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA NOTIFICACION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA NOTIFICACION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[ULTIMO PASO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ULTIMO PASO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA ULTIMO PASO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA ULTIMO PASO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA CITACION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA CITACION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[MEDIO IMPOSICION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="MEDIO IMPOSICION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA SEGUNDO FIRME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA SEGUNDO FIRME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[ENVIADO SEGUNDA INSTANCIA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ENVIADO SEGUNDA INSTANCIA" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[FECHA FALLO SEGUNDA INSTANCIA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA FALLO SEGUNDA INSTANCIA" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[ETAPA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ETAPA" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].ExternalColumns[llave color naranja]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="llave color naranja" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\SQL Server Destination"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="SQL Server Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
+              description="SQL Server Destination"
+              name="SQL Server Destination"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="The name of the database object to copy data into."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[dbo].[cartera]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of the first row to copy. Corresponds to the bulk insert FIRSTROW option."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that any insert triggers defined on the destination object will execute during the data copy. Corresponds to the bulk insert FIRE_TRIGGERS option."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Corresponds to the bulk insert KEEPIDENTITY option."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null copied to the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of the last row to copy. Corresponds to the bulk insert LASTROW option."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of syntax errors and compilation errors that can occur before the data copy operation is canceled. Each row that cannot be copied is ignored and counted as one error. Corresponds to the bulk insert MAXERRORS option."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies how the data to be copied is sorted. Corresponds to the bulk insert ORDER option."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that a table-level lock is acquired for the duration of the data copy operation. Corresponds to the bulk insert TABLOCK option."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies in seconds the amount of time the SQL Destination adapter will wait before terminating if there is no data available for insertion.  A timeout value of 0 means the SQL Destination adapter will not time out."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\SQL Server Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-5R1FD82\SQLEXPRESS.DbTestImport]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-5R1FD82\SQLEXPRESS.DbTestImport]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input]"
+                  hasSideEffects="true"
+                  name="SQL Server Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[TIPO DOCUMENTO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="TIPO DOCUMENTO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[TIPO DOCUMENTO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO DOCUMENTO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[NRO DOCUMENTO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="NRO DOCUMENTO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NRO DOCUMENTO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NRO DOCUMENTO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[COMPARENDO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="COMPARENDO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[COMPARENDO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[COMPARENDO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FECHA COMPARENDO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FECHA COMPARENDO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA COMPARENDO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA COMPARENDO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[PLACA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="PLACA"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[PLACA]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[PLACA]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ESTADO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="ESTADO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ESTADO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ESTADO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[  SALDO  ]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="  SALDO  "
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[  SALDO  ]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[  SALDO  ]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ INTERESES  ]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName=" INTERESES  "
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ INTERESES  ]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ INTERESES  ]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[TIPO COMPARENDO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="TIPO COMPARENDO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[TIPO COMPARENDO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO COMPARENDO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FECHA PROCESO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FECHA PROCESO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA PROCESO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA PROCESO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[VALOR NOMINAL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="VALOR NOMINAL"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[VALOR NOMINAL]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[VALOR NOMINAL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[INFRACCION]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="INFRACCION"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[INFRACCION]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[INFRACCION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[DESCRIPCION INFRACCION]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1004"
+                      cachedName="DESCRIPCION INFRACCION"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DESCRIPCION INFRACCION]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[DESCRIPCION INFRACCION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[TIPO SERVICIO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="TIPO SERVICIO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[TIPO SERVICIO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO SERVICIO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[VALOR TOTAL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="VALOR TOTAL"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[VALOR TOTAL]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[VALOR TOTAL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[UVT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UVT"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[UVT]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[UVT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[NRO RESOLUCION]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NRO RESOLUCION"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NRO RESOLUCION]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NRO RESOLUCION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FECHA RESOLUCION]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FECHA RESOLUCION"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA RESOLUCION]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA RESOLUCION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FECHA FIRME]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FECHA FIRME"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA FIRME]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA FIRME]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[TIPO RESOLUCION]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="TIPO RESOLUCION"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[TIPO RESOLUCION]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TIPO RESOLUCION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[PAGOS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="PAGOS"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[PAGOS]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[PAGOS]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[CORREO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="CORREO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[CORREO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[CORREO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[TELEFONO ]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="TELEFONO "
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[TELEFONO ]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[TELEFONO ]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[DIRECCION]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="DIRECCION"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DIRECCION]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[DIRECCION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[NOMBRE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="NOMBRE"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NOMBRE]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NOMBRE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[NRO MANDAMIENTO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="NRO MANDAMIENTO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NRO MANDAMIENTO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NRO MANDAMIENTO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FECHA MANDAMIENTO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FECHA MANDAMIENTO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA MANDAMIENTO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA MANDAMIENTO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[NOTIFICACION]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="NOTIFICACION"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NOTIFICACION]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[NOTIFICACION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FECHA NOTIFICACION]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FECHA NOTIFICACION"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA NOTIFICACION]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA NOTIFICACION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ULTIMO PASO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="ULTIMO PASO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ULTIMO PASO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ULTIMO PASO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FECHA ULTIMO PASO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FECHA ULTIMO PASO"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA ULTIMO PASO]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA ULTIMO PASO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FECHA CITACION]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FECHA CITACION"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA CITACION]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA CITACION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[MEDIO IMPOSICION]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="MEDIO IMPOSICION"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MEDIO IMPOSICION]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[MEDIO IMPOSICION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FECHA SEGUNDO FIRME]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FECHA SEGUNDO FIRME"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA SEGUNDO FIRME]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA SEGUNDO FIRME]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ENVIADO SEGUNDA INSTANCIA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="ENVIADO SEGUNDA INSTANCIA"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ENVIADO SEGUNDA INSTANCIA]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ENVIADO SEGUNDA INSTANCIA]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FECHA FALLO SEGUNDA INSTANCIA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FECHA FALLO SEGUNDA INSTANCIA"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA FALLO SEGUNDA INSTANCIA]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[FECHA FALLO SEGUNDA INSTANCIA]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ETAPA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ETAPA"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ETAPA]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[ETAPA]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[llave color naranja]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="llave color naranja"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[llave color naranja]"
+                      lineageId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output].Columns[llave color naranja]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Derived Column 1]"
+                      cachedDataType="date"
+                      cachedName="Derived Column 1"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[derive1]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[TIPO DOCUMENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="TIPO DOCUMENTO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NRO DOCUMENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="NRO DOCUMENTO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[COMPARENDO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="COMPARENDO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA COMPARENDO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA COMPARENDO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[PLACA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PLACA" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ESTADO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ESTADO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[  SALDO  ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="  SALDO  " />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ INTERESES  ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name=" INTERESES  " />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[TIPO COMPARENDO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="TIPO COMPARENDO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA PROCESO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA PROCESO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[VALOR NOMINAL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="VALOR NOMINAL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[INFRACCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="INFRACCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DESCRIPCION INFRACCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1004"
+                      name="DESCRIPCION INFRACCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[TIPO SERVICIO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="TIPO SERVICIO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[VALOR TOTAL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="VALOR TOTAL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[UVT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="UVT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NRO RESOLUCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NRO RESOLUCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA RESOLUCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA RESOLUCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA FIRME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA FIRME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[TIPO RESOLUCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="TIPO RESOLUCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[PAGOS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PAGOS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[CORREO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="CORREO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[TELEFONO ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="TELEFONO " />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DIRECCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="DIRECCION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NOMBRE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NOMBRE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NRO MANDAMIENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="NRO MANDAMIENTO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA MANDAMIENTO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA MANDAMIENTO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NOTIFICACION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="NOTIFICACION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA NOTIFICACION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA NOTIFICACION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ULTIMO PASO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ULTIMO PASO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA ULTIMO PASO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA ULTIMO PASO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA CITACION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA CITACION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MEDIO IMPOSICION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="MEDIO IMPOSICION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA SEGUNDO FIRME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA SEGUNDO FIRME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ENVIADO SEGUNDA INSTANCIA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ENVIADO SEGUNDA INSTANCIA" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA FALLO SEGUNDA INSTANCIA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FECHA FALLO SEGUNDA INSTANCIA" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ETAPA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ETAPA" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[llave color naranja]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="llave color naranja" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[derive1]"
+                      dataType="dbDate"
+                      name="derive1" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Flat File Source Output]"
+              endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="Flat File Source Output"
+              startId="Package\Data Flow Task\Origen Archivo de texto.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Data Flow Task"
+          TopLeft="5.5,5.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Data Flow Task\Origen Archivo de texto"
+          TopLeft="230,152" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="438,288" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Flat File Source Output]"
+          TopLeft="327,194">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="190,94"
+              Start="0,0"
+              End="190,86.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43"
+                    Point2="0,47"
+                    Point3="4,47" />
+                  <mssgle:LineSegment
+                    End="186,47" />
+                  <mssgle:CubicBezierSegment
+                    Point1="186,47"
+                    Point2="190,47"
+                    Point3="190,51" />
+                  <mssgle:LineSegment
+                    End="190,86.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Data Flow Task\SQL Server Destination"
+          TopLeft="247,379" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="517,330">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-173,49"
+              Start="0,0"
+              End="-173,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.5"
+                    Point2="0,24.5"
+                    Point3="-4,24.5" />
+                  <mssgle:LineSegment
+                    End="-169,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-169,24.5"
+                    Point2="-173,24.5"
+                    Point3="-173,28.5" />
+                  <mssgle:LineSegment
+                    End="-173,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\SQL Server Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
