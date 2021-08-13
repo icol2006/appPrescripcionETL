@@ -31,8 +31,8 @@ where p1.nombre is null
 
 
 --convertir la fecha mandamiento
-update cartera set [FECHA_MANDAMIENTO]=CONVERT(DATETIME,[FECHA MANDAMIENTO],103)
-WHERE [FECHA MANDAMIENTO] LIKE '%/%'
+update cartera set [FECHA_COMPARENDO]=CONVERT(DATETIME,[FECHA COMPARENDO],103)
+WHERE [FECHA COMPARENDO] LIKE '%/%'
 
 --convertir la fecha notificacion
 update cartera set [FECHA_NOTIFICACION]=CONVERT(DATETIME,[FECHA NOTIFICACION],103)
