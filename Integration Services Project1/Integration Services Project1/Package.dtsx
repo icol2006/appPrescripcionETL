@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="38"
-  DTS:VersionGUID="{79C924EC-7F52-4253-806F-1D026880BD47}">
+  DTS:VersionBuild="42"
+  DTS:VersionGUID="{62121782-4BE5-4572-B3D1-93A85A970ADD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -42,7 +42,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="C:\Users\icol2\Desktop\Cartera2.txt">
+          DTS:ConnectionString="C:\Users\icol2\Desktop\Cartera_Junio_2021.txt">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -51,7 +51,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="TIPO DOCUMENTO"
-              DTS:DTSID="{1ACCC048-3109-4AD2-9C4C-1C570AEB545B}"
+              DTS:DTSID="{C45D9110-EC1B-4BF1-9C97-1A0B53842B55}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -60,7 +60,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="NRO DOCUMENTO"
-              DTS:DTSID="{08A820B7-880D-40D6-98F3-9E396BA9685C}"
+              DTS:DTSID="{8F87F8E4-C460-4B07-B5F3-5CE49A2D993A}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -69,7 +69,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="COMPARENDO"
-              DTS:DTSID="{9F4FC054-514D-4CCB-B8FE-38DAD5A0FFC1}"
+              DTS:DTSID="{2FD08355-B7C9-4FCF-8ECA-3FDE81BDA408}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -78,7 +78,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="FECHA COMPARENDO"
-              DTS:DTSID="{BC58941C-226B-49FF-A1A6-8665033E8DCF}"
+              DTS:DTSID="{914102E0-5A49-4AC4-AB79-D2EB0310BD06}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -87,7 +87,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="PLACA"
-              DTS:DTSID="{FA8670F6-4E41-4F51-8D3A-BA95CE769FB3}"
+              DTS:DTSID="{61A65629-0387-4411-943E-AEF4D26A5457}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -96,7 +96,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="ESTADO"
-              DTS:DTSID="{519DB50B-CDBD-4D42-989A-74FAFF546E81}"
+              DTS:DTSID="{06FFCEB6-661A-4BDD-83C1-FDE1B49E1C31}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -105,7 +105,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="  SALDO  "
-              DTS:DTSID="{CE34F616-5E18-4BD6-82D4-FB082B6E2075}"
+              DTS:DTSID="{07FC91CF-3EA2-4948-A588-F704F0AE3127}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -114,7 +114,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName=" INTERESES  "
-              DTS:DTSID="{2382547D-C214-4CF7-887C-0ABC5EF38308}"
+              DTS:DTSID="{F745669A-FE61-4AFE-88F7-6044CB1E5B9B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -123,7 +123,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="TIPO COMPARENDO"
-              DTS:DTSID="{572A2993-59C4-450D-9576-A6E2F39A00BE}"
+              DTS:DTSID="{1A7DE265-67BB-43CB-B37B-C7D227334ECB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -132,7 +132,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="FECHA PROCESO"
-              DTS:DTSID="{FEAF394A-1E50-4132-B1B6-59758F61783D}"
+              DTS:DTSID="{107692D7-E216-48C8-9F77-5FE2FC191D6F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -141,7 +141,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="VALOR NOMINAL"
-              DTS:DTSID="{DABB9CBD-4D7E-42A2-979C-4961E8B7D06C}"
+              DTS:DTSID="{DC510606-4E8C-481C-B94A-DF8053854C7C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -150,7 +150,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="INFRACCION"
-              DTS:DTSID="{436C5FDB-54B0-4B5B-B84C-61C6DF7807AA}"
+              DTS:DTSID="{616E217E-4199-4653-8BAC-201C838276B4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -159,7 +159,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="DESCRIPCION INFRACCION"
-              DTS:DTSID="{FF5F8446-E001-40F9-AD5A-A38223619A94}"
+              DTS:DTSID="{B1F6D9AE-E1E5-4B10-AE20-4A058922F421}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -168,7 +168,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="TIPO SERVICIO"
-              DTS:DTSID="{FB9F3109-1E07-4A3E-9F56-948788A34A3F}"
+              DTS:DTSID="{166AD854-21D3-4777-8B56-759C555A34BB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -177,7 +177,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="VALOR TOTAL"
-              DTS:DTSID="{688798CA-A13A-48BA-8745-DD78B8CF5FB2}"
+              DTS:DTSID="{09B640C5-6FF0-4FD5-A4BE-F0796E924EF7}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -186,7 +186,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="UVT"
-              DTS:DTSID="{90C35663-CDCD-4F99-86C5-C41BF2177C86}"
+              DTS:DTSID="{4F15F1CC-7A29-4EEF-8FA2-DFE8E25914A6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -195,7 +195,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="NRO RESOLUCION"
-              DTS:DTSID="{D4DD0209-582B-40A5-A2F8-7BC3166CDAEC}"
+              DTS:DTSID="{BF327D68-321E-4E37-8FDF-1E1E389AFDD2}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -204,7 +204,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="FECHA RESOLUCION"
-              DTS:DTSID="{B89BB75B-4171-422E-BAD7-F43A0D380C00}"
+              DTS:DTSID="{6D90C0FE-968B-4375-A2DB-CAE78DE738FB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -213,7 +213,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="FECHA FIRME"
-              DTS:DTSID="{184C636D-5AAC-4EF1-95F8-D98C1A415812}"
+              DTS:DTSID="{63943177-49C6-420F-872D-8D77A8507093}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -222,7 +222,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="TIPO RESOLUCION"
-              DTS:DTSID="{2461A282-F4F1-4069-AE26-65D3C998BD49}"
+              DTS:DTSID="{53184CE9-0615-4956-8467-68B1719449A3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -231,7 +231,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="PAGOS"
-              DTS:DTSID="{F486DA47-BFE0-48B9-85EE-5D66B374525D}"
+              DTS:DTSID="{715157DD-69FC-46E6-98A6-9726B2453397}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -240,7 +240,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="CORREO"
-              DTS:DTSID="{389BBE5F-8DC5-4CD0-8FF8-E6B87B88447A}"
+              DTS:DTSID="{225A4EFF-C399-4542-9B53-3626CBA2D50F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -249,7 +249,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="TELEFONO "
-              DTS:DTSID="{759FA250-44B0-4629-8EFB-DA821CBC28AD}"
+              DTS:DTSID="{BF1EF7F2-74D7-4831-A808-A66218492CF1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -258,7 +258,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="DIRECCION"
-              DTS:DTSID="{4DCB1932-9070-4924-B9ED-7BC578C010C9}"
+              DTS:DTSID="{11F81C3B-D76F-414C-B6FE-871B0E094D87}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -267,7 +267,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="NOMBRE"
-              DTS:DTSID="{0CA32764-8270-4C55-B0C5-612F4D5F851C}"
+              DTS:DTSID="{4A70106D-4269-4904-A7A7-612CBCF287A9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -276,7 +276,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="NRO MANDAMIENTO"
-              DTS:DTSID="{ECB114CD-7401-41A6-813E-E88D1CFC0510}"
+              DTS:DTSID="{CFF526D3-7E4D-47B2-AC78-98918E66FAC4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -285,7 +285,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="FECHA MANDAMIENTO"
-              DTS:DTSID="{05EC52D1-C77D-4719-AA5D-5925980E0DDB}"
+              DTS:DTSID="{CB3E4FBE-A882-4923-8112-7360D084E54B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -294,7 +294,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="NOTIFICACION"
-              DTS:DTSID="{73E9F4DD-22EF-4864-847E-4105C2ED0CD4}"
+              DTS:DTSID="{233F5AB9-E697-403C-900C-F21AC1DB2BCF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -303,7 +303,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="FECHA NOTIFICACION"
-              DTS:DTSID="{19FFAFF7-2501-4047-87C7-42057136647D}"
+              DTS:DTSID="{3A726474-A3E2-4683-A8F9-1F4BB2790527}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -312,7 +312,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="ULTIMO PASO"
-              DTS:DTSID="{0A104E40-E2A6-42B3-AA28-8B3AF17D4588}"
+              DTS:DTSID="{FBFDE6BE-44EF-4A9D-8E2E-234A14D08EBC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -321,7 +321,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="FECHA ULTIMO PASO"
-              DTS:DTSID="{5FB39157-C83F-4DE5-972B-60CA4EA848F7}"
+              DTS:DTSID="{56BACA79-8DD3-45F5-8E69-9173E0017A07}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -330,7 +330,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="FECHA CITACION"
-              DTS:DTSID="{B88917E0-B1D9-42B2-89EA-A77994C734E2}"
+              DTS:DTSID="{220B5583-8291-4D7A-8BAF-43757AAC90FB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -339,7 +339,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="MEDIO IMPOSICION"
-              DTS:DTSID="{C945BE6E-5032-491C-9EE8-CA50C4D26832}"
+              DTS:DTSID="{9BC47769-B652-4C5A-808C-C65C58B6B6A8}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -348,7 +348,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="FECHA SEGUNDO FIRME"
-              DTS:DTSID="{CF2CB4AC-2644-41B7-9FAA-4497C0ED4947}"
+              DTS:DTSID="{96F9DD7C-A161-4921-9A6C-36FB6FF8D4EA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -357,7 +357,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="ENVIADO SEGUNDA INSTANCIA"
-              DTS:DTSID="{83577A32-250A-45F4-927B-BEAE8E39A735}"
+              DTS:DTSID="{7CA4767F-E097-44AB-B81E-D534D0971BA9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -366,7 +366,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="FECHA FALLO SEGUNDA INSTANCIA"
-              DTS:DTSID="{5A7E7AC8-9F55-46D3-A102-2F14A1F42CBB}"
+              DTS:DTSID="{A8AD1AEE-A178-47FD-8C75-7C3AFF6CF4E5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -375,7 +375,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="ETAPA"
-              DTS:DTSID="{E69C8C2B-051A-4301-99A6-FC58345309D7}"
+              DTS:DTSID="{573DDD14-DF68-497D-8FAE-F151AAACFEF5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -384,7 +384,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="llave color naranja"
-              DTS:DTSID="{B1EB5A57-0DD3-415B-BC57-08E6C161BD98}"
+              DTS:DTSID="{FAF33481-FFC5-4CA9-9594-2C657198EE41}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -1566,7 +1566,7 @@
                   dataType="System.String"
                   description="The name of the database object to copy data into."
                   expressionType="Notify"
-                  name="BulkInsertTableName">[dbo].[cartera]</property>
+                  name="BulkInsertTableName">[dbo].[mes_nuevo]</property>
                 <property
                   dataType="System.Boolean"
                   description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
@@ -2181,6 +2181,52 @@
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FECHA_MANDAMIENTO]"
                       dataType="dbDate"
                       name="FECHA_MANDAMIENTO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[sum_fecha_comparendo]"
+                      dataType="dbDate"
+                      name="sum_fecha_comparendo" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[sum_fecha_notificacion]"
+                      dataType="dbDate"
+                      name="sum_fecha_notificacion" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[dias_suspencion_comparendo]"
+                      dataType="i4"
+                      name="dias_suspencion_comparendo" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[dias_suspencion_notificacion]"
+                      dataType="i4"
+                      name="dias_suspencion_notificacion" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[res_fecha_comparendo]"
+                      dataType="dbDate"
+                      name="res_fecha_comparendo" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[res_fecha_notificacion]"
+                      dataType="dbDate"
+                      name="res_fecha_notificacion" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[prescrito_comparendo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="prescrito_comparendo" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[prescrito_notificacion]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="prescrito_notificacion" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[num]"
+                      dataType="i4"
+                      name="num" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -2196,7 +2242,34 @@
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Eliiminar datos tabla"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Eliiminar datos tabla"
+      DTS:DTSID="{B2A95A12-E072-4DBB-B43A-2D352B2C1A80}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Eliiminar datos tabla"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{65BB54C4-F9C3-423C-B36D-116425D2F37E}"
+          SQLTask:SqlStatementSource="delete from mes_nuevo" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{F9B0317B-0247-47A2-A1A7-6AE98C12BEBF}"
+      DTS:From="Package\Eliiminar datos tabla"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -2208,11 +2281,37 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="155,42"
           Id="Package\Data Flow Task"
-          TopLeft="5.5,5.5" />
+          TopLeft="87.5,139.5" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Eliiminar datos tabla"
+          TopLeft="82,55" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="166,97">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.5"
+              Start="0,0"
+              End="0,35">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -2223,26 +2322,26 @@
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="194,42"
-          Id="Package\Data Flow Task\Origen Archivo de texto"
-          TopLeft="230,152" />
-        <NodeLayout
-          Size="194,42"
           Id="Package\Data Flow Task\SQL Server Destination"
           TopLeft="237,261" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Data Flow Task\Origen Archivo de texto"
+          TopLeft="238,151" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Flat File Source Output]"
-          TopLeft="330.5,194">
+          TopLeft="334.5,193">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,67"
+              EndConnector="0,68"
               Start="0,0"
-              End="0,59.5">
+              End="0,60.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,59.5" />
+                    End="0,60.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

@@ -1,30 +1,169 @@
-//actualizar el id de los registros
+--unir nro_documento+comparendo+fecha_comparendo y actualizar el id
 update  cartera set id= [NRO DOCUMENTO]+[COMPARENDO]+[FECHA COMPARENDO]
 
-//obtener los registros repetidos e insertarlos en una tabla
+--obtener los registros repetidos e insertarlos en una tabla
+  delete from repetidos
   insert into repetidos(registro,cantidad)
    select  id, count(*) as cantidad
    from cartera
    group by id
    HAVING count(*) >2 
    order by cantidad
+  
 
-//convertir la fecha mandamiento
+ALTER TABLE cartera; DROP COLUMN num;
+--insertar la columna num
+Alter Table cartera; Add num Int Identity(1, 1)
+Go
+
+--Alter Table cartera Drop Column num
+--Go  
+
+
+--borrar los registros repetidos
+DELETE FROM cartera WHERE num NOT IN  (SELECT MIN(num) 
+FROM cartera GROUP BY id)
+
+--insertar los registros nuevos en una tabla
+select p2.id, p2.nombre from persona p1 
+right join persona2 p2 on p1.nombre=p2.nombre 
+where p1.nombre is null
+
+
+--convertir la fecha mandamiento
 update cartera set [FECHA_MANDAMIENTO]=CONVERT(DATETIME,[FECHA MANDAMIENTO],103)
 WHERE [FECHA MANDAMIENTO] LIKE '%/%'
 
-//convertir la fecha notificacion
+--convertir la fecha notificacion
 update cartera set [FECHA_NOTIFICACION]=CONVERT(DATETIME,[FECHA NOTIFICACION],103)
 WHERE [FECHA NOTIFICACION] LIKE '%/%'
   
-//agregar 3 anios
-SELECT  TOP (10000)  [FECHA MANDAMIENTO] ,[FECHA_MANDAMIENTO]
-,DATEADD(year, 3, [FECHA_MANDAMIENTO]) AS FechaMandamientoResultado
-FROM [DbTestImport].[dbo].[cartera]
-where [FECHA_MANDAMIENTO] is not null
+--agregar 3 anios
+--SELECT  TOP (10000)  [FECHA MANDAMIENTO] ,[FECHA_MANDAMIENTO]
+--,DATEADD(year, 3, [FECHA_MANDAMIENTO]) AS FechaMandamientoResultado
+--FROM [DbTestImport].[dbo].[cartera]
+--where [FECHA_MANDAMIENTO] is not null
 
-//agregar 3 anios
-SELECT  TOP (10000)  [FECHA NOTIFICACION] ,[FECHA_NOTIFICACION]
-,DATEADD(year, 3, [FECHA NOTIFICACION]) AS FechaMandamientoResultado
-FROM [DbTestImport].[dbo].[cartera]
-where [FECHA_MANDAMIENTO] is not null
+--agregar 3 anios
+--SELECT  TOP (10000)  [FECHA NOTIFICACION] ,[FECHA_NOTIFICACION]
+--,DATEADD(year, 3, [FECHA NOTIFICACION]) AS FechaMandamientoResultado
+--FROM [DbTestImport].[dbo].[cartera]
+--where [FECHA_MANDAMIENTO] is not null
+
+--sumar 3 anios comaparendo
+--update cartera set sum_fecha_comparendo=DATEADD(year, 3, [FECHA_COMPARENDO])
+
+--sumar 3 anios notificacion
+--update cartera set sum_fecha_notificacion=DATEADD(year, 3, [FECHA_NOTIFICACION])
+
+
+--actualizar dias de suspencion notificacion
+--update cartera set dias_suspencion_notificacion=(
+--	Select count(*)
+--	from fechas_suspencion
+--	where fecha>=cartera.FECHA_NOTIFICACION and fecha<=cartera.sum_fecha_notificacion
+--)
+
+--actualizar dias de suspencion comparendo
+--update cartera set dias_suspencion_comparendo=(
+--	Select count(*)
+--	from fechas_suspencion
+--	where fecha>=cartera.FECHA_COMPARENDO and fecha<=cartera.sum_fecha_comparendo
+--)
+
+--actualizar resultado fecha_comparendo
+update cartera set res_fecha_comparendo=DATEADD(year, 3, FECHA_COMPARENDO )
+
+update cartera set res_fecha_comparendo=DATEADD(DAY, 
+(Select count(*)
+	from fechas_suspencion
+	where fecha>=cartera.FECHA_COMPARENDO and fecha<=cartera.res_fecha_comparendo),
+	[FECHA_COMPARENDO])
+
+
+-----------------------------------------------------------------
+DECLARE @LoopCounter INT , @MaxId INT, 
+        @fecha NVARCHAR(100),@comando NVARCHAR(1000),
+		@cantFilasModificar INT
+SELECT @LoopCounter = min(id) , @MaxId = max(Id) 
+FROM fechas_suspencion
+
+SET @cantFilasModificar=1
+Select @cantFilasModificar=COUNT(*)
+	from  cartera
+	where cartera.res_fecha_comparendo in (select fecha from fechas_suspencion )
+WHILE(@cantFilasModificar>0)
+	BEGIN
+		WHILE(@LoopCounter IS NOT NULL AND @LoopCounter <= @MaxId)
+			BEGIN
+			   --fecha comparendo
+			   SELECT @fecha =fecha , @comando='update cartera set res_fecha_comparendo=DATEADD(day, 1, res_fecha_comparendo) where  res_fecha_comparendo='''
+			   FROM fechas_suspencion WHERE Id = @LoopCounter
+				
+			   EXEC (@comando+''+ @fecha+'''')
+			   PRINT(@comando+''+ @fecha+'''')
+
+			   SET @LoopCounter  = @LoopCounter  + 1        
+			END
+
+		Select @cantFilasModificar=COUNT(*)
+			from  cartera
+			where cartera.res_fecha_comparendo in (select fecha from fechas_suspencion )
+		PRINT(@cantFilasModificar)
+	END
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+--actualizar resultado fechas_notificacion
+update cartera set res_fecha_notificacion=DATEADD(DAY, 
+(Select count(*)
+	from fechas_suspencion
+	where fecha>=cartera.FECHA_NOTIFICACION and fecha<=cartera.sum_fecha_notificacion),
+	[FECHA_NOTIFICACION])
+update cartera set res_fecha_notificacion=DATEADD(year, 3, [res_fecha_notificacion])
+
+
+
+--generar query actualizacion dia final
+SELECT fecha,  'update cartera set res_fecha_comparendo=DATEADD(day, 1, res_fecha_comparendo) where  res_fecha_comparendo=''' + CONVERT(VARCHAR(10), fecha, 23)+''''
+  FROM [DbTestImport].[dbo].[fechas_suspencion]
+  
+--actualizacion dinamica dia suspencion
+DECLARE @LoopCounter INT , @MaxEmployeeId INT, 
+        @fecha NVARCHAR(100),@comando NVARCHAR(1000)
+SELECT @LoopCounter = min(id) , @MaxEmployeeId = max(Id) 
+FROM fechas_suspencion
+ 
+WHILE(@LoopCounter IS NOT NULL
+      AND @LoopCounter <= @MaxEmployeeId)
+BEGIN
+   --fecha comparendo
+   SELECT @fecha =fecha2 , @comando='update cartera set res_fecha_comparendo=DATEADD(day, 1, res_fecha_comparendo) where  res_fecha_comparendo='''
+   FROM fechas_suspencion WHERE Id = @LoopCounter
+    
+   EXEC (@comando+''+ @fecha+'''')
+   PRINT(@comando+''+ @fecha+'''')
+
+   --fecha notificacion
+   SELECT @fecha =fecha2 , @comando='update cartera set res_fecha_notificacion=DATEADD(day, 1, res_fecha_notificacion) where  res_fecha_notificacion='''
+   FROM fechas_suspencion WHERE Id = @LoopCounter
+    
+   EXEC (@comando+''+ @fecha+'''')
+   PRINT(@comando+''+ @fecha+'''')
+
+   SET @LoopCounter  = @LoopCounter  + 1        
+END
+ 
+  
+  
