@@ -16,7 +16,7 @@ namespace appEtlPrescripcion
 {
     public partial class Form1 : Form
     {
-        Boolean refrescarEstado = true;
+        Boolean refrescarEstadProcsamiento = true;
 
         public Form1()
         {
@@ -29,7 +29,9 @@ namespace appEtlPrescripcion
             {
                 try
                 {
-                    var datos = ProcesarPrescripcion.procesarDatos();
+                    EstadoForm.procesarDatos = true;
+
+                    var datos = ProcesarDAtos.procesarFechas();
 
                     TextWriter tw = new StreamWriter("SavedList.txt");
 
@@ -42,7 +44,7 @@ namespace appEtlPrescripcion
 
                     this.Invoke(new Action(() =>
                     {
-                        MessageBox.Show("fdsalkj");
+                        MessageBox.Show("Finalizado");
                     }));        
                 }
                 catch (Exception ex)
@@ -51,8 +53,7 @@ namespace appEtlPrescripcion
                 }
                 finally
                 {
-
-
+                    EstadoForm.procesarDatos = false;
                 }
             });
             thread2.Start();
@@ -68,7 +69,7 @@ namespace appEtlPrescripcion
             {
                 try
                 {
-                    while (this.refrescarEstado == true)
+                    while (this.refrescarEstadProcsamiento == true)
                     {
                         try
                         {
@@ -78,7 +79,13 @@ namespace appEtlPrescripcion
                             {
                                 txtProcesados.Text = EstadoForm.cantidadRegistrosProcesado+"";
                                 txtTotal.Text = EstadoForm.totalRegistros+"";
-                                var afds = 0;
+                                if (EstadoForm.procesarDatos)
+                                {
+                                    ptbLoading.Visible = true;
+                                }else
+                                {
+                                    ptbLoading.Visible = false;
+                                }
                             }));
                         }
                         catch (Exception ex)
@@ -104,12 +111,44 @@ namespace appEtlPrescripcion
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.refrescarEstado = false;
+            this.refrescarEstadProcsamiento = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             actualizarEstadoForm();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            EstadoForm.procesarDatos = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    EstadoForm.procesarDatos = true;
+                    ProcesarDAtos.realizarConversion();
+                        
+
+                    this.Invoke(new Action(() =>
+                    {
+                        MessageBox.Show("Finalizado");
+                    }));
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    EstadoForm.procesarDatos = false;
+                }
+            });
+            thread2.Start();
         }
     }
 }
