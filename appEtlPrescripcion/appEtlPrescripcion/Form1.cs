@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace appEtlPrescripcion
 {
@@ -25,22 +26,15 @@ namespace appEtlPrescripcion
 
         private void button1_Click(object sender, EventArgs e)
         {
+            gbProcesoPrescritos.Visible = true;
             Thread thread2 = new Thread(() =>
             {
                 try
                 {
                     EstadoForm.procesarDatos = true;
-
-                    var datos = ProcesarDAtos.procesarFechas();
-
-                    TextWriter tw = new StreamWriter("SavedList.txt");
-
-                    foreach (var item in datos)
-                    {
-                        tw.WriteLine(item[0] + " " + item[1]);
-                    }
-
-                    tw.Close();
+                    EstadoForm.cantidadRegistrosProcesado = 0;
+              
+                    ProcesarDAtos.procesarFechas();
 
                     this.Invoke(new Action(() =>
                     {
@@ -54,6 +48,15 @@ namespace appEtlPrescripcion
                 finally
                 {
                     EstadoForm.procesarDatos = false;
+                    try
+                    {
+                        gbProcesoPrescritos.Visible = false;
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                  
                 }
             });
             thread2.Start();
@@ -112,6 +115,7 @@ namespace appEtlPrescripcion
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.refrescarEstadProcsamiento = false;
+            EstadoForm.procesarDatos = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -131,8 +135,7 @@ namespace appEtlPrescripcion
                 try
                 {
                     EstadoForm.procesarDatos = true;
-                    ProcesarDAtos.realizarConversion();
-                        
+                    ProcesarDAtos.realizarConversion();                     
 
                     this.Invoke(new Action(() =>
                     {
@@ -149,6 +152,130 @@ namespace appEtlPrescripcion
                 }
             });
             thread2.Start();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    EstadoForm.procesarDatos = true;
+                    DbMesNuevo.ExportarRegistroNuevos();
+                    this.Invoke(new Action(() =>
+                    {
+                        MessageBox.Show("Finalizado");
+                    }));
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    EstadoForm.procesarDatos = false;
+                }
+            });
+            thread2.Start();
+        
+   
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    EstadoForm.procesarDatos = true;
+                    DbMesNuevo.ExportarRegistroRepetidos();
+
+                    this.Invoke(new Action(() =>
+                    {
+                        MessageBox.Show("Finalizado");
+                    }));
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    EstadoForm.procesarDatos = false;
+                }
+            });
+            thread2.Start();
+
+         
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    EstadoForm.procesarDatos = true;
+                    DbMesNuevo.ExportarMesNuevo();
+
+                    this.Invoke(new Action(() =>
+                    {
+                        MessageBox.Show("Finalizado");
+                    }));
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    EstadoForm.procesarDatos = false;
+                }
+            });
+            thread2.Start();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    EstadoForm.procesarDatos = true;
+                    DbMesNuevo.ExportarMesViejo();
+
+                    this.Invoke(new Action(() =>
+                    {
+                        MessageBox.Show("Finalizado");
+                    }));
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    EstadoForm.procesarDatos = false;
+                }
+            });
+            thread2.Start();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //Fetch the Statistical data from database.
+
+
+            //Get the names of Cities.
+            string[] x =new string[] { "uno", "dos", "tres", "cuatro", "cinco"};
+
+            //Get the Total of Orders for each City.
+            int[] y =new int[] { 20, 3, 24, 56, 32 };
+
+            chart1.Series[0].LegendText = "Brazil Order Statistics";
+            chart1.Series[0].ChartType = SeriesChartType.Bar;
+            chart1.Series[0].IsValueShownAsLabel = true;
+            chart1.Series[0].Points.DataBindXY(x, y);
         }
     }
 }

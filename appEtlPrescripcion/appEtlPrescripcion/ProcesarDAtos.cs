@@ -30,17 +30,13 @@ namespace appEtlPrescripcion
 
             foreach (var datos in listadoGrupoFechasComparendo)
             {
-                if (datos != null) { 
+                if (datos != null && EstadoForm.procesarDatos == true) { 
                     var fechaInicio = Convert.ToDateTime(datos);
                     DateTime fechaFinal = DateTime.Now;
-                    if (fechaInicio>Convert.ToDateTime("2017-01-01"))
-                    {
-                        fechaFinal = obteneterFechaFinal(fechaInicio, fechasSuspencion);
-                        DbMesNuevo.ActualizarResultadoFechasFinalesComparendo(fechaInicio, fechaFinal, true);
-                    }
-                                      
-            
-
+           
+                    fechaFinal = obteneterFechaFinal(fechaInicio, fechasSuspencion);
+                    DbMesNuevo.ActualizarResultadoFechasFinalesComparendo(fechaInicio, fechaFinal, true);
+                
                     fechasProcesadas.Add(new FechasProcesada()
                     {
                         fechaInicio=fechaInicio,
@@ -59,7 +55,7 @@ namespace appEtlPrescripcion
 
             foreach (var datos in listadoGrupoFechasNotificacion)
             {
-                if (datos != null)
+                if (datos != null && EstadoForm.procesarDatos == true)
                 {
                     var fechaInicio = Convert.ToDateTime(datos);
                     DateTime fechaFinal = new DateTime();
@@ -76,7 +72,6 @@ namespace appEtlPrescripcion
 
                     DbMesNuevo.ActualizarResultadoFechasFinalesNotificacion(fechaInicio, fechaFinal, true);
 
-          
                 }
                 EstadoForm.cantidadRegistrosProcesado++;
             }
@@ -90,7 +85,6 @@ namespace appEtlPrescripcion
 
             DateTime fechaFinal = fechaInicio;
             var cantidadDiasSumaAnios = ((fechaInicio.AddYears(3)) - fechaInicio).Days;
-            //cantidadDiasSumaAnios--;
 
                 while (cantidadDiasSumaAnios > 0)
                 {

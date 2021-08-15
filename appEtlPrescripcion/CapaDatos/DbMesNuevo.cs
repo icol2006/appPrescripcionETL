@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace CapaDatos
 
                     listadoDatos.Add(fecha);
                 };
+                oSqlDataReader.Close();
             }
 
             catch (Exception ex)
@@ -79,6 +81,7 @@ namespace CapaDatos
 
                     listadoDatos.Add(fecha);
                 };
+                oSqlDataReader.Close();
             }
 
             catch (Exception ex)
@@ -233,6 +236,119 @@ namespace CapaDatos
             }
 
             return resultado;
+        }
+
+
+        public static void ExportarRegistroNuevos()
+        {
+            String comando = "SELECT * FROM nuevos ";
+            exportarDatos(comando);
+        }
+
+
+        public static void ExportarRegistroRepetidos()
+        {
+            var comando = "SELECT * FROM repetidos";
+            exportarDatos(comando);
+        }
+
+
+        public static void ExportarMesNuevo()
+        {
+            String comando = "SELECT * FROM mes_nuevo";
+            exportarDatos(comando);
+        }
+
+        public static void ExportarMesViejo()
+        {
+            String comando = "SELECT * FROM mes_viejo";
+            exportarDatos(comando);
+        }
+
+        public static void exportarDatos(String comando)
+        {
+            SqlDataReader oSqlDataReader;
+            SqlConnection SqlConexion = new SqlConnection();
+   
+            try
+            {
+                SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
+                SqlConexion.Open();
+
+                SqlCommand SqlComando = new SqlCommand();
+                SqlComando.Connection = SqlConexion;
+                SqlComando.CommandText = comando;
+                                       
+
+                SqlComando.CommandType = CommandType.Text;
+                oSqlDataReader = SqlComando.ExecuteReader();
+                
+
+                string fileName = "datos.csv";
+                StreamWriter sw = new StreamWriter(fileName);
+                object[] output = new object[oSqlDataReader.FieldCount];
+
+                for (int i = 0; i < oSqlDataReader.FieldCount; i++)
+                    output[i] = oSqlDataReader.GetName(i);
+
+                sw.WriteLine(string.Join(";", output));
+
+                while (oSqlDataReader.Read())
+                {
+                    oSqlDataReader.GetValues(output);
+                    sw.WriteLine(string.Join(";", output));
+                }
+
+                sw.Close();
+                oSqlDataReader.Close();
+
+            }
+
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                if (SqlConexion.State == ConnectionState.Open)
+                {
+                    SqlConexion.Close();
+                }
+            }
+        }
+
+        public static DataTable obtenerDatosDatables(String query)
+        {
+            SqlConnection SqlConexion = new SqlConnection();
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
+              
+                SqlCommand cmd = new SqlCommand(query, SqlConexion);
+                SqlConexion.Open();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                // this will query your database and return the result to your datatable
+                da.Fill(dataTable);
+                SqlConexion.Close();
+                da.Dispose();
+
+            }
+
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                if (SqlConexion.State == ConnectionState.Open)
+                {
+                    SqlConexion.Close();
+                }
+            }
+
+            return dataTable;
         }
 
 

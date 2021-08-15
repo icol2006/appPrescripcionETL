@@ -29,47 +29,66 @@ namespace appEtlPrescripcion
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.txtProcesados = new System.Windows.Forms.TextBox();
             this.ptbLoading = new System.Windows.Forms.PictureBox();
-            this.txtAccionForm = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.gbProcesoPrescritos = new System.Windows.Forms.GroupBox();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.button8 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbLoading)).BeginInit();
+            this.gbProcesoPrescritos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(12, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(717, 368);
+            this.tabControl1.Size = new System.Drawing.Size(717, 353);
             this.tabControl1.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(709, 342);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Graficos";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button7);
+            this.tabPage2.Controls.Add(this.button6);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.button5);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.button2);
@@ -78,7 +97,7 @@ namespace appEtlPrescripcion
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(709, 342);
+            this.tabPage2.Size = new System.Drawing.Size(709, 327);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Procesamiento";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -86,7 +105,7 @@ namespace appEtlPrescripcion
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(39, 39);
+            this.label4.Location = new System.Drawing.Point(45, 39);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(104, 13);
             this.label4.TabIndex = 4;
@@ -94,7 +113,7 @@ namespace appEtlPrescripcion
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(207, 34);
+            this.button3.Location = new System.Drawing.Point(207, 29);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 3;
@@ -125,16 +144,28 @@ namespace appEtlPrescripcion
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 79);
+            this.label1.Location = new System.Drawing.Point(45, 84);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Procemiento registro prescriptos";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.button8);
+            this.tabPage1.Controls.Add(this.chart1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(709, 327);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Graficos";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(240, 425);
+            this.label2.Location = new System.Drawing.Point(13, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 1;
@@ -143,7 +174,7 @@ namespace appEtlPrescripcion
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(377, 425);
+            this.label3.Location = new System.Drawing.Point(150, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 2;
@@ -152,7 +183,7 @@ namespace appEtlPrescripcion
             // txtTotal
             // 
             this.txtTotal.Enabled = false;
-            this.txtTotal.Location = new System.Drawing.Point(277, 418);
+            this.txtTotal.Location = new System.Drawing.Point(50, 19);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(94, 20);
             this.txtTotal.TabIndex = 4;
@@ -160,41 +191,158 @@ namespace appEtlPrescripcion
             // txtProcesados
             // 
             this.txtProcesados.Enabled = false;
-            this.txtProcesados.Location = new System.Drawing.Point(448, 418);
+            this.txtProcesados.Location = new System.Drawing.Point(221, 19);
             this.txtProcesados.Name = "txtProcesados";
             this.txtProcesados.Size = new System.Drawing.Size(94, 20);
             this.txtProcesados.TabIndex = 5;
             // 
             // ptbLoading
             // 
+            this.ptbLoading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ptbLoading.Image = global::appEtlPrescripcion.Properties.Resources.loading_buffering;
-            this.ptbLoading.Location = new System.Drawing.Point(206, 418);
+            this.ptbLoading.Location = new System.Drawing.Point(675, 390);
             this.ptbLoading.Name = "ptbLoading";
-            this.ptbLoading.Size = new System.Drawing.Size(28, 24);
+            this.ptbLoading.Size = new System.Drawing.Size(50, 48);
             this.ptbLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ptbLoading.TabIndex = 6;
             this.ptbLoading.TabStop = false;
             this.ptbLoading.Visible = false;
             // 
-            // txtAccionForm
+            // button4
             // 
-            this.txtAccionForm.Enabled = false;
-            this.txtAccionForm.Location = new System.Drawing.Point(567, 418);
-            this.txtAccionForm.Name = "txtAccionForm";
-            this.txtAccionForm.Size = new System.Drawing.Size(158, 20);
-            this.txtAccionForm.TabIndex = 7;
+            this.button4.Location = new System.Drawing.Point(559, 34);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "Procesar";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "label5";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(397, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(126, 13);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Exportar registros nuevos";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(397, 84);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(134, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Exportar registros repetidos";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(559, 74);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 9;
+            this.button5.Text = "Procesar";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(397, 128);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(93, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Exportar mes viejo";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(45, 128);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(101, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Exportar mes nuevo";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(207, 118);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 12;
+            this.button6.Text = "Procesar";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(559, 118);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 13;
+            this.button7.Text = "Procesar";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // gbProcesoPrescritos
+            // 
+            this.gbProcesoPrescritos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbProcesoPrescritos.Controls.Add(this.txtProcesados);
+            this.gbProcesoPrescritos.Controls.Add(this.label2);
+            this.gbProcesoPrescritos.Controls.Add(this.label3);
+            this.gbProcesoPrescritos.Controls.Add(this.txtTotal);
+            this.gbProcesoPrescritos.Location = new System.Drawing.Point(348, 390);
+            this.gbProcesoPrescritos.Name = "gbProcesoPrescritos";
+            this.gbProcesoPrescritos.Size = new System.Drawing.Size(321, 48);
+            this.gbProcesoPrescritos.TabIndex = 7;
+            this.gbProcesoPrescritos.TabStop = false;
+            this.gbProcesoPrescritos.Visible = false;
+            // 
+            // chart1
+            // 
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(36, 53);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(602, 233);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(66, 21);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 1;
+            this.button8.Text = "button8";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(757, 450);
-            this.Controls.Add(this.txtAccionForm);
+            this.Controls.Add(this.gbProcesoPrescritos);
             this.Controls.Add(this.ptbLoading);
-            this.Controls.Add(this.txtProcesados);
-            this.Controls.Add(this.txtTotal);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -203,9 +351,12 @@ namespace appEtlPrescripcion
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ptbLoading)).EndInit();
+            this.gbProcesoPrescritos.ResumeLayout(false);
+            this.gbProcesoPrescritos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -222,9 +373,20 @@ namespace appEtlPrescripcion
         private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.TextBox txtProcesados;
         private System.Windows.Forms.PictureBox ptbLoading;
-        private System.Windows.Forms.TextBox txtAccionForm;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox gbProcesoPrescritos;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 
