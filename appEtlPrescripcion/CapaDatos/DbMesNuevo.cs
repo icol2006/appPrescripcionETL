@@ -193,12 +193,12 @@ namespace CapaDatos
 
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = "update  cartera set id= [NRO DOCUMENTO]+[COMPARENDO]+[FECHA COMPARENDO]";
+                SqlComando.CommandText = "update  mes_nuevo set id= [NRO DOCUMENTO]+[COMPARENDO]+[FECHA COMPARENDO]";
                 SqlComando.CommandType = CommandType.Text;
                 SqlComando.ExecuteNonQuery();
 
                 SqlComando.CommandText = "delete from repetidos insert into repetidos" +
-                    "(registro, cantidad) select id, count(*) as cantidad from cartera group by id HAVING count(*) > 2 order by cantidad";
+                    "(registro, cantidad) select id, count(*) as cantidad from mes_nuevo group by id HAVING count(*) > 2 order by cantidad";
                 SqlComando.ExecuteNonQuery();
 
                 SqlComando.CommandText = "ALTER TABLE mes_nuevo DROP COLUMN num";
@@ -207,13 +207,13 @@ namespace CapaDatos
                 SqlComando.CommandText = "Alter Table mes_nuevo Add num Int Identity(1, 1)";
                 SqlComando.ExecuteNonQuery();
 
-                SqlComando.CommandText = "DELETE FROM cartera WHERE num NOT IN  (SELECT MIN(num) FROM cartera GROUP BY id)";
+                SqlComando.CommandText = "DELETE FROM mes_nuevo WHERE num NOT IN  (SELECT MIN(num) FROM mes_nuevo GROUP BY id)";
                 SqlComando.ExecuteNonQuery();
 
-                SqlComando.CommandText = "update cartera set [FECHA_COMPARENDO]=CONVERT(DATETIME,[FECHA COMPARENDO],103) WHERE [FECHA COMPARENDO] LIKE '%/%'";
+                SqlComando.CommandText = "update mes_nuevo set [FECHA_COMPARENDO]=CONVERT(DATETIME,[FECHA COMPARENDO],103) WHERE [FECHA COMPARENDO] LIKE '%/%'";
                 SqlComando.ExecuteNonQuery();
 
-                SqlComando.CommandText = "update cartera set [FECHA_NOTIFICACION]=CONVERT(DATETIME,[FECHA NOTIFICACION],103) WHERE [FECHA NOTIFICACION] LIKE '%/%'";
+                SqlComando.CommandText = "update mes_nuevo set [FECHA_NOTIFICACION]=CONVERT(DATETIME,[FECHA NOTIFICACION],103) WHERE [FECHA NOTIFICACION] LIKE '%/%'";
                 SqlComando.ExecuteNonQuery();
             }
 

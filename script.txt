@@ -11,9 +11,9 @@ update  cartera set id= [NRO DOCUMENTO]+[COMPARENDO]+[FECHA COMPARENDO]
    order by cantidad
   
 
-ALTER TABLE cartera; DROP COLUMN num;
+ALTER TABLE mes_nuevo DROP COLUMN num;
 --insertar la columna num
-Alter Table cartera; Add num Int Identity(1, 1)
+Alter Table mes_nuevo Add num Int Identity(1, 1);
 Go
 
 --Alter Table cartera Drop Column num
@@ -30,13 +30,68 @@ right join persona2 p2 on p1.nombre=p2.nombre
 where p1.nombre is null
 
 
---convertir la fecha mandamiento
-update cartera set [FECHA_COMPARENDO]=CONVERT(DATETIME,[FECHA COMPARENDO],103)
-WHERE [FECHA COMPARENDO] LIKE '%/%'
+--nuevos
+--insertar los registros nuevos en una tabla
+insert into repetidos
+select p2.[TIPO DOCUMENTO],
+      p2.[NRO DOCUMENTO],
+      p2.[COMPARENDO],
+      p2.[FECHA COMPARENDO],
+      p2.[PLACA],
+      p2.[ESTADO],
+      p2.[  SALDO  ],
+      p2.[ INTERESES  ],
+      p2.[TIPO COMPARENDO],
+      p2.[FECHA PROCESO],
+      p2.[VALOR NOMINAL],
+      p2.[INFRACCION],
+      p2.[DESCRIPCION INFRACCION],
+      p2.[TIPO SERVICIO],
+      p2.[VALOR TOTAL],
+      p2.[UVT],
+      p2.[NRO RESOLUCION],
+      p2.[FECHA RESOLUCION],
+      p2.[FECHA FIRME],
+      p2.[TIPO RESOLUCION],
+      p2.[PAGOS],
+      p2.[CORREO],
+      p2.[TELEFONO ],
+      p2.[DIRECCION],
+      p2.[NOMBRE],
+      p2.[NRO MANDAMIENTO],
+      p2.[FECHA MANDAMIENTO],
+      p2.[NOTIFICACION],
+      p2.[FECHA NOTIFICACION],
+      p2.[ULTIMO PASO],
+      p2.[FECHA ULTIMO PASO],
+      p2.[FECHA CITACION],
+      p2.[MEDIO IMPOSICION],
+      p2.[FECHA SEGUNDO FIRME],
+      p2.[ENVIADO SEGUNDA INSTANCIA],
+      p2.[FECHA FALLO SEGUNDA INSTANCIA],
+      p2.[ETAPA],
+      p2.[ID],
+      p2.[fecha_comparendo],
+      p2.[fecha_notificacion],
+      p2.[res_fecha_comparendo],
+      p2.[res_fecha_notificacion],
+      p2.[prescrito_comparendo],
+      p2.[prescrito_notificacion],
+      p2.[fc_procesada],
+      p2.[fn_procesada]
+from mes_nuevo p1 
+right join mes_viejo p2 on p1.ID=p2.ID 
+where p1.ID is null
+
+
+
+
+
+--convertir la fecha comparendo
+update cartera set [FECHA_COMPARENDO]=CONVERT(DATETIME,[FECHA COMPARENDO],103) WHERE [FECHA COMPARENDO] LIKE '%/%'
 
 --convertir la fecha notificacion
-update cartera set [FECHA_NOTIFICACION]=CONVERT(DATETIME,[FECHA NOTIFICACION],103)
-WHERE [FECHA NOTIFICACION] LIKE '%/%'
+update cartera set [FECHA_NOTIFICACION]=CONVERT(DATETIME,[FECHA NOTIFICACION],103) WHERE [FECHA NOTIFICACION] LIKE '%/%'
   
 --agregar 3 anios
 --SELECT  TOP (10000)  [FECHA MANDAMIENTO] ,[FECHA_MANDAMIENTO]
