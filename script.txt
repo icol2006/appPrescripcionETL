@@ -5,7 +5,7 @@ update  cartera set id= [NRO DOCUMENTO]+[COMPARENDO]+[FECHA COMPARENDO]
   delete from repetidos
   insert into repetidos(registro,cantidad)
    select  id, count(*) as cantidad
-   from cartera
+   from mes_nuevo
    group by id
    HAVING count(*) >2 
    order by cantidad

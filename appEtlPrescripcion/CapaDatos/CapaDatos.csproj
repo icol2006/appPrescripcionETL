@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbFechasSuspencion.cs" />
+    <Compile Include="DbGeneral.cs" />
     <Compile Include="DbMesNuevo.cs" />
     <Compile Include="DConexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

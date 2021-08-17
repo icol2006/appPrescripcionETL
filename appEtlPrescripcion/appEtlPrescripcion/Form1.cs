@@ -18,6 +18,8 @@ namespace appEtlPrescripcion
     public partial class Form1 : Form
     {
         Boolean refrescarEstadProcsamiento = true;
+        String mesActual = "";
+        String mesAnterior = "";
 
         public Form1()
         {
@@ -34,7 +36,7 @@ namespace appEtlPrescripcion
                     EstadoForm.procesarDatos = true;
                     EstadoForm.cantidadRegistrosProcesado = 0;
               
-                    ProcesarDAtos.procesarFechas();
+                    ProcesarDAtos.procesarFechas(this.mesActual);
 
                     this.Invoke(new Action(() =>
                     {
@@ -43,7 +45,7 @@ namespace appEtlPrescripcion
                 }
                 catch (Exception ex)
                 {
-
+                    MessageBox.Show(ex.Message);
                 }
                 finally
                 {
@@ -93,7 +95,7 @@ namespace appEtlPrescripcion
                         }
                         catch (Exception ex)
                         {
-
+                            MessageBox.Show(ex.Message);
                         }
                     }
 
@@ -120,6 +122,7 @@ namespace appEtlPrescripcion
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            cargarMeses();
             actualizarEstadoForm();
         }
 
@@ -135,7 +138,7 @@ namespace appEtlPrescripcion
                 try
                 {
                     EstadoForm.procesarDatos = true;
-                    ProcesarDAtos.realizarConversion();                     
+                    ProcesarDAtos.realizarConversion(this.mesActual);                     
 
                     this.Invoke(new Action(() =>
                     {
@@ -144,7 +147,7 @@ namespace appEtlPrescripcion
                 }
                 catch (Exception ex)
                 {
-
+                    MessageBox.Show(ex.Message);
                 }
                 finally
                 {
@@ -161,7 +164,7 @@ namespace appEtlPrescripcion
                 try
                 {
                     EstadoForm.procesarDatos = true;
-                    DbMesNuevo.ExportarRegistroNuevos();
+                    DbMesNuevo.ExportarRegistroNuevos(cmbMesActual.Text);
                     this.Invoke(new Action(() =>
                     {
                         MessageBox.Show("Finalizado");
@@ -188,7 +191,7 @@ namespace appEtlPrescripcion
                 try
                 {
                     EstadoForm.procesarDatos = true;
-                    DbMesNuevo.ExportarRegistroRepetidos();
+                    DbMesNuevo.ExportarRegistroRepetidos(this.mesActual);
 
                     this.Invoke(new Action(() =>
                     {
@@ -197,7 +200,7 @@ namespace appEtlPrescripcion
                 }
                 catch (Exception ex)
                 {
-
+                    MessageBox.Show(ex.Message);
                 }
                 finally
                 {
@@ -216,7 +219,7 @@ namespace appEtlPrescripcion
                 try
                 {
                     EstadoForm.procesarDatos = true;
-                    DbMesNuevo.ExportarMesNuevo();
+                    DbMesNuevo.ExportarMesNuevo(cmbMesActual.Text);
 
                     this.Invoke(new Action(() =>
                     {
@@ -242,7 +245,7 @@ namespace appEtlPrescripcion
                 try
                 {
                     EstadoForm.procesarDatos = true;
-                    DbMesNuevo.ExportarMesViejo();
+                    DbMesNuevo.ExportarMesViejo(this.mesAnterior);
 
                     this.Invoke(new Action(() =>
                     {
@@ -251,7 +254,7 @@ namespace appEtlPrescripcion
                 }
                 catch (Exception ex)
                 {
-
+                    MessageBox.Show(ex.Message);
                 }
                 finally
                 {
@@ -276,6 +279,28 @@ namespace appEtlPrescripcion
             chart1.Series[0].ChartType = SeriesChartType.Bar;
             chart1.Series[0].IsValueShownAsLabel = true;
             chart1.Series[0].Points.DataBindXY(x, y);
+        }
+
+        private void cargarMeses()
+        {
+            var meses = DbGeneral.ObtenerMeses();
+
+ 
+            foreach (var item in meses)
+            {
+                cmbMesAnterior.Items.Add(item);
+                cmbMesActual.Items.Add(item);
+            }
+        }
+
+        private void cmbMesAnterior_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.mesAnterior = cmbMesAnterior.SelectedItem.ToString();
+        }
+
+        private void cmbMesActual_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.mesActual = cmbMesActual.SelectedItem.ToString();
         }
     }
 }

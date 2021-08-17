@@ -12,15 +12,15 @@ namespace appEtlPrescripcion
 {
     public static class ProcesarDAtos
     {
-        public static void realizarConversion()
+        public static void realizarConversion(String mesActual)
         {
-            DbMesNuevo.ConversionDatos();
+            DbMesNuevo.ConversionDatos(mesActual);
         }
 
-        public static List<List<string>> procesarFechas()
+        public static List<List<string>> procesarFechas(string mesActual)
         {
-            var listadoGrupoFechasComparendo = DbMesNuevo.ObtenerGruposFechaComparendo();
-            var listadoGrupoFechasNotificacion=DbMesNuevo.ObtenerGruposFechaNotificacion();
+            var listadoGrupoFechasComparendo = DbMesNuevo.ObtenerGruposFechaComparendo(mesActual);
+            var listadoGrupoFechasNotificacion=DbMesNuevo.ObtenerGruposFechaNotificacion(mesActual);
 
             List<FechasSuspencion> fechasSuspencion = DbFechasSuspencion.Listar();
             List<List<string>> resultado = new List<List<string>>();
@@ -35,7 +35,7 @@ namespace appEtlPrescripcion
                     DateTime fechaFinal = DateTime.Now;
            
                     fechaFinal = obteneterFechaFinal(fechaInicio, fechasSuspencion);
-                    DbMesNuevo.ActualizarResultadoFechasFinalesComparendo(fechaInicio, fechaFinal, true);
+                    DbMesNuevo.ActualizarResultadoFechasFinalesComparendo(fechaInicio, fechaFinal, true,mesActual);
                 
                     fechasProcesadas.Add(new FechasProcesada()
                     {
@@ -70,7 +70,7 @@ namespace appEtlPrescripcion
                         fechaFinal = obteneterFechaFinal(fechaInicio, fechasSuspencion);
                     }
 
-                    DbMesNuevo.ActualizarResultadoFechasFinalesNotificacion(fechaInicio, fechaFinal, true);
+                    DbMesNuevo.ActualizarResultadoFechasFinalesNotificacion(fechaInicio, fechaFinal, true,mesActual);
 
                 }
                 EstadoForm.cantidadRegistrosProcesado++;

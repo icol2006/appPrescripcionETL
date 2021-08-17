@@ -11,7 +11,7 @@ namespace CapaDatos
 {
     public static class DbMesNuevo
     {
-        public static List<DateTime?> ObtenerGruposFechaComparendo()
+        public static List<DateTime?> ObtenerGruposFechaComparendo(string mesActual)
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
@@ -24,7 +24,7 @@ namespace CapaDatos
 
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = "SELECT FECHA_COMPARENDO FROM mes_nuevo " +
+                SqlComando.CommandText = "SELECT FECHA_COMPARENDO FROM  " + mesActual+
                                          " group by FECHA_COMPARENDO";
 
                 SqlComando.CommandType = CommandType.Text;
@@ -55,7 +55,7 @@ namespace CapaDatos
             return listadoDatos;
         }
 
-        public static List<DateTime?> ObtenerGruposFechaNotificacion()
+        public static List<DateTime?> ObtenerGruposFechaNotificacion(string mesActual)
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
@@ -68,7 +68,7 @@ namespace CapaDatos
 
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = "SELECT fecha_notificacion FROM mes_nuevo " +
+                SqlComando.CommandText = "SELECT fecha_notificacion FROM  " + mesActual  +
                                          " group by fecha_notificacion";
 
                 SqlComando.CommandType = CommandType.Text;
@@ -99,7 +99,7 @@ namespace CapaDatos
             return listadoDatos;
         }
 
-        public static Boolean ActualizarResultadoFechasFinalesComparendo(DateTime fecha_comparendo, DateTime res_fecha_comparendo, Boolean procesado)
+        public static Boolean ActualizarResultadoFechasFinalesComparendo(DateTime fecha_comparendo, DateTime res_fecha_comparendo, Boolean procesado, string mesActual)
         {
             Boolean resultado = true;
             SqlConnection SqlConexion = new SqlConnection();
@@ -111,7 +111,7 @@ namespace CapaDatos
 
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = "update mes_nuevo set res_fecha_comparendo=@res_fecha_comparendo,fc_procesada=@fc_procesada " +
+                SqlComando.CommandText = "update "+ mesActual+"  set res_fecha_comparendo=@res_fecha_comparendo,fc_procesada=@fc_procesada " +
                     " where fecha_comparendo=@fecha_comparendo";
 
                 SqlComando.CommandType = CommandType.Text;
@@ -142,7 +142,7 @@ namespace CapaDatos
         }
 
         public static Boolean ActualizarResultadoFechasFinalesNotificacion(DateTime fecha_notificacion, DateTime res_fecha_notificacion,
-            Boolean procesado)
+            Boolean procesado, string mesActual)
         {
             Boolean resultado = true;
             SqlConnection SqlConexion = new SqlConnection();
@@ -154,7 +154,7 @@ namespace CapaDatos
 
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = "update mes_nuevo set res_fecha_notificacion=@res_fecha_notificacion,fn_procesada=@fn_procesada " +
+                SqlComando.CommandText = "update "+ mesActual+" set res_fecha_notificacion=@res_fecha_notificacion,fn_procesada=@fn_procesada " +
                     " where fecha_notificacion=@fecha_notificacion";
 
                 SqlComando.CommandType = CommandType.Text;
@@ -184,7 +184,7 @@ namespace CapaDatos
             return resultado;
         }
 
-        public static Boolean ConversionDatos()
+        public static Boolean ConversionDatos(string mesActual)
         {
             Boolean resultado = true;
             SqlConnection SqlConexion = new SqlConnection();
@@ -196,7 +196,7 @@ namespace CapaDatos
 
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = "update  mes_nuevo set id= [NRO DOCUMENTO]+[COMPARENDO]+[FECHA COMPARENDO]";
+                SqlComando.CommandText = "update  "+ mesActual+" set id= [NRO DOCUMENTO]+[COMPARENDO]+[FECHA COMPARENDO]";
                 SqlComando.CommandType = CommandType.Text;
                 SqlComando.ExecuteNonQuery();
 
@@ -239,29 +239,29 @@ namespace CapaDatos
         }
 
 
-        public static void ExportarRegistroNuevos()
+        public static void ExportarRegistroNuevos(String mesActual)
         {
-            String comando = "SELECT * FROM nuevos ";
+            String comando = "SELECT * FROM  "+ mesActual;
             exportarDatos(comando);
         }
 
 
-        public static void ExportarRegistroRepetidos()
+        public static void ExportarRegistroRepetidos(String mesActual)
         {
-            var comando = "SELECT * FROM repetidos";
+            var comando = "SELECT * FROM "+ mesActual;
             exportarDatos(comando);
         }
 
 
-        public static void ExportarMesNuevo()
+        public static void ExportarMesNuevo(String mesActual)
         {
-            String comando = "SELECT * FROM mes_nuevo";
+            String comando = "SELECT * FROM "+ mesActual;
             exportarDatos(comando);
         }
 
-        public static void ExportarMesViejo()
+        public static void ExportarMesViejo(String mesAnterior)
         {
-            String comando = "SELECT * FROM mes_viejo";
+            String comando = "SELECT * FROM "+ mesAnterior;
             exportarDatos(comando);
         }
 
