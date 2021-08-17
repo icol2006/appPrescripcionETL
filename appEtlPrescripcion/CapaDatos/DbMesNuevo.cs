@@ -11,13 +11,14 @@ namespace CapaDatos
 {
     public static class DbMesNuevo
     {
-        public static Tuple<List<DateTime?>, string> ObtenerGruposFechaComparendo(string mesActual)
+        public static Tuple<List<DateTime?>, string,Boolean> ObtenerGruposFechaComparendo(string mesActual)
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
             List<DateTime?> listadoFechas = new List<DateTime?>();
-            Tuple<List<DateTime?>, string> listadoDatos = null;
+            Tuple<List<DateTime?>, string, Boolean> listadoDatos = null;
             String mesnsajeError = "";
+            Boolean resultado = true;
 
             try
             {
@@ -45,6 +46,7 @@ namespace CapaDatos
             catch (Exception ex)
             {
                 mesnsajeError = ex.Message;
+                resultado = false;
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
             finally
@@ -55,17 +57,18 @@ namespace CapaDatos
                 }
             }
 
-            listadoDatos = Tuple.Create(listadoFechas, mesnsajeError);
+            listadoDatos = Tuple.Create(listadoFechas, mesnsajeError,resultado);
             return listadoDatos;
         }
 
-        public static Tuple<List<DateTime?>, string> ObtenerGruposFechaNotificacion(string mesActual)
+        public static Tuple<List<DateTime?>, string,Boolean> ObtenerGruposFechaNotificacion(string mesActual)
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
             List<DateTime?> listadoFechas = new List<DateTime?>();
-            Tuple<List<DateTime?>, string> listadoDatos = null;
+            Tuple<List<DateTime?>, string,Boolean> listadoDatos = null;
             String mesnsajeError = "";
+            Boolean resultado = true;
 
             try
             {
@@ -93,6 +96,7 @@ namespace CapaDatos
             catch (Exception ex)
             {
                 mesnsajeError = ex.Message;
+                resultado = false;
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
             finally
@@ -103,7 +107,7 @@ namespace CapaDatos
                 }
             }
 
-            listadoDatos = Tuple.Create(listadoFechas, mesnsajeError);
+            listadoDatos = Tuple.Create(listadoFechas, mesnsajeError,resultado);
             return listadoDatos;
         }
 

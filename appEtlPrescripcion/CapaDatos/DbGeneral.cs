@@ -127,5 +127,99 @@ namespace CapaDatos
 
             return dataTable;
         }
+
+
+        public static Tuple<double, string,Boolean> obtenerSaldo(string query)
+        {
+            SqlDataReader oSqlDataReader;
+            SqlConnection SqlConexion = new SqlConnection();
+            Tuple<double, string, Boolean> listadoDatos = null;
+            double cantidad = 0;        
+            String mesnsajeError = "";
+            Boolean res = true;
+
+            try
+            {
+                SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
+                SqlConexion.Open();
+
+                SqlCommand SqlComando = new SqlCommand();
+                SqlComando.Connection = SqlConexion;
+                SqlComando.CommandText = query;
+                SqlComando.CommandType = CommandType.Text;
+
+                oSqlDataReader = SqlComando.ExecuteReader();
+
+                while (oSqlDataReader.Read())
+                {
+                    cantidad= (double)oSqlDataReader.GetValue(0);
+                };
+            }
+
+            catch (Exception ex)
+            {
+                mesnsajeError = ex.Message;
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                if (SqlConexion.State == ConnectionState.Open)
+                {
+                    SqlConexion.Close();
+                }
+            }
+
+            listadoDatos = Tuple.Create(cantidad, mesnsajeError,res);
+
+
+            return listadoDatos;
+        }
+
+        public static Tuple<int, string, Boolean> obtenerCantidades(string query)
+        {
+            SqlDataReader oSqlDataReader;
+            SqlConnection SqlConexion = new SqlConnection();
+            Tuple<int, string, Boolean> listadoDatos = null;
+            int cantidad = 0;
+            String mesnsajeError = "";
+            Boolean res = true;
+
+            try
+            {
+                SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
+                SqlConexion.Open();
+
+                SqlCommand SqlComando = new SqlCommand();
+                SqlComando.Connection = SqlConexion;
+                SqlComando.CommandText = query;
+                SqlComando.CommandType = CommandType.Text;
+
+                oSqlDataReader = SqlComando.ExecuteReader();
+
+                while (oSqlDataReader.Read())
+                {
+                    cantidad = (int)oSqlDataReader.GetValue(0);
+                };
+            }
+
+            catch (Exception ex)
+            {
+                mesnsajeError = ex.Message;
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                if (SqlConexion.State == ConnectionState.Open)
+                {
+                    SqlConexion.Close();
+                }
+            }
+
+            listadoDatos = Tuple.Create(cantidad, mesnsajeError, res);
+
+
+            return listadoDatos;
+        }
+
     }
 }

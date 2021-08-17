@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,6 +36,12 @@ namespace appEtlPrescripcion
         private void iniciarProcedimientoPrescripcion()
         {
             gbProcesoPrescritos.Visible = true;
+            var fechaMesActual = txtMesActual.Text;
+
+            DateTime fechaActual = DateTime.ParseExact(fechaMesActual, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var ultimoDiaMesActual= DateTime.DaysInMonth(fechaActual.Year, fechaActual.Month);
+            var fechaUltimoDiaMesActual = new DateTime(fechaActual.Year, fechaActual.Month, ultimoDiaMesActual);
+
             Thread thread2 = new Thread(() =>
             {
                 try
@@ -142,6 +149,7 @@ namespace appEtlPrescripcion
         {
             cargarMeses();
             actualizarEstadoForm();
+            this.txtMesActual.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -383,28 +391,10 @@ namespace appEtlPrescripcion
 
         private void button8_Click(object sender, EventArgs e)
         {
-            generarGrafico("DESCRIPCION#INFRACCION");
+       
         }
 
-        private void generarGrafico(string columna)
-        {
-            var dt = DbGeneral.obtenerDatosDatables("select "+ columna +", COUNT(*) [Total] from " + mesActual + " group by  " + columna );
 
-            //Get the names of Cities.
-            string[] x = (from p in dt.AsEnumerable()
-                          orderby p.Field<string>(columna) ascending
-                          select p.Field<string>(columna)).ToArray();
-
-            //Get the Total of Orders for each City.
-            int[] y = (from p in dt.AsEnumerable()
-                       orderby p.Field<string>(columna) ascending
-                       select p.Field<int>("Total")).ToArray();
-
-            chart1.Series[0].LegendText = "Graficos";
-            chart1.Series[0].ChartType = SeriesChartType.Bar;
-            chart1.Series[0].IsValueShownAsLabel = true;
-            chart1.Series[0].Points.DataBindXY(x, y);
-        }
 
         private void cargarMeses()
         {
@@ -447,5 +437,128 @@ namespace appEtlPrescripcion
         {
             EstadoForm.formEstaAbierto = false;
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            obtenerCantidadMeses();
+            obtenerSaldo();
+            generarGraficoEtapa();
+        }
+
+        private void obtenerCantidadMeses()
+        {
+
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    var res1 =  ProcesarDAtos.obtnerTotalRegistro(this.mesAnterior);
+                    var res2 = ProcesarDAtos.obtnerTotalRegistro(this.mesActual);
+
+
+                    this.Invoke(new Action(() =>
+                    {
+
+                        if(res1.Item3==false)
+                        {
+                            MessageBox.Show(res1.Item2);
+                        }
+                        else
+                        {                            
+                            this.txtCantRegMesAnterior.Text = res1.Item1+"";
+                        }
+
+                        if (res2.Item3 == false)
+                        {
+                            MessageBox.Show(res2.Item2);
+                        }
+                        else
+                        {
+                            this.txtCantRegMesActual.Text = res2.Item1 + ""; ;
+                        }                      
+                    
+                      
+                    }));
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                }
+            });
+            thread2.Start();
+        }
+
+
+        private void obtenerSaldo()
+        {
+
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    var res1 = ProcesarDAtos.obtnerTotalSaldo(this.mesActual);
+
+
+                    this.Invoke(new Action(() =>
+                    {
+
+                        if (res1.Item3 == false)
+                        {
+                            MessageBox.Show(res1.Item2);
+                        }
+                        else
+                        {
+                            this.txtSaldoTotal.Text = res1.Item1 + "";
+                        }
+
+                    }));
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                }
+            });
+            thread2.Start();
+        }
+
+
+        private void generarGraficoEtapa()
+        {
+
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    var res = ProcesarDAtos.generarGrafico("etapa", this.mesActual);
+                    //DESCRIPCION#INFRACCION            
+
+                    this.Invoke(new Action(() =>
+                    {
+                        chart1.Series[0].LegendText = "Graficos";
+                        chart1.Series[0].ChartType = SeriesChartType.Bar;
+                        chart1.Series[0].IsValueShownAsLabel = true;
+                        chart1.Series[0].Points.DataBindXY(res.Item1, res.Item2);
+                    }));
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                }
+            });
+            thread2.Start();
+        }
+
     }
 }

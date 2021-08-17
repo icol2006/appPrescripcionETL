@@ -4,10 +4,12 @@ using CapaDatos;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace appEtlPrescripcion
 {
@@ -64,7 +66,7 @@ namespace appEtlPrescripcion
 
             EstadoForm.totalRegistros = listadoGrupoFechasComparendo.Item1.Count() + listadoGrupoFechasNotificacion.Item1.Count();
 
-            if(listadoGrupoFechasComparendo.Item2.Trim().Length>0 && listadoGrupoFechasNotificacion.Item2.Trim().Length > 0)
+            if(listadoGrupoFechasComparendo.Item3==true && listadoGrupoFechasNotificacion.Item3==true)
             {
                 foreach (var datos in listadoGrupoFechasComparendo.Item1)
                 {
@@ -158,5 +160,39 @@ namespace appEtlPrescripcion
 
             File.Move("datos.csv", nombreArchivo);
         }
+
+        public static Tuple<string[], int[]> generarGrafico(string columna,string mesActual)
+        {
+            var dt = DbGeneral.obtenerDatosDatables("select " + columna + ", COUNT(*) [Total] from " + mesActual + " group by  " + columna);
+            Tuple<string[], int[]> listadoDatos = null;
+
+            //Get the names of Cities.
+            string[] x = (from p in dt.AsEnumerable()
+                          orderby p.Field<string>(columna) ascending
+                          select p.Field<string>(columna)).ToArray();
+
+            //Get the Total of Orders for each City.
+            int[] y = (from p in dt.AsEnumerable()
+                       orderby p.Field<string>(columna) ascending
+                       select p.Field<int>("Total")).ToArray();
+
+            listadoDatos = Tuple.Create(x, y);
+            return listadoDatos;
+        }
+
+        public static Tuple<int, string, Boolean> obtnerTotalRegistro(String mes)
+        {
+            var res= DbGeneral.obtenerCantidades("select  COUNT(*) [Total] from " + mes);
+
+            return res;
+        }
+
+        public static Tuple<double, string, Boolean> obtnerTotalSaldo(String mes)
+        {
+            var res = DbGeneral.obtenerSaldo("select  sum(saldo) [Total] from " + mes);
+
+            return res;
+        }
+
     }
 }
