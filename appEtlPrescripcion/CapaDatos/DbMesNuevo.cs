@@ -199,34 +199,35 @@ namespace CapaDatos
         public static Tuple<List<object[]>, string, Boolean> ExportarRegistroNuevos(String mesActual)
         {
             String comando = "SELECT * FROM  "+ mesActual;
-            return exportarDatos(comando);
+            return exportarDatos(comando,mesActual);
         }
 
         public static Tuple<List<object[]>, string, Boolean> ExportarRegistroRepetidos(String mesActual)
         {
             var comando = "SELECT * FROM "+ mesActual;
-            return exportarDatos(comando);
+            return exportarDatos(comando,mesActual);
         }
 
         public static Tuple<List<object[]>, string, Boolean> ExportarMesNuevo(String mesActual)
         {
             String comando = "SELECT * FROM "+ mesActual;
-            return exportarDatos(comando);
+            return exportarDatos(comando,mesActual);
         }
 
         public static Tuple<List<object[]>, string, Boolean> ExportarMesViejo(String mesAnterior)
         {
             String comando = "SELECT * FROM "+ mesAnterior;
-            return exportarDatos(comando);
+            return exportarDatos(comando,mesAnterior);
         }
 
-        public static Tuple<List<object[]>, string,Boolean> exportarDatos(String comando)
+        public static Tuple<List<object[]>, string,Boolean> exportarDatos(String comando, String tabla)
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
             String mesnsajeError = ""; Boolean existeError = false;
             Tuple<List<object[]>, string,Boolean> listadoDatos = null;
             List<object[]> datos = new List<object[]>();
+            String queryColumnas = "SELECT column_name  FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'"+tabla+"'";
 
             try
             {
@@ -235,28 +236,23 @@ namespace CapaDatos
 
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = comando;
-                                       
 
+                //Obtener datos
+                SqlComando.CommandText = comando;                                      
                 SqlComando.CommandType = CommandType.Text;
                 oSqlDataReader = SqlComando.ExecuteReader();
-                    
-                object[] output = new object[oSqlDataReader.FieldCount];
 
+                object[] output = new object[oSqlDataReader.FieldCount];
                 for (int i = 0; i < oSqlDataReader.FieldCount; i++)
                     output[i] = oSqlDataReader.GetName(i);
-
-               // sw.WriteLine(string.Join(";", output));
 
                 while (oSqlDataReader.Read())
                 {
                     oSqlDataReader.GetValues(output);
                     datos.Add(output);
-                    //sw.WriteLine(string.Join(";", output));
                     output = new object[oSqlDataReader.FieldCount];
                 }
 
-               // sw.Close();
                 oSqlDataReader.Close();
             }
 
@@ -275,6 +271,61 @@ namespace CapaDatos
             }
 
             listadoDatos = Tuple.Create(datos, mesnsajeError,existeError);
+
+            return listadoDatos;
+        }
+
+        public static Tuple<List<object[]>, string, Boolean> obtenerNombresColumnas(String tabla)
+        {
+            SqlDataReader oSqlDataReader;
+            SqlConnection SqlConexion = new SqlConnection();
+            String mesnsajeError = ""; Boolean existeError = false;
+            Tuple<List<object[]>, string, Boolean> listadoDatos = null;
+            List<object[]> datos = new List<object[]>();
+            String queryColumnas = "SELECT column_name  FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'" + tabla + "'";
+
+            try
+            {
+                SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
+                SqlConexion.Open();
+
+                SqlCommand SqlComando = new SqlCommand();
+                SqlComando.Connection = SqlConexion;
+
+                //Obtener datos
+                SqlComando.CommandText = queryColumnas;
+                SqlComando.CommandType = CommandType.Text;
+                oSqlDataReader = SqlComando.ExecuteReader();
+
+                object[] output = new object[oSqlDataReader.FieldCount];
+                for (int i = 0; i < oSqlDataReader.FieldCount; i++)
+                    output[i] = oSqlDataReader.GetName(i);
+
+                while (oSqlDataReader.Read())
+                {
+                    oSqlDataReader.GetValues(output);
+                    datos.Add(output);
+                    output = new object[oSqlDataReader.FieldCount];
+                }
+
+                oSqlDataReader.Close();
+            }
+
+            catch (Exception ex)
+            {
+                mesnsajeError = ex.Message;
+                existeError = false;
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                if (SqlConexion.State == ConnectionState.Open)
+                {
+                    SqlConexion.Close();
+                }
+            }
+
+            listadoDatos = Tuple.Create(datos, mesnsajeError, existeError);
 
             return listadoDatos;
         }

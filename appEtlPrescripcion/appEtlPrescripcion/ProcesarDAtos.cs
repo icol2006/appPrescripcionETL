@@ -37,8 +37,8 @@ namespace appEtlPrescripcion
             listadoQuery.Add("IF NOT EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  Add num Int Identity(1, 1) END;");
 
             listadoQuery.Add("DELETE FROM " + mesActual + " WHERE num NOT IN  (SELECT MIN(num) FROM " + mesActual + " GROUP BY id)");
-            listadoQuery.Add("update " + mesActual + " set FECHA_COMPARENDO=CAST(FECHA#COMPARENDO AS DATE) WHERE FECHA#COMPARENDO LIKE '%/%'");
-            listadoQuery.Add("update " + mesActual + " set FECHA_NOTIFICACION=CAST(FECHA#notificacion AS DATE) WHERE FECHA#notificacion LIKE '%/%'");
+            listadoQuery.Add("update " + mesActual + " set FECHA_COMPARENDO=convert(datetime, FECHA#COMPARENDO, 103) WHERE FECHA#COMPARENDO LIKE '%/%'");
+            listadoQuery.Add("update " + mesActual + " set FECHA_NOTIFICACION=convert(datetime, FECHA#notificacion, 103) WHERE FECHA#notificacion LIKE '%/%'");
 
             foreach (var item in listadoQuery)
             {
@@ -148,9 +148,18 @@ namespace appEtlPrescripcion
      
         }
 
-        public static void GenerarCsv(List<object[]> datos,String nombreArchivo)
+        public static void GenerarCsv(List<object[]> datos,String nombreArchivo, List<object[]> columnas)
         {
             StreamWriter sw = new StreamWriter("datos.csv");
+            var resColumnas = "";
+
+            foreach (var item in columnas)
+            {
+                resColumnas += (string)item[0] + ";";
+               // sw.WriteLine(string.Join(";", item));
+            }
+
+            sw.WriteLine(resColumnas);
 
             foreach (var item in datos)
             {

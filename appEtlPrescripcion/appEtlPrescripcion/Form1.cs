@@ -213,7 +213,9 @@ namespace appEtlPrescripcion
                     {
                         EstadoForm.procesarDatos = true;
                         var res = DbMesNuevo.ExportarRegistroNuevos(this.mesActual);
-                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo);
+                        var nombresColumnas = DbMesNuevo.obtenerNombresColumnas(this.mesActual);
+
+                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
                         this.Invoke(new Action(() =>
                         {
@@ -257,7 +259,9 @@ namespace appEtlPrescripcion
                     {
                         EstadoForm.procesarDatos = true;
                         var res = DbMesNuevo.ExportarRegistroRepetidos(this.mesActual);
-                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo);
+                        var nombresColumnas = DbMesNuevo.obtenerNombresColumnas(this.mesActual);
+
+                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
                         this.Invoke(new Action(() =>
                         {
@@ -286,7 +290,7 @@ namespace appEtlPrescripcion
 
         private void button6_Click(object sender, EventArgs e)
         {
-            exportarMesNuevos();
+            exportarMesActual();
         }
 
         private String abrirFileDialog()
@@ -305,7 +309,7 @@ namespace appEtlPrescripcion
             return resultado;
         }
 
-        private void exportarMesNuevos()
+        private void exportarMesActual()
         {
            var nombreArchivo= abrirFileDialog();
              
@@ -317,7 +321,9 @@ namespace appEtlPrescripcion
                     {
                         EstadoForm.procesarDatos = true;
                         var res = DbMesNuevo.ExportarMesNuevo(this.mesActual);
-                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo);
+                        var nombresColumnas = DbMesNuevo.obtenerNombresColumnas(this.mesActual);
+
+                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
                         this.Invoke(new Action(() =>
                         {
@@ -362,7 +368,9 @@ namespace appEtlPrescripcion
                     {
                         EstadoForm.procesarDatos = true;
                         var res = DbMesNuevo.ExportarMesViejo(this.mesAnterior);
-                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo);
+                        var nombresColumnas = DbMesNuevo.obtenerNombresColumnas(this.mesActual);
+
+                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
                         this.Invoke(new Action(() =>
                         {
