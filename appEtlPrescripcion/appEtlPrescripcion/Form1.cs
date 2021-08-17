@@ -20,6 +20,7 @@ namespace appEtlPrescripcion
         Boolean refrescarEstadProcsamiento = true;
         String mesActual = "";
         String mesAnterior = "";
+        String resultadoProcesamiento = "";
 
         public Form1()
         {
@@ -28,6 +29,11 @@ namespace appEtlPrescripcion
 
         private void button1_Click(object sender, EventArgs e)
         {
+            iniciarProcedimientoPrescripcion();
+        }
+
+        private void iniciarProcedimientoPrescripcion()
+        {
             gbProcesoPrescritos.Visible = true;
             Thread thread2 = new Thread(() =>
             {
@@ -35,13 +41,21 @@ namespace appEtlPrescripcion
                 {
                     EstadoForm.procesarDatos = true;
                     EstadoForm.cantidadRegistrosProcesado = 0;
-              
-                    ProcesarDAtos.procesarFechas(this.mesActual);
+
+                    resultadoProcesamiento=ProcesarDAtos.procesarFechas(this.mesActual);
 
                     this.Invoke(new Action(() =>
                     {
-                        MessageBox.Show("Finalizado");
-                    }));        
+                        if(resultadoProcesamiento.Trim().Length>0)
+                        {
+                            MessageBox.Show(resultadoProcesamiento);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Finalizado");
+                        }
+                       
+                    }));
                 }
                 catch (Exception ex)
                 {
@@ -58,15 +72,13 @@ namespace appEtlPrescripcion
                     {
 
                     }
-                  
+
                 }
             });
             thread2.Start();
 
-
-
-
         }
+
 
         private void actualizarEstadoForm()
         {
@@ -80,22 +92,28 @@ namespace appEtlPrescripcion
                         {
                             Thread.Sleep(50);
 
-                            this.Invoke(new Action(() =>
-                            {
-                                txtProcesados.Text = EstadoForm.cantidadRegistrosProcesado+"";
-                                txtTotal.Text = EstadoForm.totalRegistros+"";
-                                if (EstadoForm.procesarDatos)
+                            if(EstadoForm.formEstaAbierto == true)
+                            {                                
+                                this.Invoke(new Action(() =>
                                 {
-                                    ptbLoading.Visible = true;
-                                }else
-                                {
-                                    ptbLoading.Visible = false;
-                                }
-                            }));
+                                    txtProcesados.Text = EstadoForm.cantidadRegistrosProcesado + "";
+                                    txtTotal.Text = EstadoForm.totalRegistros + "";
+                                    if (EstadoForm.procesarDatos)
+                                    {
+                                        ptbLoading.Visible = true;
+                                    }
+                                    else
+                                    {
+                                        ptbLoading.Visible = false;
+                                    }
+                                }));
+                            }
+                      
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+                           
+
                         }
                     }
 
@@ -133,16 +151,29 @@ namespace appEtlPrescripcion
 
         private void button3_Click(object sender, EventArgs e)
         {
+            realizarConversion();
+        }
+
+        private void realizarConversion()
+        {
             Thread thread2 = new Thread(() =>
             {
                 try
                 {
                     EstadoForm.procesarDatos = true;
-                    ProcesarDAtos.realizarConversion(this.mesActual);                     
+                   resultadoProcesamiento= ProcesarDAtos.realizarConversion(this.mesActual);
 
                     this.Invoke(new Action(() =>
                     {
-                        MessageBox.Show("Finalizado");
+                        if(resultadoProcesamiento.Trim().Length>0)
+                        {
+                            MessageBox.Show(resultadoProcesamiento);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Finalizado");
+                        }
+                        
                     }));
                 }
                 catch (Exception ex)
@@ -159,44 +190,35 @@ namespace appEtlPrescripcion
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Thread thread2 = new Thread(() =>
-            {
-                try
-                {
-                    EstadoForm.procesarDatos = true;
-                    DbMesNuevo.ExportarRegistroNuevos(cmbMesActual.Text);
-                    this.Invoke(new Action(() =>
-                    {
-                        MessageBox.Show("Finalizado");
-                    }));
-                }
-                catch (Exception ex)
-                {
-
-                }
-                finally
-                {
-                    EstadoForm.procesarDatos = false;
-                }
-            });
-            thread2.Start();
-        
-   
+            exportarRegistrosNuevos();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void exportarRegistrosNuevos()
         {
+            var nombreArchivo = abrirFileDialog();
+
             Thread thread2 = new Thread(() =>
             {
                 try
                 {
-                    EstadoForm.procesarDatos = true;
-                    DbMesNuevo.ExportarRegistroRepetidos(this.mesActual);
-
-                    this.Invoke(new Action(() =>
+                    if (nombreArchivo.Trim().Length > 0)
                     {
-                        MessageBox.Show("Finalizado");
-                    }));
+                        EstadoForm.procesarDatos = true;
+                        var res = DbMesNuevo.ExportarRegistroNuevos(this.mesActual);
+                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo);
+
+                        this.Invoke(new Action(() =>
+                        {
+                            if (res.Item3 == true)
+                            {
+                                MessageBox.Show(res.Item2);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Finalizado");
+                            }
+                        }));
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -208,27 +230,104 @@ namespace appEtlPrescripcion
                 }
             });
             thread2.Start();
-
-         
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
+            exportarRegistrosRepetidos();
+        }
+
+        private void exportarRegistrosRepetidos()
+        {
+            var nombreArchivo = abrirFileDialog();
+
             Thread thread2 = new Thread(() =>
             {
                 try
                 {
-                    EstadoForm.procesarDatos = true;
-                    DbMesNuevo.ExportarMesNuevo(cmbMesActual.Text);
-
-                    this.Invoke(new Action(() =>
+                    if (nombreArchivo.Trim().Length > 0)
                     {
-                        MessageBox.Show("Finalizado");
-                    }));
+                        EstadoForm.procesarDatos = true;
+                        var res = DbMesNuevo.ExportarRegistroRepetidos(this.mesActual);
+                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo);
+
+                        this.Invoke(new Action(() =>
+                        {
+                            if (res.Item3 == true)
+                            {
+                                MessageBox.Show(res.Item2);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Finalizado");
+                            }
+                        }));
+                    }
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    EstadoForm.procesarDatos = false;
+                }
+            });
+            thread2.Start();
+        }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            exportarMesNuevos();
+        }
+
+        private String abrirFileDialog()
+        {
+            String resultado = "";
+
+            SaveFileDialog oSaveFileDialog = new SaveFileDialog();
+            oSaveFileDialog.Filter = "All files (*.*) | *.*";
+            if (oSaveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = oSaveFileDialog.FileName;
+                string extesion = Path.GetExtension(fileName);
+                resultado = fileName;
+            }
+
+            return resultado;
+        }
+
+        private void exportarMesNuevos()
+        {
+           var nombreArchivo= abrirFileDialog();
+             
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    if(nombreArchivo.Trim().Length>0)
+                    {
+                        EstadoForm.procesarDatos = true;
+                        var res = DbMesNuevo.ExportarMesNuevo(this.mesActual);
+                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo);
+
+                        this.Invoke(new Action(() =>
+                        {
+                            if (res.Item3 == true)
+                            {
+                                MessageBox.Show(res.Item2);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Finalizado");
+                            }
+                        }));
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
                 finally
                 {
@@ -240,17 +339,35 @@ namespace appEtlPrescripcion
 
         private void button7_Click(object sender, EventArgs e)
         {
+            exportarMesViejo();
+        }
+
+        private void exportarMesViejo()
+        {
+            var nombreArchivo = abrirFileDialog();
+
             Thread thread2 = new Thread(() =>
             {
                 try
                 {
-                    EstadoForm.procesarDatos = true;
-                    DbMesNuevo.ExportarMesViejo(this.mesAnterior);
-
-                    this.Invoke(new Action(() =>
+                    if (nombreArchivo.Trim().Length > 0)
                     {
-                        MessageBox.Show("Finalizado");
-                    }));
+                        EstadoForm.procesarDatos = true;
+                        var res = DbMesNuevo.ExportarMesViejo(this.mesAnterior);
+                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo);
+
+                        this.Invoke(new Action(() =>
+                        {
+                            if (res.Item3 == true)
+                            {
+                                MessageBox.Show(res.Item2);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Finalizado");
+                            }
+                        }));
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -266,16 +383,24 @@ namespace appEtlPrescripcion
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //Fetch the Statistical data from database.
+            generarGrafico("DESCRIPCION#INFRACCION");
+        }
 
+        private void generarGrafico(string columna)
+        {
+            var dt = DbGeneral.obtenerDatosDatables("select "+ columna +", COUNT(*) [Total] from " + mesActual + " group by  " + columna );
 
             //Get the names of Cities.
-            string[] x =new string[] { "uno", "dos", "tres", "cuatro", "cinco"};
+            string[] x = (from p in dt.AsEnumerable()
+                          orderby p.Field<string>(columna) ascending
+                          select p.Field<string>(columna)).ToArray();
 
             //Get the Total of Orders for each City.
-            int[] y =new int[] { 20, 3, 24, 56, 32 };
+            int[] y = (from p in dt.AsEnumerable()
+                       orderby p.Field<string>(columna) ascending
+                       select p.Field<int>("Total")).ToArray();
 
-            chart1.Series[0].LegendText = "Brazil Order Statistics";
+            chart1.Series[0].LegendText = "Graficos";
             chart1.Series[0].ChartType = SeriesChartType.Bar;
             chart1.Series[0].IsValueShownAsLabel = true;
             chart1.Series[0].Points.DataBindXY(x, y);
@@ -296,11 +421,31 @@ namespace appEtlPrescripcion
         private void cmbMesAnterior_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.mesAnterior = cmbMesAnterior.SelectedItem.ToString();
+            activarControlesProcesamiento();
+
         }
 
         private void cmbMesActual_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.mesActual = cmbMesActual.SelectedItem.ToString();
+            activarControlesProcesamiento();
+        }
+
+        private void activarControlesProcesamiento()
+        {
+            if (this.mesAnterior.Trim().Length > 0 && this.mesActual.Trim().Length > 0)
+            {
+                gbxControlesProcesamiento.Enabled = true;
+            }
+            else
+            {
+                gbxControlesProcesamiento.Enabled = false;
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            EstadoForm.formEstaAbierto = false;
         }
     }
 }

@@ -4,6 +4,7 @@ using CapaDatos;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,68 +13,106 @@ namespace appEtlPrescripcion
 {
     public static class ProcesarDAtos
     {
-        public static void realizarConversion(String mesActual)
+        public static String realizarConversion(String mesActual)
         {
-            DbMesNuevo.ConversionDatos(mesActual);
+            String resultado = "";
+            List<String> listadoQuery = new List<string>();
+
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'ID') BEGIN ALTER TABLE " + mesActual + " ADD ID varchar(255) END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD fecha_comparendo date END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_notificacion') BEGIN ALTER TABLE " + mesActual + " ADD fecha_notificacion date END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD res_fecha_comparendo date END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_notificacion') BEGIN ALTER TABLE " + mesActual + "  ADD res_fecha_notificacion date END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'prescrito_comparendo') BEGIN ALTER TABLE " + mesActual + "  ADD prescrito_comparendo varchar(10) END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'prescrito_notificacion') BEGIN ALTER TABLE " + mesActual + "  ADD prescrito_notificacion varchar(10) END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fc_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fc_procesada bit END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fn_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fn_procesada bit END;");
+
+            listadoQuery.Add("update  " + mesActual + " set id=(NRO#DOCUMENTO+COMPARENDO+FECHA#COMPARENDO)");
+            listadoQuery.Add("delete from repetidos  insert into repetidos (registro, cantidad) select id, count(*) as cantidad from " + mesActual + " group by id HAVING count(*) > 2 order by cantidad");
+
+            listadoQuery.Add("IF  EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  DROP COLUMN num END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  Add num Int Identity(1, 1) END;");
+
+            listadoQuery.Add("DELETE FROM " + mesActual + " WHERE num NOT IN  (SELECT MIN(num) FROM " + mesActual + " GROUP BY id)");
+            listadoQuery.Add("update " + mesActual + " set FECHA_COMPARENDO=CAST(FECHA#COMPARENDO AS DATE) WHERE FECHA#COMPARENDO LIKE '%/%'");
+            listadoQuery.Add("update " + mesActual + " set FECHA_NOTIFICACION=CAST(FECHA#notificacion AS DATE) WHERE FECHA#notificacion LIKE '%/%'");
+
+            foreach (var item in listadoQuery)
+            {
+               var res= DbGeneral.EjecutarQuery(item);
+                if(res.Trim().Length>0)
+                {
+                    resultado += res + System.Environment.NewLine;
+                }
+            }
+
+            return resultado;            
         }
 
-        public static List<List<string>> procesarFechas(string mesActual)
+        public static String procesarFechas(string mesActual)
         {
             var listadoGrupoFechasComparendo = DbMesNuevo.ObtenerGruposFechaComparendo(mesActual);
             var listadoGrupoFechasNotificacion=DbMesNuevo.ObtenerGruposFechaNotificacion(mesActual);
+            String resultado = "";
+            resultado += listadoGrupoFechasComparendo.Item2 + System.Environment.NewLine;
+            resultado += listadoGrupoFechasNotificacion.Item2 + System.Environment.NewLine;
 
             List<FechasSuspencion> fechasSuspencion = DbFechasSuspencion.Listar();
-            List<List<string>> resultado = new List<List<string>>();
             List<FechasProcesada> fechasProcesadas = new List<FechasProcesada>();
+    
 
-            EstadoForm.totalRegistros = listadoGrupoFechasComparendo.Count() + listadoGrupoFechasNotificacion.Count();
+            EstadoForm.totalRegistros = listadoGrupoFechasComparendo.Item1.Count() + listadoGrupoFechasNotificacion.Item1.Count();
 
-            foreach (var datos in listadoGrupoFechasComparendo)
+            if(listadoGrupoFechasComparendo.Item2.Trim().Length>0 && listadoGrupoFechasNotificacion.Item2.Trim().Length > 0)
             {
-                if (datos != null && EstadoForm.procesarDatos == true) { 
-                    var fechaInicio = Convert.ToDateTime(datos);
-                    DateTime fechaFinal = DateTime.Now;
-           
-                    fechaFinal = obteneterFechaFinal(fechaInicio, fechasSuspencion);
-                    DbMesNuevo.ActualizarResultadoFechasFinalesComparendo(fechaInicio, fechaFinal, true,mesActual);
-                
-                    fechasProcesadas.Add(new FechasProcesada()
-                    {
-                        fechaInicio=fechaInicio,
-                        fechaFinal=fechaFinal
-                    });
-
-                    if (EstadoForm.procesarDatos == false)
-                    {
-                        break;
-                    }
-
-                }
-                EstadoForm.cantidadRegistrosProcesado++;
-
-            }
-
-            foreach (var datos in listadoGrupoFechasNotificacion)
-            {
-                if (datos != null && EstadoForm.procesarDatos == true)
+                foreach (var datos in listadoGrupoFechasComparendo.Item1)
                 {
-                    var fechaInicio = Convert.ToDateTime(datos);
-                    DateTime fechaFinal = new DateTime();
+                    if (datos != null && EstadoForm.procesarDatos == true)
+                    {
+                        var fechaInicio = Convert.ToDateTime(datos);
+                        DateTime fechaFinal = DateTime.Now;
 
-                    var selecionFecha = fechasProcesadas.Where(x => x.fechaInicio == fechaInicio).FirstOrDefault();
-                    if (selecionFecha != null)
-                    {
-                        fechaFinal = Convert.ToDateTime(selecionFecha.fechaFinal);
-                    }
-                    else
-                    {
                         fechaFinal = obteneterFechaFinal(fechaInicio, fechasSuspencion);
+                        DbMesNuevo.ActualizarResultadoFechasFinalesComparendo(fechaInicio, fechaFinal, true, mesActual);
+
+                        fechasProcesadas.Add(new FechasProcesada()
+                        {
+                            fechaInicio = fechaInicio,
+                            fechaFinal = fechaFinal
+                        });
+
+                        if (EstadoForm.procesarDatos == false)
+                        {
+                            break;
+                        }
+
                     }
-
-                    DbMesNuevo.ActualizarResultadoFechasFinalesNotificacion(fechaInicio, fechaFinal, true,mesActual);
-
+                    EstadoForm.cantidadRegistrosProcesado++;
                 }
-                EstadoForm.cantidadRegistrosProcesado++;
+          
+                foreach (var datos in listadoGrupoFechasNotificacion.Item1)
+                {
+                    if (datos != null && EstadoForm.procesarDatos == true)
+                    {
+                        var fechaInicio = Convert.ToDateTime(datos);
+                        DateTime fechaFinal = new DateTime();
+
+                        var selecionFecha = fechasProcesadas.Where(x => x.fechaInicio == fechaInicio).FirstOrDefault();
+                        if (selecionFecha != null)
+                        {
+                            fechaFinal = Convert.ToDateTime(selecionFecha.fechaFinal);
+                        }
+                        else
+                        {
+                            fechaFinal = obteneterFechaFinal(fechaInicio, fechasSuspencion);
+                        }
+
+                        DbMesNuevo.ActualizarResultadoFechasFinalesNotificacion(fechaInicio, fechaFinal, true, mesActual);
+
+                    }
+                    EstadoForm.cantidadRegistrosProcesado++;
+                }
             }
 
             return resultado;
@@ -107,5 +146,17 @@ namespace appEtlPrescripcion
      
         }
 
+        public static void GenerarCsv(List<object[]> datos,String nombreArchivo)
+        {
+            StreamWriter sw = new StreamWriter("datos.csv");
+
+            foreach (var item in datos)
+            {
+                sw.WriteLine(string.Join(";", item));
+            }
+             sw.Close();
+
+            File.Move("datos.csv", nombreArchivo);
+        }
     }
 }

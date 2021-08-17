@@ -29,28 +29,29 @@ namespace appEtlPrescripcion
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.cmbMesActual = new System.Windows.Forms.ComboBox();
             this.cmbMesAnterior = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.gbxControlesProcesamiento = new System.Windows.Forms.GroupBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbMesActual = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button8 = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -62,6 +63,7 @@ namespace appEtlPrescripcion
             this.gbProcesoPrescritos = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.gbxControlesProcesamiento.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbLoading)).BeginInit();
@@ -83,23 +85,11 @@ namespace appEtlPrescripcion
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.cmbMesActual);
             this.tabPage2.Controls.Add(this.cmbMesAnterior);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.button7);
-            this.tabPage2.Controls.Add(this.button6);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.gbxControlesProcesamiento);
             this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.button4);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.button3);
-            this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.cmbMesActual);
+            this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -108,36 +98,40 @@ namespace appEtlPrescripcion
             this.tabPage2.Text = "Procesamiento";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // cmbMesActual
-            // 
-            this.cmbMesActual.FormattingEnabled = true;
-            this.cmbMesActual.Location = new System.Drawing.Point(400, 14);
-            this.cmbMesActual.Name = "cmbMesActual";
-            this.cmbMesActual.Size = new System.Drawing.Size(166, 21);
-            this.cmbMesActual.TabIndex = 16;
-            this.cmbMesActual.SelectedIndexChanged += new System.EventHandler(this.cmbMesActual_SelectedIndexChanged);
-            // 
             // cmbMesAnterior
             // 
             this.cmbMesAnterior.FormattingEnabled = true;
-            this.cmbMesAnterior.Location = new System.Drawing.Point(116, 14);
+            this.cmbMesAnterior.Location = new System.Drawing.Point(112, 24);
             this.cmbMesAnterior.Name = "cmbMesAnterior";
             this.cmbMesAnterior.Size = new System.Drawing.Size(166, 21);
             this.cmbMesAnterior.TabIndex = 15;
             this.cmbMesAnterior.SelectedIndexChanged += new System.EventHandler(this.cmbMesAnterior_SelectedIndexChanged);
             // 
-            // label10
+            // gbxControlesProcesamiento
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(315, 22);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(59, 13);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "Mes actual";
+            this.gbxControlesProcesamiento.Controls.Add(this.button7);
+            this.gbxControlesProcesamiento.Controls.Add(this.button6);
+            this.gbxControlesProcesamiento.Controls.Add(this.label9);
+            this.gbxControlesProcesamiento.Controls.Add(this.button3);
+            this.gbxControlesProcesamiento.Controls.Add(this.label8);
+            this.gbxControlesProcesamiento.Controls.Add(this.label4);
+            this.gbxControlesProcesamiento.Controls.Add(this.button5);
+            this.gbxControlesProcesamiento.Controls.Add(this.button4);
+            this.gbxControlesProcesamiento.Controls.Add(this.label7);
+            this.gbxControlesProcesamiento.Controls.Add(this.button2);
+            this.gbxControlesProcesamiento.Controls.Add(this.label6);
+            this.gbxControlesProcesamiento.Controls.Add(this.button1);
+            this.gbxControlesProcesamiento.Controls.Add(this.label1);
+            this.gbxControlesProcesamiento.Enabled = false;
+            this.gbxControlesProcesamiento.Location = new System.Drawing.Point(28, 62);
+            this.gbxControlesProcesamiento.Name = "gbxControlesProcesamiento";
+            this.gbxControlesProcesamiento.Size = new System.Drawing.Size(664, 144);
+            this.gbxControlesProcesamiento.TabIndex = 17;
+            this.gbxControlesProcesamiento.TabStop = false;
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(559, 148);
+            this.button7.Location = new System.Drawing.Point(527, 97);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 23);
             this.button7.TabIndex = 13;
@@ -147,7 +141,7 @@ namespace appEtlPrescripcion
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(207, 148);
+            this.button6.Location = new System.Drawing.Point(175, 97);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 12;
@@ -158,80 +152,15 @@ namespace appEtlPrescripcion
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(45, 158);
+            this.label9.Location = new System.Drawing.Point(13, 107);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(101, 13);
             this.label9.TabIndex = 11;
             this.label9.Text = "Exportar mes nuevo";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(397, 158);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(93, 13);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Exportar mes viejo";
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(559, 104);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 9;
-            this.button5.Text = "Procesar";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(397, 114);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(134, 13);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "Exportar registros repetidos";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(397, 74);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(126, 13);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "Exportar registros nuevos";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(45, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Mes anterior";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(559, 64);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Procesar";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(45, 69);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(104, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Conversion de datos";
-            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(207, 59);
+            this.button3.Location = new System.Drawing.Point(175, 28);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 3;
@@ -239,9 +168,56 @@ namespace appEtlPrescripcion
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(365, 107);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(93, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Exportar mes viejo";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(104, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Conversion de datos";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(527, 68);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 9;
+            this.button5.Text = "Procesar";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(527, 33);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "Procesar";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(365, 78);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(134, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Exportar registros repetidos";
+            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(302, 104);
+            this.button2.Location = new System.Drawing.Point(270, 68);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -249,9 +225,18 @@ namespace appEtlPrescripcion
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(365, 43);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(126, 13);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Exportar registros nuevos";
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(207, 104);
+            this.button1.Location = new System.Drawing.Point(175, 68);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -262,11 +247,38 @@ namespace appEtlPrescripcion
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 114);
+            this.label1.Location = new System.Drawing.Point(13, 78);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Procemiento registro prescriptos";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(41, 32);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Mes anterior";
+            // 
+            // cmbMesActual
+            // 
+            this.cmbMesActual.FormattingEnabled = true;
+            this.cmbMesActual.Location = new System.Drawing.Point(396, 24);
+            this.cmbMesActual.Name = "cmbMesActual";
+            this.cmbMesActual.Size = new System.Drawing.Size(166, 21);
+            this.cmbMesActual.TabIndex = 16;
+            this.cmbMesActual.SelectedIndexChanged += new System.EventHandler(this.cmbMesActual_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(311, 32);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(59, 13);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Mes actual";
             // 
             // tabPage1
             // 
@@ -282,11 +294,11 @@ namespace appEtlPrescripcion
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(66, 21);
+            this.button8.Location = new System.Drawing.Point(70, 24);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.Size = new System.Drawing.Size(127, 23);
             this.button8.TabIndex = 1;
-            this.button8.Text = "button8";
+            this.button8.Text = "Generar graficos";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -295,16 +307,16 @@ namespace appEtlPrescripcion
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(36, 53);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(602, 233);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -380,10 +392,13 @@ namespace appEtlPrescripcion
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.gbxControlesProcesamiento.ResumeLayout(false);
+            this.gbxControlesProcesamiento.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbLoading)).EndInit();
@@ -423,6 +438,7 @@ namespace appEtlPrescripcion
         private System.Windows.Forms.ComboBox cmbMesActual;
         private System.Windows.Forms.ComboBox cmbMesAnterior;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox gbxControlesProcesamiento;
     }
 }
 

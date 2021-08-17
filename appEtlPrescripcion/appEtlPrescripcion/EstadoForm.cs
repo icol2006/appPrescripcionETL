@@ -17,10 +17,13 @@ namespace AppBot.Modelos
 
         public static int cantidadRegistrosProcesado = 0;
 
+        public static Boolean formEstaAbierto = true;
+
         public static void resetearValoresCantidades()
         {
             totalRegistros = 0;
             cantidadRegistrosProcesado = 0;
         }
+
     }
 }

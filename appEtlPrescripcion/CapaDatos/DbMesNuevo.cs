@@ -11,17 +11,19 @@ namespace CapaDatos
 {
     public static class DbMesNuevo
     {
-        public static List<DateTime?> ObtenerGruposFechaComparendo(string mesActual)
+        public static Tuple<List<DateTime?>, string> ObtenerGruposFechaComparendo(string mesActual)
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
-            List<DateTime?> listadoDatos = new List<DateTime?>();
+            List<DateTime?> listadoFechas = new List<DateTime?>();
+            Tuple<List<DateTime?>, string> listadoDatos = null;
+            String mesnsajeError = "";
 
             try
             {
                 SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
                 SqlConexion.Open();
-
+         
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
                 SqlComando.CommandText = "SELECT FECHA_COMPARENDO FROM  " + mesActual+
@@ -35,13 +37,14 @@ namespace CapaDatos
                     var fecha = oSqlDataReader.GetValue(oSqlDataReader.GetOrdinal("FECHA_COMPARENDO")) == DBNull.Value
                     ? (DateTime?)null : Convert.ToDateTime(oSqlDataReader.GetValue(oSqlDataReader.GetOrdinal("FECHA_COMPARENDO")));
 
-                    listadoDatos.Add(fecha);
+                    listadoFechas.Add(fecha);
                 };
                 oSqlDataReader.Close();
             }
 
             catch (Exception ex)
             {
+                mesnsajeError = ex.Message;
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
             finally
@@ -52,14 +55,17 @@ namespace CapaDatos
                 }
             }
 
+            listadoDatos = Tuple.Create(listadoFechas, mesnsajeError);
             return listadoDatos;
         }
 
-        public static List<DateTime?> ObtenerGruposFechaNotificacion(string mesActual)
+        public static Tuple<List<DateTime?>, string> ObtenerGruposFechaNotificacion(string mesActual)
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
-            List<DateTime?> listadoDatos = new List<DateTime?>();
+            List<DateTime?> listadoFechas = new List<DateTime?>();
+            Tuple<List<DateTime?>, string> listadoDatos = null;
+            String mesnsajeError = "";
 
             try
             {
@@ -79,13 +85,14 @@ namespace CapaDatos
                     var fecha = oSqlDataReader.GetValue(oSqlDataReader.GetOrdinal("fecha_notificacion")) == DBNull.Value
                     ? (DateTime?)null : Convert.ToDateTime(oSqlDataReader.GetValue(oSqlDataReader.GetOrdinal("fecha_notificacion")));
 
-                    listadoDatos.Add(fecha);
+                    listadoFechas.Add(fecha);
                 };
                 oSqlDataReader.Close();
             }
 
             catch (Exception ex)
             {
+                mesnsajeError = ex.Message;
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
             finally
@@ -96,6 +103,7 @@ namespace CapaDatos
                 }
             }
 
+            listadoDatos = Tuple.Create(listadoFechas, mesnsajeError);
             return listadoDatos;
         }
 
@@ -184,92 +192,38 @@ namespace CapaDatos
             return resultado;
         }
 
-        public static Boolean ConversionDatos(string mesActual)
-        {
-            Boolean resultado = true;
-            SqlConnection SqlConexion = new SqlConnection();
-
-            try
-            {
-                SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
-                SqlConexion.Open();
-
-                SqlCommand SqlComando = new SqlCommand();
-                SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = "update  "+ mesActual+" set id= [NRO DOCUMENTO]+[COMPARENDO]+[FECHA COMPARENDO]";
-                SqlComando.CommandType = CommandType.Text;
-                SqlComando.ExecuteNonQuery();
-
-                SqlComando.CommandText = "delete from repetidos insert into repetidos" +
-                    "(registro, cantidad) select id, count(*) as cantidad from mes_nuevo group by id HAVING count(*) > 2 order by cantidad";
-                SqlComando.ExecuteNonQuery();
-
-                SqlComando.CommandText = "ALTER TABLE mes_nuevo DROP COLUMN num";
-                SqlComando.ExecuteNonQuery();
-
-                SqlComando.CommandText = "Alter Table mes_nuevo Add num Int Identity(1, 1)";
-                SqlComando.ExecuteNonQuery();
-
-                SqlComando.CommandText = "DELETE FROM mes_nuevo WHERE num NOT IN  (SELECT MIN(num) FROM mes_nuevo GROUP BY id)";
-                SqlComando.ExecuteNonQuery();
-
-                SqlComando.CommandText = "update mes_nuevo set [FECHA_COMPARENDO]=CONVERT(DATETIME,[FECHA COMPARENDO],103) WHERE [FECHA COMPARENDO] LIKE '%/%'";
-                SqlComando.ExecuteNonQuery();
-
-                SqlComando.CommandText = "update mes_nuevo set [FECHA_NOTIFICACION]=CONVERT(DATETIME,[FECHA NOTIFICACION],103) WHERE [FECHA NOTIFICACION] LIKE '%/%'";
-                SqlComando.ExecuteNonQuery();
-            }
-
-            catch (SqlException ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-
-                resultado = false;
-            }
-
-            finally
-            {
-                if (SqlConexion.State == ConnectionState.Open)
-                {
-                    SqlConexion.Close();
-                }
-            }
-
-            return resultado;
-        }
-
-
-        public static void ExportarRegistroNuevos(String mesActual)
+        public static Tuple<List<object[]>, string, Boolean> ExportarRegistroNuevos(String mesActual)
         {
             String comando = "SELECT * FROM  "+ mesActual;
-            exportarDatos(comando);
+            return exportarDatos(comando);
         }
 
-
-        public static void ExportarRegistroRepetidos(String mesActual)
+        public static Tuple<List<object[]>, string, Boolean> ExportarRegistroRepetidos(String mesActual)
         {
             var comando = "SELECT * FROM "+ mesActual;
-            exportarDatos(comando);
+            return exportarDatos(comando);
         }
 
-
-        public static void ExportarMesNuevo(String mesActual)
+        public static Tuple<List<object[]>, string, Boolean> ExportarMesNuevo(String mesActual)
         {
             String comando = "SELECT * FROM "+ mesActual;
-            exportarDatos(comando);
+            return exportarDatos(comando);
         }
 
-        public static void ExportarMesViejo(String mesAnterior)
+        public static Tuple<List<object[]>, string, Boolean> ExportarMesViejo(String mesAnterior)
         {
             String comando = "SELECT * FROM "+ mesAnterior;
-            exportarDatos(comando);
+            return exportarDatos(comando);
         }
 
-        public static void exportarDatos(String comando)
+        public static Tuple<List<object[]>, string,Boolean> exportarDatos(String comando)
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
-   
+            String mesnsajeError = ""; Boolean existeError = false;
+            Tuple<List<object[]>, string,Boolean> listadoDatos = null;
+            List<object[]> datos = new List<object[]>();
+
             try
             {
                 SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
@@ -282,30 +236,30 @@ namespace CapaDatos
 
                 SqlComando.CommandType = CommandType.Text;
                 oSqlDataReader = SqlComando.ExecuteReader();
-                
-
-                string fileName = "datos.csv";
-                StreamWriter sw = new StreamWriter(fileName);
+                    
                 object[] output = new object[oSqlDataReader.FieldCount];
 
                 for (int i = 0; i < oSqlDataReader.FieldCount; i++)
                     output[i] = oSqlDataReader.GetName(i);
 
-                sw.WriteLine(string.Join(";", output));
+               // sw.WriteLine(string.Join(";", output));
 
                 while (oSqlDataReader.Read())
                 {
                     oSqlDataReader.GetValues(output);
-                    sw.WriteLine(string.Join(";", output));
+                    datos.Add(output);
+                    //sw.WriteLine(string.Join(";", output));
+                    output = new object[oSqlDataReader.FieldCount];
                 }
 
-                sw.Close();
+               // sw.Close();
                 oSqlDataReader.Close();
-
             }
 
             catch (Exception ex)
             {
+                mesnsajeError = ex.Message;
+                existeError = false;
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
             finally
@@ -315,6 +269,10 @@ namespace CapaDatos
                     SqlConexion.Close();
                 }
             }
+
+            listadoDatos = Tuple.Create(datos, mesnsajeError,existeError);
+
+            return listadoDatos;
         }
 
         public static DataTable obtenerDatosDatables(String query)
