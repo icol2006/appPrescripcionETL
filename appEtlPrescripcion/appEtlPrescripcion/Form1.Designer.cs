@@ -36,6 +36,9 @@ namespace appEtlPrescripcion
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cmbMesAnterior = new System.Windows.Forms.ComboBox();
             this.gbxControlesProcesamiento = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtMesActual = new System.Windows.Forms.MaskedTextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -68,9 +71,6 @@ namespace appEtlPrescripcion
             this.txtProcesados = new System.Windows.Forms.TextBox();
             this.ptbLoading = new System.Windows.Forms.PictureBox();
             this.gbProcesoPrescritos = new System.Windows.Forms.GroupBox();
-            this.txtMesActual = new System.Windows.Forms.MaskedTextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.gbxControlesProcesamiento.SuspendLayout();
@@ -141,6 +141,33 @@ namespace appEtlPrescripcion
             this.gbxControlesProcesamiento.Size = new System.Drawing.Size(664, 234);
             this.gbxControlesProcesamiento.TabIndex = 17;
             this.gbxControlesProcesamiento.TabStop = false;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(394, 52);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(59, 13);
+            this.label15.TabIndex = 16;
+            this.label15.Text = "Mes actual";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(503, 75);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(65, 13);
+            this.label14.TabIndex = 15;
+            this.label14.Text = "dd/mm/yyyy";
+            // 
+            // txtMesActual
+            // 
+            this.txtMesActual.Location = new System.Drawing.Point(397, 68);
+            this.txtMesActual.Mask = "00/00/0000";
+            this.txtMesActual.Name = "txtMesActual";
+            this.txtMesActual.Size = new System.Drawing.Size(100, 20);
+            this.txtMesActual.TabIndex = 14;
+            this.txtMesActual.ValidatingType = typeof(System.DateTime);
             // 
             // button7
             // 
@@ -461,33 +488,6 @@ namespace appEtlPrescripcion
             this.gbProcesoPrescritos.TabIndex = 7;
             this.gbProcesoPrescritos.TabStop = false;
             this.gbProcesoPrescritos.Visible = false;
-            // 
-            // txtMesActual
-            // 
-            this.txtMesActual.Location = new System.Drawing.Point(397, 68);
-            this.txtMesActual.Mask = "00/00/0000";
-            this.txtMesActual.Name = "txtMesActual";
-            this.txtMesActual.Size = new System.Drawing.Size(100, 20);
-            this.txtMesActual.TabIndex = 14;
-            this.txtMesActual.ValidatingType = typeof(System.DateTime);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(503, 75);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(65, 13);
-            this.label14.TabIndex = 15;
-            this.label14.Text = "dd/mm/yyyy";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(394, 52);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(59, 13);
-            this.label15.TabIndex = 16;
-            this.label15.Text = "Mes actual";
             // 
             // Form1
             // 

@@ -11,7 +11,7 @@ namespace CapaDatos
 {
     public static class DbMesNuevo
     {
-        public static Tuple<List<DateTime?>, string,Boolean> ObtenerGruposFechaComparendo(string mesActual)
+        public static Tuple<List<DateTime?>, string, Boolean> ObtenerGruposFechaComparendo(string mesActual)
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
@@ -24,10 +24,10 @@ namespace CapaDatos
             {
                 SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
                 SqlConexion.Open();
-         
+
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = "SELECT FECHA_COMPARENDO FROM  " + mesActual+
+                SqlComando.CommandText = "SELECT FECHA_COMPARENDO FROM  " + mesActual +
                                          " group by FECHA_COMPARENDO";
 
                 SqlComando.CommandType = CommandType.Text;
@@ -57,16 +57,16 @@ namespace CapaDatos
                 }
             }
 
-            listadoDatos = Tuple.Create(listadoFechas, mesnsajeError,resultado);
+            listadoDatos = Tuple.Create(listadoFechas, mesnsajeError, resultado);
             return listadoDatos;
         }
 
-        public static Tuple<List<DateTime?>, string,Boolean> ObtenerGruposFechaNotificacion(string mesActual)
+        public static Tuple<List<DateTime?>, string, Boolean> ObtenerGruposFechaNotificacion(string mesActual)
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
             List<DateTime?> listadoFechas = new List<DateTime?>();
-            Tuple<List<DateTime?>, string,Boolean> listadoDatos = null;
+            Tuple<List<DateTime?>, string, Boolean> listadoDatos = null;
             String mesnsajeError = "";
             Boolean resultado = true;
 
@@ -77,7 +77,7 @@ namespace CapaDatos
 
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = "SELECT fecha_notificacion FROM  " + mesActual  +
+                SqlComando.CommandText = "SELECT fecha_notificacion FROM  " + mesActual +
                                          " group by fecha_notificacion";
 
                 SqlComando.CommandType = CommandType.Text;
@@ -107,7 +107,7 @@ namespace CapaDatos
                 }
             }
 
-            listadoDatos = Tuple.Create(listadoFechas, mesnsajeError,resultado);
+            listadoDatos = Tuple.Create(listadoFechas, mesnsajeError, resultado);
             return listadoDatos;
         }
 
@@ -123,7 +123,7 @@ namespace CapaDatos
 
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = "update "+ mesActual+"  set res_fecha_comparendo=@res_fecha_comparendo,fc_procesada=@fc_procesada " +
+                SqlComando.CommandText = "update " + mesActual + "  set res_fecha_comparendo=@res_fecha_comparendo,fc_procesada=@fc_procesada " +
                     " where fecha_comparendo=@fecha_comparendo";
 
                 SqlComando.CommandType = CommandType.Text;
@@ -166,7 +166,7 @@ namespace CapaDatos
 
                 SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
-                SqlComando.CommandText = "update "+ mesActual+" set res_fecha_notificacion=@res_fecha_notificacion,fn_procesada=@fn_procesada " +
+                SqlComando.CommandText = "update " + mesActual + " set res_fecha_notificacion=@res_fecha_notificacion,fn_procesada=@fn_procesada " +
                     " where fecha_notificacion=@fecha_notificacion";
 
                 SqlComando.CommandType = CommandType.Text;
@@ -196,175 +196,7 @@ namespace CapaDatos
             return resultado;
         }
 
-        public static Tuple<List<object[]>, string, Boolean> ExportarRegistroNuevos(String mesActual)
-        {
-            String comando = "SELECT * FROM  "+ mesActual;
-            return exportarDatos(comando,mesActual);
-        }
-
-        public static Tuple<List<object[]>, string, Boolean> ExportarRegistroRepetidos(String mesActual)
-        {
-            var comando = "SELECT * FROM "+ mesActual;
-            return exportarDatos(comando,mesActual);
-        }
-
-        public static Tuple<List<object[]>, string, Boolean> ExportarMesNuevo(String mesActual)
-        {
-            String comando = "SELECT * FROM "+ mesActual;
-            return exportarDatos(comando,mesActual);
-        }
-
-        public static Tuple<List<object[]>, string, Boolean> ExportarMesViejo(String mesAnterior)
-        {
-            String comando = "SELECT * FROM "+ mesAnterior;
-            return exportarDatos(comando,mesAnterior);
-        }
-
-        public static Tuple<List<object[]>, string,Boolean> exportarDatos(String comando, String tabla)
-        {
-            SqlDataReader oSqlDataReader;
-            SqlConnection SqlConexion = new SqlConnection();
-            String mesnsajeError = ""; Boolean existeError = false;
-            Tuple<List<object[]>, string,Boolean> listadoDatos = null;
-            List<object[]> datos = new List<object[]>();
-            String queryColumnas = "SELECT column_name  FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'"+tabla+"'";
-
-            try
-            {
-                SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
-                SqlConexion.Open();
-
-                SqlCommand SqlComando = new SqlCommand();
-                SqlComando.Connection = SqlConexion;
-
-                //Obtener datos
-                SqlComando.CommandText = comando;                                      
-                SqlComando.CommandType = CommandType.Text;
-                oSqlDataReader = SqlComando.ExecuteReader();
-
-                object[] output = new object[oSqlDataReader.FieldCount];
-                for (int i = 0; i < oSqlDataReader.FieldCount; i++)
-                    output[i] = oSqlDataReader.GetName(i);
-
-                while (oSqlDataReader.Read())
-                {
-                    oSqlDataReader.GetValues(output);
-                    datos.Add(output);
-                    output = new object[oSqlDataReader.FieldCount];
-                }
-
-                oSqlDataReader.Close();
-            }
-
-            catch (Exception ex)
-            {
-                mesnsajeError = ex.Message;
-                existeError = false;
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
-            finally
-            {
-                if (SqlConexion.State == ConnectionState.Open)
-                {
-                    SqlConexion.Close();
-                }
-            }
-
-            listadoDatos = Tuple.Create(datos, mesnsajeError,existeError);
-
-            return listadoDatos;
-        }
-
-        public static Tuple<List<object[]>, string, Boolean> obtenerNombresColumnas(String tabla)
-        {
-            SqlDataReader oSqlDataReader;
-            SqlConnection SqlConexion = new SqlConnection();
-            String mesnsajeError = ""; Boolean existeError = false;
-            Tuple<List<object[]>, string, Boolean> listadoDatos = null;
-            List<object[]> datos = new List<object[]>();
-            String queryColumnas = "SELECT column_name  FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'" + tabla + "'";
-
-            try
-            {
-                SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
-                SqlConexion.Open();
-
-                SqlCommand SqlComando = new SqlCommand();
-                SqlComando.Connection = SqlConexion;
-
-                //Obtener datos
-                SqlComando.CommandText = queryColumnas;
-                SqlComando.CommandType = CommandType.Text;
-                oSqlDataReader = SqlComando.ExecuteReader();
-
-                object[] output = new object[oSqlDataReader.FieldCount];
-                for (int i = 0; i < oSqlDataReader.FieldCount; i++)
-                    output[i] = oSqlDataReader.GetName(i);
-
-                while (oSqlDataReader.Read())
-                {
-                    oSqlDataReader.GetValues(output);
-                    datos.Add(output);
-                    output = new object[oSqlDataReader.FieldCount];
-                }
-
-                oSqlDataReader.Close();
-            }
-
-            catch (Exception ex)
-            {
-                mesnsajeError = ex.Message;
-                existeError = false;
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
-            finally
-            {
-                if (SqlConexion.State == ConnectionState.Open)
-                {
-                    SqlConexion.Close();
-                }
-            }
-
-            listadoDatos = Tuple.Create(datos, mesnsajeError, existeError);
-
-            return listadoDatos;
-        }
-
-        public static DataTable obtenerDatosDatables(String query)
-        {
-            SqlConnection SqlConexion = new SqlConnection();
-            DataTable dataTable = new DataTable();
-
-            try
-            {
-                SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
-              
-                SqlCommand cmd = new SqlCommand(query, SqlConexion);
-                SqlConexion.Open();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                // this will query your database and return the result to your datatable
-                da.Fill(dataTable);
-                SqlConexion.Close();
-                da.Dispose();
-
-            }
-
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
-            finally
-            {
-                if (SqlConexion.State == ConnectionState.Open)
-                {
-                    SqlConexion.Close();
-                }
-            }
-
-            return dataTable;
-        }
-
-
 
     }
+
 }

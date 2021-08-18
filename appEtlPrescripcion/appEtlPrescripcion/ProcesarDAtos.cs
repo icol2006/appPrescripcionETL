@@ -19,14 +19,16 @@ namespace appEtlPrescripcion
         {
             String resultado = "";
             List<String> listadoQuery = new List<string>();
+            renombrarColumnas(mesActual);
 
             listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'ID') BEGIN ALTER TABLE " + mesActual + " ADD ID varchar(255) END;");
             listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD fecha_comparendo date END;");
             listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_notificacion') BEGIN ALTER TABLE " + mesActual + " ADD fecha_notificacion date END;");
             listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD res_fecha_comparendo date END;");
             listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_notificacion') BEGIN ALTER TABLE " + mesActual + "  ADD res_fecha_notificacion date END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'prescrito_comparendo') BEGIN ALTER TABLE " + mesActual + "  ADD prescrito_comparendo varchar(10) END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'prescrito_notificacion') BEGIN ALTER TABLE " + mesActual + "  ADD prescrito_notificacion varchar(10) END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_comparendo_formato') BEGIN ALTER TABLE " + mesActual + " ADD res_fecha_comparendo_formato varchar(255) END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_notificacion_formato') BEGIN ALTER TABLE " + mesActual + "  ADD res_fecha_notificacion_formato varchar(255) END;");
+            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'prescrito') BEGIN ALTER TABLE " + mesActual + "  ADD prescrito varchar(10) END;");
             listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fc_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fc_procesada bit END;");
             listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fn_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fn_procesada bit END;");
 
@@ -43,9 +45,9 @@ namespace appEtlPrescripcion
             foreach (var item in listadoQuery)
             {
                var res= DbGeneral.EjecutarQuery(item);
-                if(res.Trim().Length>0)
+                if(res.Item2==false)
                 {
-                    resultado += res + System.Environment.NewLine;
+                    resultado += res.Item1 + System.Environment.NewLine;
                 }
             }
 
@@ -201,6 +203,26 @@ namespace appEtlPrescripcion
             var res = DbGeneral.obtenerSaldo("select  sum(saldo) [Total] from " + mes);
 
             return res;
+        }
+
+        //modificar el nombre que empiecen o termine en un caracter en blanco
+        public static void renombrarColumnas(String mes)
+        {
+            var nombresColumnas = DbGeneral.obtenerNombresColumnas(mes);
+
+            foreach (var item in nombresColumnas.Item1)
+            {
+                var tempVerIni = item[0].ToString().Substring(0, 1);
+
+                var largo = item[0].ToString().Length-1;
+                var tempVerFin = item[0].ToString().Substring(largo, 1);
+
+                if (tempVerIni.Trim().Length==0 || tempVerFin.Trim().Length == 0)
+                {
+                    var query= "EXEC sp_RENAME '"+mes+"."+item[0].ToString()+ "', '" + item[0].ToString().Trim() + "', 'COLUMN'";
+                    DbGeneral.EjecutarQuery(query);
+                }
+            }
         }
 
     }

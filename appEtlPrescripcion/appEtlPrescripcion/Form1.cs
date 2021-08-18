@@ -186,7 +186,14 @@ namespace appEtlPrescripcion
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    try
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    catch (Exception)
+                    {
+
+                    }                
                 }
                 finally
                 {
@@ -212,8 +219,8 @@ namespace appEtlPrescripcion
                     if (nombreArchivo.Trim().Length > 0)
                     {
                         EstadoForm.procesarDatos = true;
-                        var res = DbMesNuevo.ExportarRegistroNuevos(this.mesActual);
-                        var nombresColumnas = DbMesNuevo.obtenerNombresColumnas(this.mesActual);
+                        var res = DbGeneral.ExportarRegistroNuevos(this.mesActual);
+                        var nombresColumnas = DbGeneral.obtenerNombresColumnas(this.mesActual);
 
                         ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
@@ -258,8 +265,8 @@ namespace appEtlPrescripcion
                     if (nombreArchivo.Trim().Length > 0)
                     {
                         EstadoForm.procesarDatos = true;
-                        var res = DbMesNuevo.ExportarRegistroRepetidos(this.mesActual);
-                        var nombresColumnas = DbMesNuevo.obtenerNombresColumnas(this.mesActual);
+                        var res = DbGeneral.ExportarRegistroRepetidos(this.mesActual);
+                        var nombresColumnas = DbGeneral.obtenerNombresColumnas(this.mesActual);
 
                         ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
@@ -298,7 +305,7 @@ namespace appEtlPrescripcion
             String resultado = "";
 
             SaveFileDialog oSaveFileDialog = new SaveFileDialog();
-            oSaveFileDialog.Filter = "All files (*.*) | *.*";
+            oSaveFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
             if (oSaveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string fileName = oSaveFileDialog.FileName;
@@ -320,8 +327,8 @@ namespace appEtlPrescripcion
                     if(nombreArchivo.Trim().Length>0)
                     {
                         EstadoForm.procesarDatos = true;
-                        var res = DbMesNuevo.ExportarMesNuevo(this.mesActual);
-                        var nombresColumnas = DbMesNuevo.obtenerNombresColumnas(this.mesActual);
+                        var res = DbGeneral.ExportarMesNuevo(this.mesActual);
+                        var nombresColumnas = DbGeneral.obtenerNombresColumnas(this.mesActual);
 
                         ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
@@ -367,8 +374,8 @@ namespace appEtlPrescripcion
                     if (nombreArchivo.Trim().Length > 0)
                     {
                         EstadoForm.procesarDatos = true;
-                        var res = DbMesNuevo.ExportarMesViejo(this.mesAnterior);
-                        var nombresColumnas = DbMesNuevo.obtenerNombresColumnas(this.mesActual);
+                        var res = DbGeneral.ExportarMesViejo(this.mesAnterior);
+                        var nombresColumnas = DbGeneral.obtenerNombresColumnas(this.mesActual);
 
                         ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
@@ -568,5 +575,9 @@ namespace appEtlPrescripcion
             thread2.Start();
         }
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+            ProcesarDAtos.renombrarColumnas(this.mesActual);
+        }
     }
 }
