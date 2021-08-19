@@ -410,13 +410,17 @@ namespace appEtlPrescripcion
         }
 
 
-
         private void cargarMeses()
         {
-            var meses = DbGeneral.ObtenerMeses();
+            var resultado = DbGeneral.ObtenerMeses();
 
+
+            if(resultado.Item3==false)
+            {
+                MessageBox.Show(resultado.Item2);
+            }
  
-            foreach (var item in meses)
+            foreach (var item in resultado.Item1)
             {
                 cmbMesAnterior.Items.Add(item);
                 cmbMesActual.Items.Add(item);

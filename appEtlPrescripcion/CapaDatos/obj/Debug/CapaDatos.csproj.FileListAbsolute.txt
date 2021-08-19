@@ -1,9 +1,9 @@
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\bin\Debug\CapaDatos.dll
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\bin\Debug\CapaDatos.pdb
-E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\obj\Debug\CapaDatos.csprojAssemblyReference.cache
-E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\obj\Debug\CapaDatos.csproj.CoreCompileInputs.cache
-E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\obj\Debug\CapaDatos.dll
-E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\obj\Debug\CapaDatos.pdb
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\bin\Debug\Entities.dll
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\bin\Debug\Entities.pdb
+E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\obj\Debug\CapaDatos.csprojAssemblyReference.cache
+E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\obj\Debug\CapaDatos.csproj.CoreCompileInputs.cache
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\obj\Debug\CapaDatos.csproj.CopyComplete
+E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\obj\Debug\CapaDatos.dll
+E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\CapaDatos\obj\Debug\CapaDatos.pdb

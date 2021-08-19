@@ -10,20 +10,28 @@ namespace CapaDatos
 {
     public static class DbGeneral
     {
-        public static List<String> ObtenerMeses()
+        public static Tuple<List<String>,string, Boolean>  ObtenerMeses()
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
             List<String> listadoDatos = new List<String>();
+            Tuple<List<String>, string, Boolean> resultado = null;
+          
+            String mesnsajeError = "";
+            Boolean procesado = true;
+
             String baseNombre = "DbDatos";
-            
+         
             try
             {
                 SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
                 SqlConexion.Open();
-                
-                SqlCommand SqlComando = new SqlCommand();
+
+             
+               SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
+               
+
                 SqlComando.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' " +
                     " and (table_catalog='"+ baseNombre+"' and TABLE_NAME<>'repetidos' and TABLE_NAME<>'nuevos' and TABLE_NAME<>'fechas_suspencion')";
 
@@ -42,6 +50,8 @@ namespace CapaDatos
 
             catch (Exception ex)
             {
+                procesado = false;
+                mesnsajeError = ex.Message;
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
             finally
@@ -52,9 +62,11 @@ namespace CapaDatos
                 }
             }
 
-            return listadoDatos;
-        }
+            resultado = Tuple.Create(listadoDatos, mesnsajeError, procesado);
 
+            return resultado;
+
+        }
 
         public static Tuple<string, Boolean> EjecutarQuery(string query)
         {
@@ -83,7 +95,6 @@ namespace CapaDatos
                 mesnsajeError = ex.Message;
                 resultado = false;
             }
-
             finally
             {
                 if (SqlConexion.State == ConnectionState.Open)
@@ -138,7 +149,6 @@ namespace CapaDatos
             }
 
             listadoDatos = Tuple.Create(cantidad, mesnsajeError,res);
-
 
             return listadoDatos;
         }

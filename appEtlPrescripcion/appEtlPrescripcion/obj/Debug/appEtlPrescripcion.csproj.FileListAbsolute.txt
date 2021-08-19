@@ -2,7 +2,9 @@ E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\bin\Debug\appEtlPrescripcion.exe
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\bin\Debug\appEtlPrescripcion.pdb
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\bin\Debug\CapaDatos.dll
+E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\bin\Debug\Entities.dll
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\bin\Debug\CapaDatos.pdb
+E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\bin\Debug\Entities.pdb
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\obj\Debug\appEtlPrescripcion.csprojAssemblyReference.cache
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\obj\Debug\appEtlPrescripcion.Form1.resources
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\obj\Debug\appEtlPrescripcion.Properties.Resources.resources
@@ -11,5 +13,5 @@ E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\obj\Debug\appEtlPrescripcion.csproj.CopyComplete
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\obj\Debug\appEtlPrescripcion.exe
 E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\obj\Debug\appEtlPrescripcion.pdb
-E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\bin\Debug\Entities.dll
-E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\bin\Debug\Entities.pdb
+E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\bin\Debug\System.ValueTuple.dll
+E:\Workana\053-Programa En Uipath\Software\AppPrescripcionETL\appEtlPrescripcion\appEtlPrescripcion\bin\Debug\System.ValueTuple.xml

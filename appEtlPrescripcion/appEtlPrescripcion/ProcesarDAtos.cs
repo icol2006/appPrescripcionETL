@@ -119,6 +119,17 @@ namespace appEtlPrescripcion
                 }
             }
 
+            String queryActualizacionFechas = @"update "+mesActual+ @" set prescrito=null;
+                                           update " + mesActual + @" set prescrito='si'  where fecha_notificacion is null and res_fecha_comparendo<'2021-08-31';
+                                           update " + mesActual + @" set prescrito='no' where fecha_notificacion is null and res_fecha_comparendo>'2021-08-31';
+                                           update " + mesActual + @" set prescrito='si' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo<fecha_notificacion and res_fecha_comparendo<'2021-08-31';
+                                           update " + mesActual + @" set prescrito='no' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo<fecha_notificacion and res_fecha_comparendo>'2021-08-31';
+                                           update " + mesActual + @" set prescrito='si' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo>fecha_notificacion and res_fecha_notificacion<'2021-08-31';
+                                           update " + mesActual + @" set prescrito='no' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo>fecha_notificacion and res_fecha_notificacion>'2021-08-31';
+                                           update " + mesActual + @" set res_fecha_comparendo_formato=CONVERT(nvarchar, res_fecha_comparendo,103);
+                                           update " + mesActual + @" set res_fecha_notificacion_formato=CONVERT(nvarchar, res_fecha_notificacion,103);";
+
+            DbGeneral.EjecutarQuery(queryActualizacionFechas);
             return resultado;
         }
 
