@@ -15,34 +15,38 @@ namespace appEtlPrescripcion
 {
     public static class ProcesarDAtos
     {
-        public static String realizarConversion(String mesActual)
+        public static String realizarConversion(String mesActual,String mesAnterior)
         {
             String resultado = "";
-            List<String> listadoQuery = new List<string>();
             renombrarColumnas(mesActual);
 
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'ID') BEGIN ALTER TABLE " + mesActual + " ADD ID varchar(255) END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD fecha_comparendo date END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_notificacion') BEGIN ALTER TABLE " + mesActual + " ADD fecha_notificacion date END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD res_fecha_comparendo date END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_notificacion') BEGIN ALTER TABLE " + mesActual + "  ADD res_fecha_notificacion date END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_comparendo_formato') BEGIN ALTER TABLE " + mesActual + " ADD res_fecha_comparendo_formato varchar(255) END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_notificacion_formato') BEGIN ALTER TABLE " + mesActual + "  ADD res_fecha_notificacion_formato varchar(255) END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'prescrito') BEGIN ALTER TABLE " + mesActual + "  ADD prescrito varchar(10) END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fc_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fc_procesada bit END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fn_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fn_procesada bit END;");
+            var query = @"IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'ID') BEGIN ALTER TABLE " + mesActual + " ADD ID varchar(255) END;" + System.Environment.NewLine +
+                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesAnterior + "') AND name = 'ID') BEGIN ALTER TABLE " + mesAnterior + " ADD ID varchar(255) END;" + System.Environment.NewLine +
+                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD fecha_comparendo date END;" + System.Environment.NewLine +
+                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_notificacion') BEGIN ALTER TABLE " + mesActual + " ADD fecha_notificacion date END;" + System.Environment.NewLine +
+                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD res_fecha_comparendo date END;" + System.Environment.NewLine +
+                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_notificacion') BEGIN ALTER TABLE " + mesActual + "  ADD res_fecha_notificacion date END;" + System.Environment.NewLine +
+                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_comparendo_formato') BEGIN ALTER TABLE " + mesActual + " ADD res_fecha_comparendo_formato varchar(255) END;" + System.Environment.NewLine +
+                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_notificacion_formato') BEGIN ALTER TABLE " + mesActual + "  ADD res_fecha_notificacion_formato varchar(255) END;" + System.Environment.NewLine +
+                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'prescrito') BEGIN ALTER TABLE " + mesActual + "  ADD prescrito varchar(10) END;" + System.Environment.NewLine +
+                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fc_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fc_procesada bit END;" + System.Environment.NewLine +
+                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fn_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fn_procesada bit END;" + System.Environment.NewLine +
+                "update " + mesActual + " set FECHA_COMPARENDO=convert(datetime, FECHA#COMPARENDO, 103) WHERE FECHA#COMPARENDO LIKE '%/%';" + System.Environment.NewLine +
+                "update " + mesActual + " set FECHA_NOTIFICACION=convert(datetime, FECHA#notificacion, 103) WHERE FECHA#notificacion LIKE '%/%'" + System.Environment.NewLine +
+                "update  " + mesActual + " set id=(NRO#DOCUMENTO+COMPARENDO+FECHA#COMPARENDO);" + System.Environment.NewLine +
+                "update  " + mesAnterior + " set id=(NRO#DOCUMENTO+COMPARENDO+FECHA#COMPARENDO);" + System.Environment.NewLine +
+                "IF  EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  DROP COLUMN num END;" + System.Environment.NewLine +
+                "IF NOT EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  Add num Int Identity(1, 1) END;" + System.Environment.NewLine +
+                "drop table repetidos" + System.Environment.NewLine +
+                "select * into repetidos from " + mesActual + " where id in (select  id from " + mesActual + " group by id HAVING count(*) >1)" + System.Environment.NewLine +
+                "DELETE FROM repetidos WHERE num NOT IN  (SELECT MIN(num) FROM repetidos GROUP BY id)" + System.Environment.NewLine +
+                "DELETE FROM " + mesActual + " WHERE num NOT IN  (SELECT MIN(num) FROM " + mesActual + " GROUP BY id);" + System.Environment.NewLine +
+                "IF  EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'nuevos')) BEGIN drop table nuevos END;" + System.Environment.NewLine +
+                "select * into nuevos from " + mesActual + " where ID in(select p2.ID from " + mesAnterior + " p1 right join " + mesActual + " p2 on p1.ID=p2.ID where p1.ID is null);";
 
-            listadoQuery.Add("update  " + mesActual + " set id=(NRO#DOCUMENTO+COMPARENDO+FECHA#COMPARENDO)");
-            listadoQuery.Add("delete from repetidos  insert into repetidos (registro, cantidad) select id, count(*) as cantidad from " + mesActual + " group by id HAVING count(*) > 2 order by cantidad");
+            var listadoQuerys = query.Split(new[] { Environment.NewLine },StringSplitOptions.None);
 
-            listadoQuery.Add("IF  EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  DROP COLUMN num END;");
-            listadoQuery.Add("IF NOT EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  Add num Int Identity(1, 1) END;");
-
-            listadoQuery.Add("DELETE FROM " + mesActual + " WHERE num NOT IN  (SELECT MIN(num) FROM " + mesActual + " GROUP BY id)");
-            listadoQuery.Add("update " + mesActual + " set FECHA_COMPARENDO=convert(datetime, FECHA#COMPARENDO, 103) WHERE FECHA#COMPARENDO LIKE '%/%'");
-            listadoQuery.Add("update " + mesActual + " set FECHA_NOTIFICACION=convert(datetime, FECHA#notificacion, 103) WHERE FECHA#notificacion LIKE '%/%'");
-
-            foreach (var item in listadoQuery)
+            foreach (var item in listadoQuerys)
             {
                var res= DbGeneral.EjecutarQuery(item);
                 if(res.Item2==false)
@@ -52,6 +56,32 @@ namespace appEtlPrescripcion
             }
 
             return resultado;            
+        }
+
+        public static Tuple<string, Boolean> verificarColumnas(String mes)
+        {
+            String resultado = "";
+            Boolean existeError = false;
+            List<String> nombresColumnas = new List<string>();
+            Tuple<string, Boolean> listadoDatos = null;
+
+            //construir query para insertar los registros nuevos en la tabla de nuevos
+            var datosColumnas = DbGeneral.obtenerNombresColumnas(mes);
+
+            foreach (var item in datosColumnas.Item1)
+            {
+                nombresColumnas.Add(item[0].ToString().ToUpper());
+            }
+
+            resultado= nombresColumnas.IndexOf("NRO#DOCUMENTO") > -1 ? "" : "Columna NRO#DOCUMENTO no existe" + Environment.NewLine;
+            resultado+= nombresColumnas.IndexOf("COMPARENDO") > -1 ? "" : "Columna COMPARENDO no existe" + Environment.NewLine;
+            resultado+= nombresColumnas.IndexOf("FECHA#COMPARENDO") > -1 ? "" : "Columna FECHA#COMPARENDO no existe" + Environment.NewLine;
+            resultado+= nombresColumnas.IndexOf("FECHA#NOTIFICACION") > -1 ? "" : "Columna FECHA#NOTIFICACION no existe" + Environment.NewLine;
+           
+            existeError = resultado.Trim().Length > 0 ? true : false;
+            listadoDatos = Tuple.Create(resultado, existeError);
+
+            return listadoDatos;
         }
 
         public static String procesarFechas(string mesActual)
@@ -209,9 +239,24 @@ namespace appEtlPrescripcion
             return res;
         }
 
-        public static Tuple<double, string, Boolean> obtnerTotalSaldo(String mes)
+        public static Tuple<decimal, string, Boolean> obtnerTotalSaldo(String mes)
         {
             var res = DbGeneral.obtenerSaldo("select  sum(saldo) [Total] from " + mes);
+
+            return res;
+        }
+
+        public static Tuple<decimal, string, Boolean> obtnerTotalSaldoEtapaCartera(String mes)
+        {
+            var res = DbGeneral.obtenerSaldo("select  sum(saldo) [Total] from " + mes + "  WHERE ETAPA='CARTERA'");
+
+            return res;
+        }
+
+
+        public static Tuple<decimal, string, Boolean> obtnerTotalSaldoEtapaContravencional(String mes)
+        {
+            var res = DbGeneral.obtenerSaldo("select  sum(saldo) [Total] from "+ mes + "  WHERE ETAPA<>'CARTERA'");
 
             return res;
         }

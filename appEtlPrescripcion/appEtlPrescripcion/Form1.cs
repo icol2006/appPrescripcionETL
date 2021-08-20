@@ -159,7 +159,27 @@ namespace appEtlPrescripcion
 
         private void button3_Click(object sender, EventArgs e)
         {
-            realizarConversion();
+            var verificaMesAnterior = ProcesarDAtos.verificarColumnas(this.mesAnterior);
+            var verificaMesActual = ProcesarDAtos.verificarColumnas(this.mesActual);
+
+            if(verificaMesAnterior.Item2==false && verificaMesActual.Item2==false)
+            {
+                realizarConversion();
+            }
+            else
+            {
+                String resultado = "";
+
+                if(verificaMesAnterior.Item2==true)
+                {
+                    resultado = verificaMesAnterior.Item1 + "Tabla " + mesAnterior + Environment.NewLine;
+                }
+                if (verificaMesActual.Item2 == true)
+                {
+                    resultado += verificaMesActual.Item1 + "Tabla " + mesActual + Environment.NewLine;
+                }
+                MessageBox.Show(resultado);
+            }           
         }
 
         private void realizarConversion()
@@ -168,8 +188,8 @@ namespace appEtlPrescripcion
             {
                 try
                 {
-                    EstadoForm.procesarDatos = true;
-                   resultadoProcesamiento= ProcesarDAtos.realizarConversion(this.mesActual);
+                   EstadoForm.procesarDatos = true;
+                   resultadoProcesamiento= ProcesarDAtos.realizarConversion(this.mesActual,this.mesAnterior);
 
                     this.Invoke(new Action(() =>
                     {
@@ -461,6 +481,8 @@ namespace appEtlPrescripcion
         {
             obtenerCantidadMeses();
             obtenerSaldo();
+            obtenerSaldoEtapaCartera();
+            obtenerSaldoEtapaContravencional();
             generarGraficoEtapa();
         }
 
@@ -531,7 +553,7 @@ namespace appEtlPrescripcion
                         }
                         else
                         {
-                            this.txtSaldoTotal.Text = res1.Item1 + "";
+                            this.txtSaldoTotal.Text = Math.Round(res1.Item1) + "";
                         }
 
                     }));
@@ -548,6 +570,61 @@ namespace appEtlPrescripcion
             thread2.Start();
         }
 
+        private void obtenerSaldoEtapaCartera()
+        {
+
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    var res1 = ProcesarDAtos.obtnerTotalSaldoEtapaCartera(this.mesActual);
+
+
+                    this.Invoke(new Action(() =>
+                    {
+
+                        this.txtSaldoCartera.Text = Math.Round(res1.Item1) + "";
+                    }));
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                }
+            });
+            thread2.Start();
+        }
+
+        private void obtenerSaldoEtapaContravencional()
+        {
+
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    var res1 = ProcesarDAtos.obtnerTotalSaldoEtapaContravencional(this.mesActual);
+
+
+                    this.Invoke(new Action(() =>
+                    {
+
+                        this.txtSaldoContravencional.Text = Math.Round(res1.Item1) + "";
+                    }));
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                }
+            });
+            thread2.Start();
+        }
 
         private void generarGraficoEtapa()
         {

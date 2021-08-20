@@ -26,9 +26,10 @@ namespace CapaDatos
             {
                 SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
                 SqlConexion.Open();
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(DConexion.CnBDEmpresa);
+                var baseDatos = builder.InitialCatalog;
 
-             
-               SqlCommand SqlComando = new SqlCommand();
+                SqlCommand SqlComando = new SqlCommand();
                 SqlComando.Connection = SqlConexion;
                
 
@@ -108,12 +109,12 @@ namespace CapaDatos
             return datos;
         }
 
-        public static Tuple<double, string,Boolean> obtenerSaldo(string query)
+        public static Tuple<decimal, string,Boolean> obtenerSaldo(string query)
         {
             SqlDataReader oSqlDataReader;
             SqlConnection SqlConexion = new SqlConnection();
-            Tuple<double, string, Boolean> listadoDatos = null;
-            double cantidad = 0;        
+            Tuple<decimal, string, Boolean> listadoDatos = null;
+            decimal cantidad = 0;        
             String mesnsajeError = "";
             Boolean res = true;
 
@@ -131,7 +132,7 @@ namespace CapaDatos
 
                 while (oSqlDataReader.Read())
                 {
-                    cantidad= (double)oSqlDataReader.GetValue(0);
+                    cantidad= (decimal)oSqlDataReader.GetValue(0);
                 };
             }
 
@@ -201,13 +202,13 @@ namespace CapaDatos
 
         public static Tuple<List<object[]>, string, Boolean> ExportarRegistroNuevos(String mesActual)
         {
-            String comando = "SELECT * FROM  " + mesActual;
+            String comando = "SELECT * FROM  nuevos";
             return exportarDatos(comando, mesActual);
         }
 
         public static Tuple<List<object[]>, string, Boolean> ExportarRegistroRepetidos(String mesActual)
         {
-            var comando = "SELECT * FROM " + mesActual;
+            var comando = "SELECT * FROM repetidos";
             return exportarDatos(comando, mesActual);
         }
 
@@ -230,7 +231,6 @@ namespace CapaDatos
             String mesnsajeError = ""; Boolean existeError = false;
             Tuple<List<object[]>, string, Boolean> listadoDatos = null;
             List<object[]> datos = new List<object[]>();
-            String queryColumnas = "SELECT column_name  FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'" + tabla + "'";
 
             try
             {
