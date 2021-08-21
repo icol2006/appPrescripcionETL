@@ -38,9 +38,10 @@ namespace appEtlPrescripcion
             gbProcesoPrescritos.Visible = true;
             var fechaMesActual = txtMesActual.Text;
 
-            DateTime fechaActual = DateTime.ParseExact(fechaMesActual, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            var ultimoDiaMesActual= DateTime.DaysInMonth(fechaActual.Year, fechaActual.Month);
-            var fechaUltimoDiaMesActual = new DateTime(fechaActual.Year, fechaActual.Month, ultimoDiaMesActual);
+            DateTime fechaCorte = DateTime.ParseExact(fechaMesActual, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            //var ultimoDiaMesActual= DateTime.DaysInMonth(fechaCorte.Year, fechaCorte.Month);
+            //var fechaUltimoDiaMesActual = new DateTime(fechaCorte.Year, fechaCorte.Month, ultimoDiaMesActual);
+
 
             Thread thread2 = new Thread(() =>
             {
@@ -49,7 +50,19 @@ namespace appEtlPrescripcion
                     EstadoForm.procesarDatos = true;
                     EstadoForm.cantidadRegistrosProcesado = 0;
 
-                    resultadoProcesamiento=ProcesarDAtos.procesarFechas(this.mesActual);
+                    try
+                    {
+                        ProcesarDAtos.procesarFechas("repetidos", fechaCorte.ToString("yyyy/MM/dd"));
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    EstadoForm.cantidadRegistrosProcesado = 0;
+                    EstadoForm.totalRegistros = 0;
+                    resultadoProcesamiento =ProcesarDAtos.procesarFechas(this.mesActual, fechaCorte.ToString("yyyy/MM/dd"));
+              
 
                     this.Invoke(new Action(() =>
                     {
@@ -432,19 +445,39 @@ namespace appEtlPrescripcion
 
         private void cargarMeses()
         {
-            var resultado = DbGeneral.ObtenerMeses();
+           Tuple<List<String>, string, Boolean> datos;
 
+           Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    datos = DbGeneral.ObtenerMeses();
 
-            if(resultado.Item3==false)
-            {
-                MessageBox.Show(resultado.Item2);
-            }
- 
-            foreach (var item in resultado.Item1)
-            {
-                cmbMesAnterior.Items.Add(item);
-                cmbMesActual.Items.Add(item);
-            }
+                    this.Invoke(new Action(() =>
+                    {
+                        if (datos.Item3 == false)
+                        {
+                            MessageBox.Show(datos.Item2);
+                        }
+
+                        foreach (var item in datos.Item1)
+                        {
+                            cmbMesAnterior.Items.Add(item);
+                            cmbMesActual.Items.Add(item);
+                        }
+                    }));
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                }
+            });
+            thread2.Start();
+                  
         }
 
         private void cmbMesAnterior_SelectedIndexChanged(object sender, EventArgs e)
@@ -553,7 +586,7 @@ namespace appEtlPrescripcion
                         }
                         else
                         {
-                            this.txtSaldoTotal.Text = Math.Round(res1.Item1) + "";
+                            this.txtSaldoTotal.Text = String.Format("{0:n0}", res1.Item1) + "";
                         }
 
                     }));
@@ -583,7 +616,7 @@ namespace appEtlPrescripcion
                     this.Invoke(new Action(() =>
                     {
 
-                        this.txtSaldoCartera.Text = Math.Round(res1.Item1) + "";
+                        this.txtSaldoCartera.Text = String.Format("{0:n0}", res1.Item1) + "";
                     }));
 
                 }
@@ -611,7 +644,7 @@ namespace appEtlPrescripcion
                     this.Invoke(new Action(() =>
                     {
 
-                        this.txtSaldoContravencional.Text = Math.Round(res1.Item1) + "";
+                        this.txtSaldoContravencional.Text = String.Format("{0:n0}", res1.Item1) + "";
                     }));
 
                 }

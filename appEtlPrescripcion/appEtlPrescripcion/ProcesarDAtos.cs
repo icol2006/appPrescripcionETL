@@ -20,6 +20,9 @@ namespace appEtlPrescripcion
             String resultado = "";
             renombrarColumnas(mesActual);
 
+            var queryRepetidoCrearTabla = "select * into repetidos from " + mesActual + " where id in (select  id from " + mesActual + " group by id HAVING count(*) >1)";
+            var queryRepetidoInsertTabla = "insert into repetidos select *  from " + mesActual + " where id in (select  id from " + mesActual + " group by id HAVING count(*) >1)";
+
             var query = @"IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'ID') BEGIN ALTER TABLE " + mesActual + " ADD ID varchar(255) END;" + System.Environment.NewLine +
                 "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesAnterior + "') AND name = 'ID') BEGIN ALTER TABLE " + mesAnterior + " ADD ID varchar(255) END;" + System.Environment.NewLine +
                 "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD fecha_comparendo date END;" + System.Environment.NewLine +
@@ -37,8 +40,8 @@ namespace appEtlPrescripcion
                 "update  " + mesAnterior + " set id=(NRO#DOCUMENTO+COMPARENDO+FECHA#COMPARENDO);" + System.Environment.NewLine +
                 "IF  EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  DROP COLUMN num END;" + System.Environment.NewLine +
                 "IF NOT EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  Add num Int Identity(1, 1) END;" + System.Environment.NewLine +
-                "drop table repetidos" + System.Environment.NewLine +
-                "select * into repetidos from " + mesActual + " where id in (select  id from " + mesActual + " group by id HAVING count(*) >1)" + System.Environment.NewLine +
+                "IF EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'repetidos')) BEGIN drop table repetidos; END;" + System.Environment.NewLine +
+                queryRepetidoCrearTabla+System.Environment.NewLine +
                 "DELETE FROM repetidos WHERE num NOT IN  (SELECT MIN(num) FROM repetidos GROUP BY id)" + System.Environment.NewLine +
                 "DELETE FROM " + mesActual + " WHERE num NOT IN  (SELECT MIN(num) FROM " + mesActual + " GROUP BY id);" + System.Environment.NewLine +
                 "IF  EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'nuevos')) BEGIN drop table nuevos END;" + System.Environment.NewLine +
@@ -84,7 +87,7 @@ namespace appEtlPrescripcion
             return listadoDatos;
         }
 
-        public static String procesarFechas(string mesActual)
+        public static String procesarFechas(string mesActual,string fechaCorte)
         {
             var listadoGrupoFechasComparendo = DbMesNuevo.ObtenerGruposFechaComparendo(mesActual);
             var listadoGrupoFechasNotificacion=DbMesNuevo.ObtenerGruposFechaNotificacion(mesActual);
@@ -149,13 +152,13 @@ namespace appEtlPrescripcion
                 }
             }
 
-            String queryActualizacionFechas = @"update "+mesActual+ @" set prescrito=null;
-                                           update " + mesActual + @" set prescrito='si'  where fecha_notificacion is null and res_fecha_comparendo<'2021-08-31';
-                                           update " + mesActual + @" set prescrito='no' where fecha_notificacion is null and res_fecha_comparendo>'2021-08-31';
-                                           update " + mesActual + @" set prescrito='si' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo<fecha_notificacion and res_fecha_comparendo<'2021-08-31';
-                                           update " + mesActual + @" set prescrito='no' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo<fecha_notificacion and res_fecha_comparendo>'2021-08-31';
-                                           update " + mesActual + @" set prescrito='si' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo>fecha_notificacion and res_fecha_notificacion<'2021-08-31';
-                                           update " + mesActual + @" set prescrito='no' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo>fecha_notificacion and res_fecha_notificacion>'2021-08-31';
+            String queryActualizacionFechas = @"update " + mesActual + @" set prescrito=null;
+                                           update " + mesActual + @" set prescrito='si'  where fecha_notificacion is null and res_fecha_comparendo<'" + fechaCorte + @"';
+                                           update " + mesActual + @" set prescrito='no' where fecha_notificacion is null and res_fecha_comparendo>'" + fechaCorte + @"';
+                                           update " + mesActual + @" set prescrito='si' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo<fecha_notificacion and res_fecha_comparendo<'" + fechaCorte + @"';
+                                           update " + mesActual + @" set prescrito='no' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo<fecha_notificacion and res_fecha_comparendo>'" + fechaCorte + @"';
+                                           update " + mesActual + @" set prescrito='si' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo>fecha_notificacion and res_fecha_notificacion<'" + fechaCorte + @"';
+                                           update " + mesActual + @" set prescrito='no' where fecha_notificacion is not null and fecha_comparendo is not null and res_fecha_comparendo>fecha_notificacion and res_fecha_notificacion>'" + fechaCorte + @"';
                                            update " + mesActual + @" set res_fecha_comparendo_formato=CONVERT(nvarchar, res_fecha_comparendo,103);
                                            update " + mesActual + @" set res_fecha_notificacion_formato=CONVERT(nvarchar, res_fecha_notificacion,103);";
 
@@ -210,6 +213,10 @@ namespace appEtlPrescripcion
             }
              sw.Close();
 
+            if(File.Exists(nombreArchivo))
+            {
+                File.Delete(nombreArchivo);
+            }
             File.Move("datos.csv", nombreArchivo);
         }
 

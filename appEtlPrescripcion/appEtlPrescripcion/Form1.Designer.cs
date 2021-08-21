@@ -56,6 +56,10 @@ namespace appEtlPrescripcion
             this.cmbMesActual = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtSaldoContravencional = new System.Windows.Forms.TextBox();
+            this.txtSaldoCartera = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
             this.txtCantRegMesActual = new System.Windows.Forms.TextBox();
             this.txtCantRegMesAnterior = new System.Windows.Forms.TextBox();
@@ -70,10 +74,6 @@ namespace appEtlPrescripcion
             this.txtProcesados = new System.Windows.Forms.TextBox();
             this.ptbLoading = new System.Windows.Forms.PictureBox();
             this.gbProcesoPrescritos = new System.Windows.Forms.GroupBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtSaldoCartera = new System.Windows.Forms.TextBox();
-            this.txtSaldoContravencional = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.gbxControlesProcesamiento.SuspendLayout();
@@ -345,6 +345,38 @@ namespace appEtlPrescripcion
             this.tabPage1.Text = "Graficos";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // txtSaldoContravencional
+            // 
+            this.txtSaldoContravencional.Location = new System.Drawing.Point(390, 312);
+            this.txtSaldoContravencional.Name = "txtSaldoContravencional";
+            this.txtSaldoContravencional.Size = new System.Drawing.Size(100, 20);
+            this.txtSaldoContravencional.TabIndex = 12;
+            // 
+            // txtSaldoCartera
+            // 
+            this.txtSaldoCartera.Location = new System.Drawing.Point(151, 312);
+            this.txtSaldoCartera.Name = "txtSaldoCartera";
+            this.txtSaldoCartera.Size = new System.Drawing.Size(100, 20);
+            this.txtSaldoCartera.TabIndex = 11;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(291, 319);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(84, 13);
+            this.label17.TabIndex = 10;
+            this.label17.Text = "Contravencional";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(73, 319);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(71, 13);
+            this.label16.TabIndex = 9;
+            this.label16.Text = "Saldo Cartera";
+            // 
             // button9
             // 
             this.button9.Location = new System.Drawing.Point(287, 33);
@@ -484,38 +516,6 @@ namespace appEtlPrescripcion
             this.gbProcesoPrescritos.TabIndex = 7;
             this.gbProcesoPrescritos.TabStop = false;
             this.gbProcesoPrescritos.Visible = false;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(73, 319);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(71, 13);
-            this.label16.TabIndex = 9;
-            this.label16.Text = "Saldo Cartera";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(291, 319);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(84, 13);
-            this.label17.TabIndex = 10;
-            this.label17.Text = "Contravencional";
-            // 
-            // txtSaldoCartera
-            // 
-            this.txtSaldoCartera.Location = new System.Drawing.Point(151, 312);
-            this.txtSaldoCartera.Name = "txtSaldoCartera";
-            this.txtSaldoCartera.Size = new System.Drawing.Size(100, 20);
-            this.txtSaldoCartera.TabIndex = 11;
-            // 
-            // txtSaldoContravencional
-            // 
-            this.txtSaldoContravencional.Location = new System.Drawing.Point(390, 312);
-            this.txtSaldoContravencional.Name = "txtSaldoContravencional";
-            this.txtSaldoContravencional.Size = new System.Drawing.Size(100, 20);
-            this.txtSaldoContravencional.TabIndex = 12;
             // 
             // Form1
             // 
