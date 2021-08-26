@@ -11,6 +11,8 @@ namespace CapaDatos
 {
     public static class DbMesNuevo
     {
+        public static int TiempoEsperaComando = 30;
+
         public static Tuple<List<DateTime?>, string, Boolean> ObtenerGruposFechaComparendo(string mesActual)
         {
             SqlDataReader oSqlDataReader;
@@ -31,6 +33,8 @@ namespace CapaDatos
                                          " group by FECHA_COMPARENDO";
 
                 SqlComando.CommandType = CommandType.Text;
+                SqlComando.CommandTimeout = TiempoEsperaComando;
+
                 oSqlDataReader = SqlComando.ExecuteReader();
 
                 while (oSqlDataReader.Read())
@@ -81,6 +85,8 @@ namespace CapaDatos
                                          " group by fecha_notificacion";
 
                 SqlComando.CommandType = CommandType.Text;
+                SqlComando.CommandTimeout = TiempoEsperaComando;
+
                 oSqlDataReader = SqlComando.ExecuteReader();
 
                 while (oSqlDataReader.Read())
@@ -131,6 +137,7 @@ namespace CapaDatos
                 SqlComando.Parameters.AddWithValue("res_fecha_comparendo", (object)res_fecha_comparendo ?? DBNull.Value);
                 SqlComando.Parameters.AddWithValue("fc_procesada", (object)procesado ?? DBNull.Value);
                 SqlComando.Parameters.AddWithValue("fecha_comparendo", (object)fecha_comparendo ?? DBNull.Value);
+                SqlComando.CommandTimeout = TiempoEsperaComando;
 
                 SqlComando.ExecuteNonQuery();
             }
@@ -174,6 +181,7 @@ namespace CapaDatos
                 SqlComando.Parameters.AddWithValue("res_fecha_notificacion", (object)res_fecha_notificacion ?? DBNull.Value);
                 SqlComando.Parameters.AddWithValue("fn_procesada", (object)procesado ?? DBNull.Value);
                 SqlComando.Parameters.AddWithValue("fecha_notificacion", (object)fecha_notificacion ?? DBNull.Value);
+                SqlComando.CommandTimeout = TiempoEsperaComando;
 
                 SqlComando.ExecuteNonQuery();
             }

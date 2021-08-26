@@ -39,10 +39,7 @@ namespace appEtlPrescripcion
             var fechaMesActual = txtMesActual.Text;
 
             DateTime fechaCorte = DateTime.ParseExact(fechaMesActual, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            //var ultimoDiaMesActual= DateTime.DaysInMonth(fechaCorte.Year, fechaCorte.Month);
-            //var fechaUltimoDiaMesActual = new DateTime(fechaCorte.Year, fechaCorte.Month, ultimoDiaMesActual);
-
-
+  
             Thread thread2 = new Thread(() =>
             {
                 try
@@ -52,7 +49,7 @@ namespace appEtlPrescripcion
 
                     try
                     {
-                        ProcesarDAtos.procesarFechas("repetidos", fechaCorte.ToString("yyyy/MM/dd"));
+                        ProcesarDatos.procesarFechas("repetidos", fechaCorte.ToString("yyyy/MM/dd"));
                     }
                     catch (Exception)
                     {
@@ -61,7 +58,7 @@ namespace appEtlPrescripcion
 
                     EstadoForm.cantidadRegistrosProcesado = 0;
                     EstadoForm.totalRegistros = 0;
-                    resultadoProcesamiento =ProcesarDAtos.procesarFechas(this.mesActual, fechaCorte.ToString("yyyy/MM/dd"));
+                    resultadoProcesamiento =ProcesarDatos.procesarFechas(this.mesActual, fechaCorte.ToString("yyyy/MM/dd"));
               
 
                     this.Invoke(new Action(() =>
@@ -160,9 +157,27 @@ namespace appEtlPrescripcion
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            configurarTiempoEspera();
             cargarMeses();
             actualizarEstadoForm();
             this.txtMesActual.Text = DateTime.Now.ToString("dd/MM/yyyy");
+        }
+
+        private void configurarTiempoEspera()
+        {
+            int tiempoEspera = 30;
+            try
+            {
+                tiempoEspera = Convert.ToInt32(txtTiempoEspera.Text);
+            }
+            catch (Exception)
+            {
+
+            }          
+
+            DbFechasSuspencion.TiempoEsperaComando = tiempoEspera;
+            DbGeneral.TiempoEsperaComando = tiempoEspera;
+            DbMesNuevo.TiempoEsperaComando = tiempoEspera;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -172,8 +187,8 @@ namespace appEtlPrescripcion
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var verificaMesAnterior = ProcesarDAtos.verificarColumnas(this.mesAnterior);
-            var verificaMesActual = ProcesarDAtos.verificarColumnas(this.mesActual);
+            var verificaMesAnterior = ProcesarDatos.verificarColumnas(this.mesAnterior);
+            var verificaMesActual = ProcesarDatos.verificarColumnas(this.mesActual);
 
             if(verificaMesAnterior.Item2==false && verificaMesActual.Item2==false)
             {
@@ -202,7 +217,7 @@ namespace appEtlPrescripcion
                 try
                 {
                    EstadoForm.procesarDatos = true;
-                   resultadoProcesamiento= ProcesarDAtos.realizarConversion(this.mesActual,this.mesAnterior);
+                   resultadoProcesamiento= ProcesarDatos.realizarConversion(this.mesActual,this.mesAnterior);
 
                     this.Invoke(new Action(() =>
                     {
@@ -243,7 +258,7 @@ namespace appEtlPrescripcion
 
         private void exportarRegistrosNuevos()
         {
-            var nombreArchivo = abrirFileDialog();
+            var nombreArchivo = abrirFileDialog("csv");
 
             Thread thread2 = new Thread(() =>
             {
@@ -255,7 +270,7 @@ namespace appEtlPrescripcion
                         var res = DbGeneral.ExportarRegistroNuevos(this.mesActual);
                         var nombresColumnas = DbGeneral.obtenerNombresColumnas(this.mesActual);
 
-                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
+                        ProcesarDatos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
                         this.Invoke(new Action(() =>
                         {
@@ -289,7 +304,7 @@ namespace appEtlPrescripcion
 
         private void exportarRegistrosRepetidos()
         {
-            var nombreArchivo = abrirFileDialog();
+            var nombreArchivo = abrirFileDialog("csv");
 
             Thread thread2 = new Thread(() =>
             {
@@ -301,7 +316,7 @@ namespace appEtlPrescripcion
                         var res = DbGeneral.ExportarRegistroRepetidos(this.mesActual);
                         var nombresColumnas = DbGeneral.obtenerNombresColumnas(this.mesActual);
 
-                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
+                        ProcesarDatos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
                         this.Invoke(new Action(() =>
                         {
@@ -333,12 +348,20 @@ namespace appEtlPrescripcion
             exportarMesActual();
         }
 
-        private String abrirFileDialog()
+        private String abrirFileDialog(String filtro)
         {
             String resultado = "";
 
             SaveFileDialog oSaveFileDialog = new SaveFileDialog();
-            oSaveFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+            if(filtro.Equals("csv"))
+            {
+                oSaveFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+            }
+            if (filtro.Equals("txt"))
+            {
+                oSaveFileDialog.Filter = "Text File | *.txt";
+            }
+            
             if (oSaveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string fileName = oSaveFileDialog.FileName;
@@ -351,7 +374,7 @@ namespace appEtlPrescripcion
 
         private void exportarMesActual()
         {
-           var nombreArchivo= abrirFileDialog();
+           var nombreArchivo= abrirFileDialog("csv");
              
             Thread thread2 = new Thread(() =>
             {
@@ -363,7 +386,7 @@ namespace appEtlPrescripcion
                         var res = DbGeneral.ExportarMesNuevo(this.mesActual);
                         var nombresColumnas = DbGeneral.obtenerNombresColumnas(this.mesActual);
 
-                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
+                        ProcesarDatos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
                         this.Invoke(new Action(() =>
                         {
@@ -398,7 +421,7 @@ namespace appEtlPrescripcion
 
         private void exportarMesViejo()
         {
-            var nombreArchivo = abrirFileDialog();
+            var nombreArchivo = abrirFileDialog("csv");
 
             Thread thread2 = new Thread(() =>
             {
@@ -410,7 +433,7 @@ namespace appEtlPrescripcion
                         var res = DbGeneral.ExportarMesViejo(this.mesAnterior);
                         var nombresColumnas = DbGeneral.obtenerNombresColumnas(this.mesActual);
 
-                        ProcesarDAtos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
+                        ProcesarDatos.GenerarCsv(res.Item1,nombreArchivo,nombresColumnas.Item1);
 
                         this.Invoke(new Action(() =>
                         {
@@ -526,8 +549,8 @@ namespace appEtlPrescripcion
             {
                 try
                 {
-                    var res1 =  ProcesarDAtos.obtnerTotalRegistro(this.mesAnterior);
-                    var res2 = ProcesarDAtos.obtnerTotalRegistro(this.mesActual);
+                    var res1 =  ProcesarDatos.obtnerTotalRegistro(this.mesAnterior);
+                    var res2 = ProcesarDatos.obtnerTotalRegistro(this.mesActual);
 
 
                     this.Invoke(new Action(() =>
@@ -574,7 +597,7 @@ namespace appEtlPrescripcion
             {
                 try
                 {
-                    var res1 = ProcesarDAtos.obtnerTotalSaldo(this.mesActual);
+                    var res1 = ProcesarDatos.obtnerTotalSaldo(this.mesActual);
 
 
                     this.Invoke(new Action(() =>
@@ -594,7 +617,18 @@ namespace appEtlPrescripcion
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    this.Invoke(new Action(() =>
+                    {
+                        try
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+
+                    }));
                 }
                 finally
                 {
@@ -610,19 +644,37 @@ namespace appEtlPrescripcion
             {
                 try
                 {
-                    var res1 = ProcesarDAtos.obtnerTotalSaldoEtapaCartera(this.mesActual);
+                    var res1 = ProcesarDatos.obtnerTotalSaldoEtapaCartera(this.mesActual);
+
 
 
                     this.Invoke(new Action(() =>
                     {
-
-                        this.txtSaldoCartera.Text = String.Format("{0:n0}", res1.Item1) + "";
+                        if (res1.Item3 == false)
+                        {
+                            MessageBox.Show(res1.Item2);
+                        }
+                        else
+                        {
+                            this.txtSaldoCartera.Text = String.Format("{0:n0}", res1.Item1) + "";
+                        }
                     }));
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    this.Invoke(new Action(() =>
+                    {
+                        try
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                        catch (Exception)
+                        {
+                       
+                        }
+                     
+                    }));                   
                 }
                 finally
                 {
@@ -638,13 +690,23 @@ namespace appEtlPrescripcion
             {
                 try
                 {
-                    var res1 = ProcesarDAtos.obtnerTotalSaldoEtapaContravencional(this.mesActual);
+                    var res1 = ProcesarDatos.obtnerTotalSaldoEtapaContravencional(this.mesActual);
+
 
 
                     this.Invoke(new Action(() =>
                     {
 
-                        this.txtSaldoContravencional.Text = String.Format("{0:n0}", res1.Item1) + "";
+                        if (res1.Item3 == false)
+                        {
+                            MessageBox.Show(res1.Item2);
+                        }
+                        else
+                        {
+                            this.txtSaldoContravencional.Text = String.Format("{0:n0}", res1.Item1) + "";
+                        }
+
+
                     }));
 
                 }
@@ -666,7 +728,7 @@ namespace appEtlPrescripcion
             {
                 try
                 {
-                    var res = ProcesarDAtos.generarGrafico("etapa", this.mesActual);
+                    var res = ProcesarDatos.generarGrafico("etapa", this.mesActual);
                     //DESCRIPCION#INFRACCION            
 
                     this.Invoke(new Action(() =>
@@ -680,7 +742,17 @@ namespace appEtlPrescripcion
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    this.Invoke(new Action(() =>
+                    {
+                        try
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                    }));
                 }
                 finally
                 {
@@ -691,7 +763,67 @@ namespace appEtlPrescripcion
 
         private void button10_Click(object sender, EventArgs e)
         {
-            ProcesarDAtos.renombrarColumnas(this.mesActual);
+            ProcesarDatos.renombrarColumnas(this.mesActual);
+        }
+
+        private void button8_Click_1(object sender, EventArgs e)
+        {
+            var resultado = "";
+            var nombreArchivo = abrirFileDialog("txt");
+            Thread thread2 = new Thread(() =>
+            {
+                try
+                {
+                    EstadoForm.procesarDatos = true;
+                    ProcesarDatos.renombrarColumnas(this.mesActual);
+                    resultado = ProcesarDatos.obtenerSistaxisConversion(this.mesActual, this.mesAnterior);
+
+                    this.Invoke(new Action(() =>
+                    {
+                        if (resultado.Trim().Length > 0 && nombreArchivo.Trim().Length>0)
+                        {
+                            ProcesarDatos.GenerarArchivoTexto(resultado, nombreArchivo);
+                            MessageBox.Show("Finalizado");
+                        }              
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    try
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+                finally
+                {
+                    EstadoForm.procesarDatos = false;
+                }
+            });
+            thread2.Start();
+        }
+
+        private void txtTiempoEspera_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTiempoEspera_TextChanged(object sender, EventArgs e)
+        {
+            configurarTiempoEspera();
         }
     }
 }

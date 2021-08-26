@@ -13,39 +13,14 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace appEtlPrescripcion
 {
-    public static class ProcesarDAtos
+    public static class ProcesarDatos
     {
         public static String realizarConversion(String mesActual,String mesAnterior)
         {
             String resultado = "";
             renombrarColumnas(mesActual);
 
-            var queryRepetidoCrearTabla = "select * into repetidos from " + mesActual + " where id in (select  id from " + mesActual + " group by id HAVING count(*) >1)";
-            var queryRepetidoInsertTabla = "insert into repetidos select *  from " + mesActual + " where id in (select  id from " + mesActual + " group by id HAVING count(*) >1)";
-
-            var query = @"IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'ID') BEGIN ALTER TABLE " + mesActual + " ADD ID varchar(255) END;" + System.Environment.NewLine +
-                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesAnterior + "') AND name = 'ID') BEGIN ALTER TABLE " + mesAnterior + " ADD ID varchar(255) END;" + System.Environment.NewLine +
-                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD fecha_comparendo date END;" + System.Environment.NewLine +
-                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_notificacion') BEGIN ALTER TABLE " + mesActual + " ADD fecha_notificacion date END;" + System.Environment.NewLine +
-                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD res_fecha_comparendo date END;" + System.Environment.NewLine +
-                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_notificacion') BEGIN ALTER TABLE " + mesActual + "  ADD res_fecha_notificacion date END;" + System.Environment.NewLine +
-                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_comparendo_formato') BEGIN ALTER TABLE " + mesActual + " ADD res_fecha_comparendo_formato varchar(255) END;" + System.Environment.NewLine +
-                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_notificacion_formato') BEGIN ALTER TABLE " + mesActual + "  ADD res_fecha_notificacion_formato varchar(255) END;" + System.Environment.NewLine +
-                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'prescrito') BEGIN ALTER TABLE " + mesActual + "  ADD prescrito varchar(10) END;" + System.Environment.NewLine +
-                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fc_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fc_procesada bit END;" + System.Environment.NewLine +
-                "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fn_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fn_procesada bit END;" + System.Environment.NewLine +
-                "update " + mesActual + " set FECHA_COMPARENDO=convert(datetime, FECHA#COMPARENDO, 103) WHERE FECHA#COMPARENDO LIKE '%/%';" + System.Environment.NewLine +
-                "update " + mesActual + " set FECHA_NOTIFICACION=convert(datetime, FECHA#notificacion, 103) WHERE FECHA#notificacion LIKE '%/%'" + System.Environment.NewLine +
-                "update  " + mesActual + " set id=(NRO#DOCUMENTO+COMPARENDO+FECHA#COMPARENDO);" + System.Environment.NewLine +
-                "update  " + mesAnterior + " set id=(NRO#DOCUMENTO+COMPARENDO+FECHA#COMPARENDO);" + System.Environment.NewLine +
-                "IF  EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  DROP COLUMN num END;" + System.Environment.NewLine +
-                "IF NOT EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  Add num Int Identity(1, 1) END;" + System.Environment.NewLine +
-                "IF EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'repetidos')) BEGIN drop table repetidos; END;" + System.Environment.NewLine +
-                queryRepetidoCrearTabla+System.Environment.NewLine +
-                "DELETE FROM repetidos WHERE num NOT IN  (SELECT MIN(num) FROM repetidos GROUP BY id)" + System.Environment.NewLine +
-                "DELETE FROM " + mesActual + " WHERE num NOT IN  (SELECT MIN(num) FROM " + mesActual + " GROUP BY id);" + System.Environment.NewLine +
-                "IF  EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'nuevos')) BEGIN drop table nuevos END;" + System.Environment.NewLine +
-                "select * into nuevos from " + mesActual + " where ID in(select p2.ID from " + mesAnterior + " p1 right join " + mesActual + " p2 on p1.ID=p2.ID where p1.ID is null);";
+            var query = obtenerSistaxisConversion(mesAnterior, mesActual);
 
             var listadoQuerys = query.Split(new[] { Environment.NewLine },StringSplitOptions.None);
 
@@ -59,6 +34,36 @@ namespace appEtlPrescripcion
             }
 
             return resultado;            
+        }
+
+        public static String obtenerSistaxisConversion(String mesAnterior, String mesActual)
+        {
+          return  @"IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'ID') BEGIN ALTER TABLE " + mesActual + " ADD ID varchar(255) END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesAnterior + "') AND name = 'ID') BEGIN ALTER TABLE " + mesAnterior + " ADD ID varchar(255) END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'repetido') BEGIN ALTER TABLE " + mesActual + " ADD repetido varchar(20) END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'nuevo') BEGIN ALTER TABLE " + mesActual + " ADD nuevo varchar(20) END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD fecha_comparendo date END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fecha_notificacion') BEGIN ALTER TABLE " + mesActual + " ADD fecha_notificacion date END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_comparendo') BEGIN ALTER TABLE " + mesActual + " ADD res_fecha_comparendo date END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_notificacion') BEGIN ALTER TABLE " + mesActual + "  ADD res_fecha_notificacion date END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_comparendo_formato') BEGIN ALTER TABLE " + mesActual + " ADD res_fecha_comparendo_formato varchar(255) END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'res_fecha_notificacion_formato') BEGIN ALTER TABLE " + mesActual + "  ADD res_fecha_notificacion_formato varchar(255) END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'prescrito') BEGIN ALTER TABLE " + mesActual + "  ADD prescrito varchar(10) END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fc_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fc_procesada bit END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'fn_procesada') BEGIN ALTER TABLE " + mesActual + "  ADD fn_procesada bit END;" + System.Environment.NewLine +
+                            "IF EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'saldo') BEGIN ALTER TABLE " + mesActual + "  alter COLUMN saldo decimal(18, 0) end;" + System.Environment.NewLine +
+                            "update " + mesActual + " set FECHA_COMPARENDO=convert(datetime, FECHA#COMPARENDO, 103) WHERE FECHA#COMPARENDO LIKE '%/%';" + System.Environment.NewLine +
+                            "update " + mesActual + " set FECHA_NOTIFICACION=convert(datetime, FECHA#notificacion, 103) WHERE FECHA#notificacion LIKE '%/%'" + System.Environment.NewLine +
+                            "update  " + mesActual + " set id=(NRO#DOCUMENTO+COMPARENDO+FECHA#COMPARENDO);" + System.Environment.NewLine +
+                            "update  " + mesAnterior + " set id=(NRO#DOCUMENTO+COMPARENDO+FECHA#COMPARENDO);" + System.Environment.NewLine +
+                            "IF  EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  DROP COLUMN num END;" + System.Environment.NewLine +
+                            "IF NOT EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'" + mesActual + "') AND name = 'num') BEGIN ALTER TABLE " + mesActual + "  Add num Int Identity(1, 1) END;" + System.Environment.NewLine +
+                            "IF EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'repetidos')) BEGIN drop table repetidos; END;" + System.Environment.NewLine +
+                            "update " + mesActual + " set repetido='no' where num in(SELECT MIN(num) FROM " + mesActual + " GROUP BY id)" + Environment.NewLine +
+                            "update " + mesActual + " set repetido='si' where num not in(SELECT MIN(num) FROM " + mesActual + " GROUP BY id)" + Environment.NewLine +
+                            "update " + mesActual + " set nuevo='no'" + Environment.NewLine +
+                            "update " + mesActual + " set nuevo='si' where id in(select p2.ID from " + mesAnterior + " p1 right join " + mesActual + "  p2 on p1.ID=p2.ID where p1.ID is null)";
+
         }
 
         public static Tuple<string, Boolean> verificarColumnas(String mes)
@@ -220,9 +225,25 @@ namespace appEtlPrescripcion
             File.Move("datos.csv", nombreArchivo);
         }
 
+        public static void GenerarArchivoTexto(String datos, String nombreArchivo)
+        {
+            StreamWriter sw = new StreamWriter("sintaxis");
+
+            sw.Write(datos);
+
+            sw.Close();
+
+            if (File.Exists(nombreArchivo))
+            {
+                File.Delete(nombreArchivo);
+            }
+            File.Move("sintaxis", nombreArchivo);
+        }
+
+
         public static Tuple<string[], int[]> generarGrafico(string columna,string mesActual)
         {
-            var dt = DbGeneral.obtenerDatosDatables("select " + columna + ", COUNT(*) [Total] from " + mesActual + " group by  " + columna);
+            var dt = DbGeneral.obtenerDatosDatables("select " + columna + ", COUNT(*) [Total] from " + mesActual + " where  repetido='no' group by  " + columna);
             Tuple<string[], int[]> listadoDatos = null;
 
             //Get the names of Cities.
@@ -248,14 +269,14 @@ namespace appEtlPrescripcion
 
         public static Tuple<decimal, string, Boolean> obtnerTotalSaldo(String mes)
         {
-            var res = DbGeneral.obtenerSaldo("select  sum(saldo) [Total] from " + mes);
+            var res = DbGeneral.obtenerSaldo("select  sum(saldo) [Total] from " + mes +" where repetido='no'");
 
             return res;
         }
 
         public static Tuple<decimal, string, Boolean> obtnerTotalSaldoEtapaCartera(String mes)
         {
-            var res = DbGeneral.obtenerSaldo("select  sum(saldo) [Total] from " + mes + "  WHERE ETAPA='CARTERA'");
+            var res = DbGeneral.obtenerSaldo("select  sum(saldo) [Total] from " + mes + "  WHERE ETAPA='CARTERA' and repetido='no'");
 
             return res;
         }
@@ -263,7 +284,7 @@ namespace appEtlPrescripcion
 
         public static Tuple<decimal, string, Boolean> obtnerTotalSaldoEtapaContravencional(String mes)
         {
-            var res = DbGeneral.obtenerSaldo("select  sum(saldo) [Total] from "+ mes + "  WHERE ETAPA<>'CARTERA'");
+            var res = DbGeneral.obtenerSaldo("select  sum(saldo) [Total] from "+ mes + "  WHERE ETAPA<>'CARTERA' and repetido='no'");
 
             return res;
         }

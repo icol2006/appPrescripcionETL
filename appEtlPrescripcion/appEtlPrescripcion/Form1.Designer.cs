@@ -32,10 +32,12 @@ namespace appEtlPrescripcion
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cmbMesAnterior = new System.Windows.Forms.ComboBox();
             this.gbxControlesProcesamiento = new System.Windows.Forms.GroupBox();
+            this.button8 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.txtMesActual = new System.Windows.Forms.MaskedTextBox();
@@ -72,15 +74,19 @@ namespace appEtlPrescripcion
             this.label3 = new System.Windows.Forms.Label();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.txtProcesados = new System.Windows.Forms.TextBox();
-            this.ptbLoading = new System.Windows.Forms.PictureBox();
             this.gbProcesoPrescritos = new System.Windows.Forms.GroupBox();
+            this.ptbLoading = new System.Windows.Forms.PictureBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtTiempoEspera = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.gbxControlesProcesamiento.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbLoading)).BeginInit();
             this.gbProcesoPrescritos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbLoading)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -98,8 +104,11 @@ namespace appEtlPrescripcion
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label20);
+            this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.cmbMesAnterior);
             this.tabPage2.Controls.Add(this.gbxControlesProcesamiento);
+            this.tabPage2.Controls.Add(this.txtTiempoEspera);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.cmbMesActual);
             this.tabPage2.Controls.Add(this.label10);
@@ -116,12 +125,13 @@ namespace appEtlPrescripcion
             this.cmbMesAnterior.FormattingEnabled = true;
             this.cmbMesAnterior.Location = new System.Drawing.Point(112, 24);
             this.cmbMesAnterior.Name = "cmbMesAnterior";
-            this.cmbMesAnterior.Size = new System.Drawing.Size(166, 21);
+            this.cmbMesAnterior.Size = new System.Drawing.Size(140, 21);
             this.cmbMesAnterior.TabIndex = 15;
             this.cmbMesAnterior.SelectedIndexChanged += new System.EventHandler(this.cmbMesAnterior_SelectedIndexChanged);
             // 
             // gbxControlesProcesamiento
             // 
+            this.gbxControlesProcesamiento.Controls.Add(this.button8);
             this.gbxControlesProcesamiento.Controls.Add(this.label15);
             this.gbxControlesProcesamiento.Controls.Add(this.label14);
             this.gbxControlesProcesamiento.Controls.Add(this.txtMesActual);
@@ -144,6 +154,16 @@ namespace appEtlPrescripcion
             this.gbxControlesProcesamiento.Size = new System.Drawing.Size(664, 234);
             this.gbxControlesProcesamiento.TabIndex = 17;
             this.gbxControlesProcesamiento.TabStop = false;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(270, 28);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 17;
+            this.button8.Text = "Sintaxis SQL";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 
             // label15
             // 
@@ -197,9 +217,9 @@ namespace appEtlPrescripcion
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(13, 118);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(101, 13);
+            this.label9.Size = new System.Drawing.Size(100, 13);
             this.label9.TabIndex = 11;
-            this.label9.Text = "Exportar mes nuevo";
+            this.label9.Text = "Exportar mes actual";
             // 
             // button3
             // 
@@ -216,9 +236,9 @@ namespace appEtlPrescripcion
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(365, 118);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(93, 13);
+            this.label8.Size = new System.Drawing.Size(106, 13);
             this.label8.TabIndex = 10;
-            this.label8.Text = "Exportar mes viejo";
+            this.label8.Text = "Exportar mes anterior";
             // 
             // label4
             // 
@@ -308,16 +328,16 @@ namespace appEtlPrescripcion
             // cmbMesActual
             // 
             this.cmbMesActual.FormattingEnabled = true;
-            this.cmbMesActual.Location = new System.Drawing.Point(396, 24);
+            this.cmbMesActual.Location = new System.Drawing.Point(351, 24);
             this.cmbMesActual.Name = "cmbMesActual";
-            this.cmbMesActual.Size = new System.Drawing.Size(166, 21);
+            this.cmbMesActual.Size = new System.Drawing.Size(140, 21);
             this.cmbMesActual.TabIndex = 16;
             this.cmbMesActual.SelectedIndexChanged += new System.EventHandler(this.cmbMesActual_SelectedIndexChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(311, 32);
+            this.label10.Location = new System.Drawing.Point(266, 32);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(59, 13);
             this.label10.TabIndex = 14;
@@ -417,9 +437,9 @@ namespace appEtlPrescripcion
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(284, 16);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(146, 13);
+            this.label12.Size = new System.Drawing.Size(140, 13);
             this.label12.TabIndex = 4;
-            this.label12.Text = "Cantidad registro mes anterior";
+            this.label12.Text = "Cantidad registro mes actual";
             // 
             // txtSaldoTotal
             // 
@@ -491,18 +511,6 @@ namespace appEtlPrescripcion
             this.txtProcesados.Size = new System.Drawing.Size(94, 20);
             this.txtProcesados.TabIndex = 5;
             // 
-            // ptbLoading
-            // 
-            this.ptbLoading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ptbLoading.Image = global::appEtlPrescripcion.Properties.Resources.loading_buffering;
-            this.ptbLoading.Location = new System.Drawing.Point(675, 412);
-            this.ptbLoading.Name = "ptbLoading";
-            this.ptbLoading.Size = new System.Drawing.Size(50, 48);
-            this.ptbLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptbLoading.TabIndex = 6;
-            this.ptbLoading.TabStop = false;
-            this.ptbLoading.Visible = false;
-            // 
             // gbProcesoPrescritos
             // 
             this.gbProcesoPrescritos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -517,16 +525,68 @@ namespace appEtlPrescripcion
             this.gbProcesoPrescritos.TabStop = false;
             this.gbProcesoPrescritos.Visible = false;
             // 
+            // ptbLoading
+            // 
+            this.ptbLoading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ptbLoading.Image = global::AppPrescripcion.Properties.Resources.loading_buffering;
+            this.ptbLoading.Location = new System.Drawing.Point(675, 412);
+            this.ptbLoading.Name = "ptbLoading";
+            this.ptbLoading.Size = new System.Drawing.Size(50, 48);
+            this.ptbLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbLoading.TabIndex = 6;
+            this.ptbLoading.TabStop = false;
+            this.ptbLoading.Visible = false;
+            // 
+            // label18
+            // 
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(674, 15);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(51, 13);
+            this.label18.TabIndex = 8;
+            this.label18.Text = "Version 4";
+            // 
+            // txtTiempoEspera
+            // 
+            this.txtTiempoEspera.Location = new System.Drawing.Point(566, 25);
+            this.txtTiempoEspera.Name = "txtTiempoEspera";
+            this.txtTiempoEspera.Size = new System.Drawing.Size(64, 20);
+            this.txtTiempoEspera.TabIndex = 18;
+            this.txtTiempoEspera.Text = "30";
+            this.txtTiempoEspera.TextChanged += new System.EventHandler(this.txtTiempoEspera_TextChanged);
+            this.txtTiempoEspera.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTiempoEspera_KeyPress);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(561, 11);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(125, 13);
+            this.label19.TabIndex = 19;
+            this.label19.Text = "Tiempo espera consultas";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(635, 31);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(53, 13);
+            this.label20.TabIndex = 20;
+            this.label20.Text = "segundos";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(757, 472);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.gbProcesoPrescritos);
             this.Controls.Add(this.ptbLoading);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "App";
+            this.Text = "App Prescripcion";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -538,10 +598,11 @@ namespace appEtlPrescripcion
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbLoading)).EndInit();
             this.gbProcesoPrescritos.ResumeLayout(false);
             this.gbProcesoPrescritos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbLoading)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -589,6 +650,11 @@ namespace appEtlPrescripcion
         private System.Windows.Forms.TextBox txtSaldoCartera;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtTiempoEspera;
+        private System.Windows.Forms.Label label20;
     }
 }
 

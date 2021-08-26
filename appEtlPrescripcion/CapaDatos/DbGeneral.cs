@@ -10,6 +10,8 @@ namespace CapaDatos
 {
     public static class DbGeneral
     {
+        public static int TiempoEsperaComando  = 30;
+
         public static Tuple<List<String>,string, Boolean>  ObtenerMeses()
         {
             SqlDataReader oSqlDataReader;
@@ -37,6 +39,8 @@ namespace CapaDatos
                     " and (table_catalog='"+ baseNombre+"' and TABLE_NAME<>'repetidos' and TABLE_NAME<>'nuevos' and TABLE_NAME<>'fechas_suspencion')";
 
                 SqlComando.CommandType = CommandType.Text;
+                SqlComando.CommandTimeout = TiempoEsperaComando;
+
                 oSqlDataReader = SqlComando.ExecuteReader();
 
                 while (oSqlDataReader.Read())
@@ -85,6 +89,8 @@ namespace CapaDatos
                 SqlComando.Connection = SqlConexion;
                 SqlComando.CommandText = query;
                 SqlComando.CommandType = CommandType.Text;
+                SqlComando.CommandTimeout = TiempoEsperaComando;
+
                 SqlComando.ExecuteNonQuery();
 
               }
@@ -127,6 +133,7 @@ namespace CapaDatos
                 SqlComando.Connection = SqlConexion;
                 SqlComando.CommandText = query;
                 SqlComando.CommandType = CommandType.Text;
+                SqlComando.CommandTimeout = TiempoEsperaComando;
 
                 oSqlDataReader = SqlComando.ExecuteReader();
 
@@ -140,6 +147,7 @@ namespace CapaDatos
             {
                 mesnsajeError = ex.Message;
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
+                res = false;
             }
             finally
             {
@@ -172,6 +180,7 @@ namespace CapaDatos
                 SqlComando.Connection = SqlConexion;
                 SqlComando.CommandText = query;
                 SqlComando.CommandType = CommandType.Text;
+                SqlComando.CommandTimeout = TiempoEsperaComando;
 
                 oSqlDataReader = SqlComando.ExecuteReader();
 
@@ -202,13 +211,13 @@ namespace CapaDatos
 
         public static Tuple<List<object[]>, string, Boolean> ExportarRegistroNuevos(String mesActual)
         {
-            String comando = "SELECT * FROM  nuevos";
+            String comando = "SELECT * FROM  " + mesActual + " where nuevo='si'";
             return exportarDatos(comando, mesActual);
         }
 
         public static Tuple<List<object[]>, string, Boolean> ExportarRegistroRepetidos(String mesActual)
         {
-            var comando = "SELECT * FROM repetidos";
+            String comando = "SELECT * FROM  " + mesActual + " where repetido='si'";
             return exportarDatos(comando, mesActual);
         }
 
@@ -243,6 +252,8 @@ namespace CapaDatos
                 //Obtener datos
                 SqlComando.CommandText = comando;
                 SqlComando.CommandType = CommandType.Text;
+                SqlComando.CommandTimeout = TiempoEsperaComando;
+
                 oSqlDataReader = SqlComando.ExecuteReader();
 
                 object[] output = new object[oSqlDataReader.FieldCount];
@@ -289,6 +300,8 @@ namespace CapaDatos
                 SqlConexion.ConnectionString = DConexion.CnBDEmpresa;
 
                 SqlCommand cmd = new SqlCommand(query, SqlConexion);
+                cmd.CommandTimeout = TiempoEsperaComando;
+
                 SqlConexion.Open();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 // this will query your database and return the result to your datatable
@@ -334,6 +347,8 @@ namespace CapaDatos
                 //Obtener datos
                 SqlComando.CommandText = queryColumnas;
                 SqlComando.CommandType = CommandType.Text;
+                SqlComando.CommandTimeout = TiempoEsperaComando;
+
                 oSqlDataReader = SqlComando.ExecuteReader();
 
                 object[] output = new object[oSqlDataReader.FieldCount];

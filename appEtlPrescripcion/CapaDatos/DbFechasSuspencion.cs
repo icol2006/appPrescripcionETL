@@ -11,6 +11,8 @@ namespace CapaDatos
 {
     public static class DbFechasSuspencion
     {
+        public static int TiempoEsperaComando = 30;
+
         public static List<FechasSuspencion> Listar()
         {
             SqlDataReader oSqlDataReader;
@@ -27,6 +29,7 @@ namespace CapaDatos
                 SqlComando.Connection = SqlConexion;
                 SqlComando.CommandText = "SELECT id,fecha FROM fechas_suspencion";
                 SqlComando.CommandType = CommandType.Text;
+                SqlComando.CommandTimeout = TiempoEsperaComando;
 
                 oSqlDataReader = SqlComando.ExecuteReader();
 

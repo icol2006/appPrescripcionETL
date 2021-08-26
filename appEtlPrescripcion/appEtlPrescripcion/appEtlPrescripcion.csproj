@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{36BB38E6-3D2D-44A4-A512-5D7CBE15B0A1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>appEtlPrescripcion</RootNamespace>
-    <AssemblyName>appEtlPrescripcion</AssemblyName>
+    <RootNamespace>AppPrescripcion</RootNamespace>
+    <AssemblyName>AppPrescripcion</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Graphicloads-100-Flat-Settings-3.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -57,7 +60,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProcesarDAtos.cs" />
+    <Compile Include="ProcesarDatos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utils\Parametros.cs" />
@@ -103,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loading-buffering.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Graphicloads-100-Flat-Settings-3.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

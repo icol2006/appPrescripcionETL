@@ -1,0 +1,25 @@
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'SALDOF') BEGIN ALTER TABLE @@@2 ADD SALDO_F INT END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'ID') BEGIN ALTER TABLE @@@2 ADD ID varchar(255) END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@1') AND name = 'ID') BEGIN ALTER TABLE @@@1 ADD ID varchar(255) END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'repetido') BEGIN ALTER TABLE @@@2 ADD repetido varchar(20) END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'nuevo') BEGIN ALTER TABLE @@@2 ADD nuevo varchar(20) END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'fecha_comparendo') BEGIN ALTER TABLE @@@2 ADD fecha_comparendo date END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'fecha_notificacion') BEGIN ALTER TABLE @@@2 ADD fecha_notificacion date END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'res_fecha_comparendo') BEGIN ALTER TABLE @@@2 ADD res_fecha_comparendo date END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'res_fecha_notificacion') BEGIN ALTER TABLE @@@2  ADD res_fecha_notificacion date END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'res_fecha_comparendo_formato') BEGIN ALTER TABLE @@@2 ADD res_fecha_comparendo_formato varchar(255) END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'res_fecha_notificacion_formato') BEGIN ALTER TABLE @@@2  ADD res_fecha_notificacion_formato varchar(255) END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'prescrito') BEGIN ALTER TABLE @@@2  ADD prescrito varchar(10) END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'fc_procesada') BEGIN ALTER TABLE @@@2  ADD fc_procesada bit END;
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'fn_procesada') BEGIN ALTER TABLE @@@2  ADD fn_procesada bit END;
+update @@@2 set FECHA_COMPARENDO=convert(datetime, FECHA#COMPARENDO, 103) WHERE FECHA#COMPARENDO LIKE '%/%';
+update @@@2 set FECHA_NOTIFICACION=convert(datetime, FECHA#notificacion, 103) WHERE FECHA#notificacion LIKE '%/%'
+update  @@@2 set id=(NRO#DOCUMENTO+COMPARENDO+FECHA#COMPARENDO);
+update  @@@1 set id=(NRO#DOCUMENTO+COMPARENDO+FECHA#COMPARENDO);
+IF  EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'num') BEGIN ALTER TABLE @@@2  DROP COLUMN num END;
+IF NOT EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'@@@2') AND name = 'num') BEGIN ALTER TABLE @@@2  Add num Int Identity(1, 1) END;
+IF EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'repetidos')) BEGIN drop table repetidos; END;
+update @@@2 set repetido='no' where num in(SELECT MIN(num) FROM @@@2 GROUP BY id)
+update @@@2 set repetido='si' where num not in(SELECT MIN(num) FROM @@@2 GROUP BY id)
+update @@@2 set nuevo='no'
+update @@@2 set nuevo='si' where id in(select p2.ID from @@@1 p1 right join @@@2  p2 on p1.ID=p2.ID where p1.ID is null)
